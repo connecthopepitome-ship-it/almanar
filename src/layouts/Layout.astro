@@ -130,6 +130,9 @@ const pageSchema = schema || defaultLocalBusinessSchema;
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </head>
   <body class="min-h-screen flex flex-col bg-navy-950 text-white antialiased selection:bg-amber-brand selection:text-navy-950">
+    <!-- Top Global Animated Glowing Scroll Progress Bar -->
+    <div id="scroll-progress-bar" aria-hidden="true"></div>
+
     <CustomCursor />
     <Header currentPath={Astro.url.pathname} />
 
@@ -168,6 +171,7 @@ const pageSchema = schema || defaultLocalBusinessSchema;
     </div>
 
     <!-- Interactive script: scroll to top & reveal observer -->
+    <script src="../scripts/scrollEngine.ts"></script>
     <script>
       // Scroll to top button
       const scrollBtn = document.getElementById('scroll-to-top');

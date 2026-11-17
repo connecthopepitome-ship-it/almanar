@@ -49,40 +49,60 @@ const processFaqs = [
 
   <MarqueeTicker variant="navy" />
 
-  <!-- Detailed 4-Step Process Section (Warm Ivory) -->
-  <section class="py-24 bg-ivory-100 text-navy-950 border-b border-ivory-300 hud-grid-ivory">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+  <!-- Detailed 4-Step Process Section with Animated Timeline Beam (Navy Surface) -->
+  <section id="process-timeline-section" class="py-24 bg-navy-950 text-white border-b border-navy-800 hud-grid relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
       
-      {WORK_PROCESS.map((stage, idx) => (
-        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-ivory-300 shadow-editorial transition-all hover:border-amber-dark/40">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <div class="lg:col-span-3 flex lg:flex-col items-center lg:items-start justify-between">
-              <span class="font-display text-6xl sm:text-7xl font-extrabold text-navy-900/15 leading-none">
-                {stage.step}
-              </span>
-              <div class="inline-block px-3 py-1.5 rounded-lg bg-navy-900 text-amber-brand font-mono text-[11px] font-bold uppercase tracking-wider mt-2">
-                {stage.phase}
-              </div>
-            </div>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/5">
+        <div class="space-y-3">
+          <span class="font-mono text-xs text-amber-brand font-bold tracking-widest uppercase">
+            CHRONOLOGICAL EXECUTION PIPELINE
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            From Blueprint Submittal to <span class="text-metallic-amber">Authority Energization</span>
+          </h2>
+        </div>
+        <div class="font-mono text-xs text-slate-400">
+          <span>AVERAGE CYCLE: MILESTONE-DRIVEN ACCORDING TO PROJECT SCALE</span>
+        </div>
+      </div>
 
-            <div class="lg:col-span-9 space-y-4">
-              <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-navy-900">
-                {stage.title}
-              </h2>
-              <p class="font-sans text-xs font-semibold text-amber-dark bg-amber-brand/10 px-3.5 py-1.5 rounded-lg border border-amber-brand/20 inline-block">
-                {stage.summary}
-              </p>
-              <p class="font-sans text-sm sm:text-base text-slate-700 leading-relaxed">
-                {stage.details}
-              </p>
-
-              <!-- Stage Key Milestones -->
-              <div class="pt-4 border-t border-ivory-300">
-                <span class="font-mono text-xs font-bold uppercase tracking-wider text-navy-900 block mb-2">
-                  Key Deliverables for This Stage:
+      <div class="relative pl-8 sm:pl-12 space-y-12">
+        <!-- Glowing Amber Laser Beam Track -->
+        <div class="timeline-laser-track hidden sm:block">
+          <div id="timeline-laser-beam" class="timeline-laser-beam"></div>
+        </div>
+        
+        {WORK_PROCESS.map((stage, idx) => (
+          <div class={`timeline-stage-card scroll-reveal-up stagger-${idx + 1} glass-panel-navy rounded-3xl p-8 sm:p-12 border border-white/10 shadow-glass-navy relative crosshair-corner`}>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              <div class="lg:col-span-3 flex lg:flex-col items-center lg:items-start justify-between">
+                <span class="font-display text-6xl sm:text-7xl font-extrabold text-white/20 leading-none">
+                  {stage.step}
                 </span>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-slate-600">
+                <div class="inline-block px-3 py-1.5 rounded-lg glass-panel-amber text-amber-brand font-mono text-[11px] font-bold uppercase tracking-wider mt-2 border border-amber-brand/40">
+                  {stage.phase}
+                </div>
+              </div>
+
+              <div class="lg:col-span-9 space-y-4 font-sans">
+                <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white">
+                  {stage.title}
+                </h3>
+                <p class="font-mono text-xs font-semibold text-amber-brand bg-amber-brand/10 px-3.5 py-1.5 rounded-lg border border-amber-brand/20 inline-block">
+                  {stage.summary}
+                </p>
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                  {stage.details}
+                </p>
+
+                <!-- Stage Key Milestones -->
+                <div class="pt-4 border-t border-white/10">
+                  <span class="font-mono text-xs font-bold uppercase tracking-wider text-white block mb-2">
+                    Key Deliverables for This Stage:
+                  </span>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-slate-300">
                   {idx === 0 && (
                     <>
                       <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Site condition survey & existing services audit</span></div>
@@ -123,6 +143,7 @@ const processFaqs = [
         </div>
       ))}
 
+      </div>
     </div>
   </section>
 

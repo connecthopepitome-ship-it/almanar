@@ -6,13 +6,13 @@ import { INDUSTRIES } from '../data/company';
 <div class="industries-editorial-container">
   <!-- Editorial Grid with consistent 16:11 aspect ratios -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    {INDUSTRIES.map((ind) => (
+    {INDUSTRIES.map((ind, idx) => (
       <div 
-        class="industry-editorial-card group relative bg-navy-950 rounded-3xl overflow-hidden glass-panel-navy border border-white/5 transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-brand/50 flex flex-col justify-between"
+        class={`industry-editorial-card group relative bg-navy-950 rounded-3xl overflow-hidden glass-panel-navy border border-white/5 transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-brand/50 flex flex-col justify-between scroll-reveal-up stagger-${(idx % 4) + 1}`}
         data-cursor="view"
       >
         <!-- Photographic Frame with consistent 16:11 Aspect Ratio -->
-        <div class="relative aspect-[16/11] overflow-hidden bg-navy-900">
+        <div class="relative aspect-[16/11] overflow-hidden bg-navy-900 img-zoom-reveal">
           <img 
             src={ind.image} 
             alt={`${ind.name} Engineering by Al Manar Tech in Abu Dhabi`}

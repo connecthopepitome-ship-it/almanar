@@ -7,8 +7,8 @@ import { SERVICES } from '../data/company';
   <!-- Desktop Cockpit View (Hidden on mobile) -->
   <div class="hidden lg:grid grid-cols-12 gap-8 items-stretch">
     
-    <!-- Left Column: Numbered Vertical Service List (5 cols) -->
-    <div class="col-span-5 flex flex-col justify-between space-y-2">
+    <!-- Left Column: Numbered Vertical Service List (5 cols, Sticky on Desktop) -->
+    <div class="col-span-5 flex flex-col justify-between space-y-2 sticky top-28 self-start">
       <div class="space-y-1.5" role="tablist" aria-label="Al Manar Tech Engineering Divisions">
         {SERVICES.map((s, idx) => (
           <button 
