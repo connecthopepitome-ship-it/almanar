@@ -1,0 +1,71 @@
+---
+import Icon from './Icon.astro';
+import { INDUSTRIES } from '../data/company';
+---
+
+<div class="industries-editorial-container">
+  <!-- Editorial Grid with consistent 16:10 aspect ratios -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {INDUSTRIES.map((ind) => (
+      <div 
+        class="industry-editorial-card group relative bg-navy-950 rounded-2xl overflow-hidden border border-navy-800 shadow-card-dark transition-all duration-500 hover:-translate-y-1 hover:border-amber-brand/50 flex flex-col justify-between"
+        data-cursor="view"
+      >
+        <!-- Photographic Frame with consistent 16:11 Aspect Ratio -->
+        <div class="relative aspect-[16/11] overflow-hidden bg-navy-900">
+          <img 
+            src={ind.image} 
+            alt={`${ind.name} Engineering by Al Manar Tech in Abu Dhabi`}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent"></div>
+          
+          <!-- Top Tag: Index & Sector Tag -->
+          <div class="absolute top-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+            <span class="px-2 py-0.5 rounded bg-navy-950/90 text-amber-brand font-bold backdrop-blur-sm border border-navy-800">
+              {ind.number}
+            </span>
+            <span class="text-slate-300 font-semibold px-2 py-0.5 rounded bg-navy-900/80 backdrop-blur-sm">
+              UAE MARKET
+            </span>
+          </div>
+
+          <!-- Bottom Title Overlay -->
+          <div class="absolute bottom-3 left-3 right-3">
+            <h3 class="font-display text-lg font-bold text-white tracking-tight leading-snug group-hover:text-amber-brand transition-colors">
+              {ind.name}
+            </h3>
+          </div>
+        </div>
+
+        <!-- Descriptive Metadata Body -->
+        <div class="p-5 flex-1 flex flex-col justify-between space-y-4 bg-navy-950">
+          <p class="text-xs text-slate-300 leading-relaxed font-sans line-clamp-2">
+            {ind.tagline}
+          </p>
+
+          <div class="space-y-3 pt-3 border-t border-navy-800/80">
+            <!-- Services Deployed Badges -->
+            <div class="flex flex-wrap gap-1">
+              {ind.servicesOffered.slice(0, 2).map((svc) => (
+                <span class="px-2 py-0.5 rounded bg-navy-900 text-slate-400 font-mono text-[10px]">
+                  {svc}
+                </span>
+              ))}
+            </div>
+
+            <!-- Link -->
+            <a 
+              href={`/industries#${ind.id}`} 
+              class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-amber-brand hover:text-white transition-colors"
+            >
+              <span>Explore Sector Spec</span>
+              <Icon name="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import StatsSection from '../components/StatsSection.astro';
+import MarqueeTicker from '../components/MarqueeTicker.astro';
 import { COMPANY } from '../data/company';
 
 const pageTitle = "About Us | Over 2 Decades of Engineering Excellence in Abu Dhabi";
@@ -11,64 +12,65 @@ const pageDescription = "Learn about Al Manar Tech, established in 2001 as an AD
 <Layout title={pageTitle} description={pageDescription}>
 
   <!-- Page Hero Header -->
-  <section class="bg-navy-950 text-white py-16 lg:py-24 engineering-grid-dark relative overflow-hidden">
+  <section class="bg-navy-950 text-white py-16 lg:py-24 hud-grid relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="max-w-3xl space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-navy-800 border border-gold-500/40 text-gold-400 text-xs font-semibold">
-          <Icon name="building" class="w-4 h-4 text-gold-500" />
-          <span>About Al Manar Tech</span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-900 border border-amber-brand/40 text-amber-brand text-xs font-mono">
+          <span>01 // CORPORATE PROFILE</span>
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
           Engineering the Infrastructure That Powers Abu Dhabi's Built Environment
         </h1>
-        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+        <p class="font-sans text-base sm:text-lg text-slate-300 leading-relaxed">
           Founded in 2001, Al Manar Tech is an established electromechanical and technical contracting company headquartered in Musaffah, Abu Dhabi. For over two decades, we have partnered with building owners, contractors, and public institutions to deliver dependable building engineering systems.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Core Profile & History -->
-  <section class="py-20 bg-white">
+  <MarqueeTicker variant="navy" />
+
+  <!-- Core Profile & History (Warm Ivory) -->
+  <section class="py-24 bg-ivory-100 text-navy-950 border-b border-ivory-300 hud-grid-ivory">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         <div class="lg:col-span-7 space-y-6">
-          <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
-            Our Journey & Heritage
+          <span class="font-mono text-xs font-bold uppercase tracking-widest text-amber-dark">
+            OUR HERITAGE // EST. 2001
           </span>
-          <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight leading-tight">
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-navy-900 tracking-tight leading-tight">
             Built on Two Decades of Uncompromising Quality and Regulatory Trust
           </h2>
-          <p class="text-slate-custom text-base leading-relaxed">
+          <p class="font-sans text-slate-700 text-base leading-relaxed">
             Al Manar Tech was established in 2001 with a focused mission: to provide the highest standard of electromechanical contracting and technical infrastructure across the Emirate of Abu Dhabi. Over the past 23+ years, the UAE’s urban and industrial landscape has expanded rapidly—and Al Manar Tech has grown alongside it, executing over 160 verified projects in commercial towers, retail destinations, sports complexes, industrial warehouses, and luxury residences.
           </p>
-          <p class="text-slate-custom text-base leading-relaxed">
+          <p class="font-sans text-slate-700 text-base leading-relaxed">
             As an approved contractor recognized by the Abu Dhabi Municipality (ADM), the Abu Dhabi Distribution Company (ADDC), and the Abu Dhabi Quality and Conformity Council (ADQCC), we hold the credentials and technical expertise required to manage the entire lifecycle of building systems—from initial load calculations and authority submissions to precision installation, testing, balancing, and 24/7 facility maintenance.
           </p>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            <div class="p-4 rounded-xl bg-cloud-100 border border-cloud-200">
-              <span class="text-xs font-bold uppercase tracking-wider text-navy-900 block mb-1">
-                Engineering Authority
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-mono text-xs">
+            <div class="p-4 rounded-xl bg-white border border-ivory-300">
+              <span class="font-bold text-navy-900 block mb-1">
+                ENGINEERING AUTHORITY
               </span>
-              <p class="text-xs text-slate-600">
+              <p class="font-sans text-slate-600">
                 Authorized for medium and low-voltage electrical works, municipal approvals, and Civil Defence life safety integration.
               </p>
             </div>
-            <div class="p-4 rounded-xl bg-cloud-100 border border-cloud-200">
-              <span class="text-xs font-bold uppercase tracking-wider text-navy-900 block mb-1">
-                Regional Presence
+            <div class="p-4 rounded-xl bg-white border border-ivory-300">
+              <span class="font-bold text-navy-900 block mb-1">
+                REGIONAL REACH
               </span>
-              <p class="text-xs text-slate-600">
+              <p class="font-sans text-slate-600">
                 Operating actively across Abu Dhabi Island, Musaffah Industrial District, ICAD, KIZAD, Al Ain, and Al Dhafra.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-5 relative">
-          <div class="rounded-2xl overflow-hidden shadow-2xl border border-cloud-300">
+        <div class="lg:col-span-5 relative" data-cursor="view">
+          <div class="rounded-3xl overflow-hidden shadow-editorial border border-ivory-300 crosshair-corner">
             <img 
               src="/images/original/Al-Dar-Academies-HQ.jpeg" 
               alt="Al Manar Tech Project Site in Abu Dhabi"
@@ -76,9 +78,9 @@ const pageDescription = "Learn about Al Manar Tech, established in 2001 as an AD
               loading="lazy"
             />
           </div>
-          <div class="mt-4 p-4 rounded-xl bg-navy-900 text-white text-xs border border-navy-800 flex items-center justify-between">
-            <span class="text-slate-300">Corporate HQ Location:</span>
-            <span class="font-semibold text-gold-400">Musaffah M35, Abu Dhabi</span>
+          <div class="mt-4 p-4 rounded-xl bg-navy-900 text-white font-mono text-xs border border-navy-800 flex items-center justify-between">
+            <span class="text-slate-400">CORPORATE HQ:</span>
+            <span class="font-bold text-amber-brand">Musaffah M35, Abu Dhabi</span>
           </div>
         </div>
 
@@ -86,72 +88,72 @@ const pageDescription = "Learn about Al Manar Tech, established in 2001 as an AD
     </div>
   </section>
 
-  <!-- Verified Statistics -->
+  <!-- Verified Statistics (Navy) -->
   <StatsSection variant="dark" />
 
-  <!-- Our Core Operating Values -->
-  <section class="py-20 bg-cloud-100 border-y border-cloud-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Our Core Operating Values (Warm Ivory) -->
+  <section class="py-24 bg-ivory-100 text-navy-950 border-b border-ivory-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
-      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-        <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
-          Our Principles
+      <div class="max-w-3xl space-y-4">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-amber-dark">
+          02 // PRINCIPLES
         </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy-900 font-heading tracking-tight">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-900 tracking-tight">
           The Engineering Values That Guide Every Installation
         </h2>
-        <p class="text-slate-custom text-base sm:text-lg">
+        <p class="font-sans text-slate-700 text-base sm:text-lg">
           We treat every project not merely as a contract, but as a critical infrastructure asset that must perform safely for decades.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <div class="bg-white rounded-2xl p-7 border border-cloud-200 shadow-premium space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-gold-500 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-7 border border-ivory-300 shadow-sm space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-navy-900 text-amber-brand flex items-center justify-center">
             <Icon name="shield-check" class="w-6 h-6" />
           </div>
-          <h3 class="text-lg font-bold text-navy-900 font-heading">
+          <h3 class="font-display text-lg font-bold text-navy-900">
             Strict Regulatory Compliance
           </h3>
-          <p class="text-xs sm:text-sm text-slate-custom leading-relaxed">
-            We adhere rigorously to ADDC technical regulations, UAE Fire and Life Safety Codes, and Abu Dhabi municipal building codes. No deviations, no compromises.
+          <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
+            We adhere rigorously to ADDC technical regulations, UAE Fire and Life Safety Codes, and Abu Dhabi municipal building codes.
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl p-7 border border-cloud-200 shadow-premium space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-gold-500 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-7 border border-ivory-300 shadow-sm space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-navy-900 text-amber-brand flex items-center justify-center">
             <Icon name="zap" class="w-6 h-6" />
           </div>
-          <h3 class="text-lg font-bold text-navy-900 font-heading">
+          <h3 class="font-display text-lg font-bold text-navy-900">
             Certified Quality Materials
           </h3>
-          <p class="text-xs sm:text-sm text-slate-custom leading-relaxed">
-            All cables, switchgear, duct insulation, piping, and detection sensors are sourced exclusively from ADQCC and authority-approved manufacturers.
+          <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
+            All cables, switchgear, duct insulation, piping, and detection sensors are sourced exclusively from ADQCC approved manufacturers.
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl p-7 border border-cloud-200 shadow-premium space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-gold-500 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-7 border border-ivory-300 shadow-sm space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-navy-900 text-amber-brand flex items-center justify-center">
             <Icon name="clock" class="w-6 h-6" />
           </div>
-          <h3 class="text-lg font-bold text-navy-900 font-heading">
+          <h3 class="font-display text-lg font-bold text-navy-900">
             Milestone Punctuality
           </h3>
-          <p class="text-xs sm:text-sm text-slate-custom leading-relaxed">
-            We respect contractual deadlines. Our structured project management timelines prevent delays for main contractors and interior fit-out teams.
+          <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
+            We respect contractual deadlines. Structured project management prevents delays for main contractors and interior fit-out teams.
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl p-7 border border-cloud-200 shadow-premium space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-gold-500 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-7 border border-ivory-300 shadow-sm space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-navy-900 text-amber-brand flex items-center justify-center">
             <Icon name="wrench" class="w-6 h-6" />
           </div>
-          <h3 class="text-lg font-bold text-navy-900 font-heading">
+          <h3 class="font-display text-lg font-bold text-navy-900">
             Lifecycle Support
           </h3>
-          <p class="text-xs sm:text-sm text-slate-custom leading-relaxed">
-            Our commitment extends beyond energization. We offer planned preventive maintenance and on-call technician support throughout the system lifecycle.
+          <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Our commitment extends beyond energization. We offer planned preventive maintenance and on-call technician support throughout system life.
           </p>
         </div>
 
@@ -160,55 +162,55 @@ const pageDescription = "Learn about Al Manar Tech, established in 2001 as an AD
     </div>
   </section>
 
-  <!-- Accreditations & Licensures Detail -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Accreditations & Licensures Detail (Navy) -->
+  <section class="py-24 bg-navy-950 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
-      <div class="max-w-3xl space-y-4 mb-12">
-        <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
-          Official Accreditations
+      <div class="max-w-3xl space-y-4">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-amber-brand">
+          03 // REGULATORY LICENSURE
         </span>
-        <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight">
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
           Licensed and Approved by Abu Dhabi Government Authorities
         </h2>
-        <p class="text-slate-custom text-base">
+        <p class="font-sans text-slate-300 text-base">
           Operating as an approved contractor in the Emirate of Abu Dhabi requires rigorous verification of technical competence, financial stability, and safety record.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {COMPANY.accreditations.map((acc) => (
-          <div class="p-8 rounded-2xl bg-white border border-cloud-300 shadow-premium space-y-4 hover:border-gold-500 transition-colors">
-            <div class="inline-block px-3 py-1 rounded bg-navy-900 text-gold-500 text-xs font-bold">
-              {acc.name}
+          <div class="p-8 rounded-2xl bg-navy-900 border border-navy-800 shadow-card-dark space-y-4 hover:border-amber-brand/50 transition-colors">
+            <div class="font-mono text-xs text-amber-brand font-bold">
+              {acc.code}
             </div>
-            <h3 class="text-xl font-bold text-navy-900 font-heading">
+            <h3 class="font-display text-xl font-bold text-white">
               {acc.authority}
             </h3>
-            <p class="text-sm text-slate-custom leading-relaxed">
+            <p class="font-sans text-sm text-slate-300 leading-relaxed">
               {acc.desc}
             </p>
-            <div class="pt-4 border-t border-cloud-100 flex items-center gap-2 text-xs font-semibold text-emerald-700">
-              <Icon name="check-circle" class="w-4 h-4 text-emerald-600" />
-              <span>Active Compliance</span>
+            <div class="pt-4 border-t border-navy-800 flex items-center gap-2 font-mono text-xs text-emerald-400">
+              <Icon name="check-circle" class="w-4 h-4 text-emerald-400" />
+              <span>ACTIVE STATUS</span>
             </div>
           </div>
         ))}
       </div>
 
-      <!-- Call to Action Banner -->
-      <div class="mt-16 p-8 sm:p-12 rounded-2xl bg-navy-900 text-white flex flex-col md:flex-row items-center justify-between gap-8 border border-navy-800">
+      <!-- Action Banner -->
+      <div class="mt-16 p-8 sm:p-12 rounded-3xl bg-navy-900 text-white flex flex-col md:flex-row items-center justify-between gap-8 border border-navy-800">
         <div class="space-y-2">
-          <h3 class="text-2xl font-bold font-heading">Ready to discuss your technical specifications?</h3>
-          <p class="text-sm text-slate-300 max-w-xl">
+          <h3 class="font-display text-2xl font-bold text-white">Ready to discuss your technical specifications?</h3>
+          <p class="font-sans text-sm text-slate-300 max-w-xl">
             Our engineering team in Musaffah is available for tenders, site inspections, and contractor pre-qualification inquiries.
           </p>
         </div>
-        <div class="flex flex-wrap items-center gap-4 shrink-0">
-          <a href="tel:025829700" class="px-5 py-3 rounded-lg text-sm font-semibold bg-navy-800 text-white border border-navy-700 hover:bg-navy-700">
+        <div class="flex flex-wrap items-center gap-4 shrink-0 font-display">
+          <a href="tel:025829700" data-magnetic="true" class="px-5 py-3 rounded-xl text-xs font-mono font-bold bg-navy-800 text-white border border-navy-700 hover:bg-navy-700">
             Call 02-5829700
           </a>
-          <a href="/contact" class="px-6 py-3 rounded-lg text-sm font-bold bg-gold-500 text-navy-950 hover:bg-gold-400">
+          <a href="/contact" data-magnetic="true" class="px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-amber-brand text-navy-950 hover:bg-amber-glow shadow-amber-sm">
             Contact Engineering Desk
           </a>
         </div>

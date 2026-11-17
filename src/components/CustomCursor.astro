@@ -1,0 +1,102 @@
+---
+---
+
+<div id="cursor-dot" class="custom-cursor-dot hidden md:block" aria-hidden="true"></div>
+<div id="cursor-ring" class="custom-cursor-ring hidden md:block" aria-hidden="true">
+  <span id="cursor-text" class="custom-cursor-text"></span>
+</div>
+
+<script>
+  // Only initialize custom cursor on desktop devices with hover & fine pointer
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!isTouch && !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    const text = document.getElementById('cursor-text');
+
+    if (dot && ring) {
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+      let isVisible = false;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        if (!isVisible) {
+          dot.style.opacity = '1';
+          ring.style.opacity = '1';
+          isVisible = true;
+        }
+
+        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      }, { passive: true });
+
+      // Smooth lerp loop for the trailing outer ring
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(animateRing);
+      }
+      requestAnimationFrame(animateRing);
+
+      // Context sensitive hover states
+      document.addEventListener('mouseover', (e) => {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+
+        const cursorTarget = target.closest('[data-cursor]') as HTMLElement | null;
+        if (cursorTarget) {
+          const type = cursorTarget.getAttribute('data-cursor');
+          if (type === 'view') {
+            ring.classList.add('cursor-view');
+            ring.classList.remove('cursor-drag');
+            if (text) text.textContent = 'VIEW';
+          } else if (type === 'drag') {
+            ring.classList.add('cursor-drag');
+            ring.classList.remove('cursor-view');
+            if (text) text.textContent = 'DRAG';
+          }
+        } else {
+          ring.classList.remove('cursor-view', 'cursor-drag');
+          if (text) text.textContent = '';
+        }
+      }, { passive: true });
+
+      // Magnetic button interaction
+      const magneticElements = document.querySelectorAll('[data-magnetic]');
+      magneticElements.forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        htmlEl.addEventListener('mousemove', (e) => {
+          const rect = htmlEl.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = (e.clientX - centerX) * 0.22;
+          const deltaY = (e.clientY - centerY) * 0.22;
+          htmlEl.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+        });
+
+        htmlEl.addEventListener('mouseleave', () => {
+          htmlEl.style.transform = 'translate3d(0, 0, 0)';
+          htmlEl.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+
+        htmlEl.addEventListener('mouseenter', () => {
+          htmlEl.style.transition = 'none';
+        });
+      });
+
+      // Hide cursor when leaving window
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+        isVisible = false;
+      });
+    }
+  }
+</script>

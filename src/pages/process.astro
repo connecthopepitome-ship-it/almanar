@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
+import MarqueeTicker from '../components/MarqueeTicker.astro';
 import { WORK_PROCESS } from '../data/company';
 
 const pageTitle = "Our Engineering Delivery Process | ADDC Approved Workflow Abu Dhabi";
@@ -30,57 +31,58 @@ const processFaqs = [
 <Layout title={pageTitle} description={pageDescription}>
 
   <!-- Process Hero -->
-  <section class="bg-navy-950 text-white py-16 lg:py-24 engineering-grid-dark relative overflow-hidden">
+  <section class="bg-navy-950 text-white py-16 lg:py-24 hud-grid relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="max-w-3xl space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-navy-800 border border-gold-500/40 text-gold-400 text-xs font-semibold">
-          <Icon name="layers" class="w-4 h-4 text-gold-500" />
-          <span>Engineering Methodology</span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-900 border border-amber-brand/40 text-amber-brand text-xs font-mono">
+          <span>05 // METHODOLOGY</span>
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
           A Disciplined 4-Stage Approach to Infrastructure Execution
         </h1>
-        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+        <p class="font-sans text-base sm:text-lg text-slate-300 leading-relaxed">
           Electromechanical installations succeed or fail on the rigor of their engineering workflow. Al Manar Tech follows a systematic milestone lifecycle designed to eliminate delays, prevent rework, and secure authority approvals efficiently.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Detailed 4-Step Process Section -->
-  <section class="py-20 bg-cloud-100">
+  <MarqueeTicker variant="navy" />
+
+  <!-- Detailed 4-Step Process Section (Warm Ivory) -->
+  <section class="py-24 bg-ivory-100 text-navy-950 border-b border-ivory-300 hud-grid-ivory">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
       {WORK_PROCESS.map((stage, idx) => (
-        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-cloud-200 shadow-premium transition-all hover:shadow-premium-lg">
+        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-ivory-300 shadow-editorial transition-all hover:border-amber-dark/40">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             <div class="lg:col-span-3 flex lg:flex-col items-center lg:items-start justify-between">
-              <span class="text-6xl sm:text-7xl font-black font-heading text-navy-900/20">
+              <span class="font-display text-6xl sm:text-7xl font-extrabold text-navy-900/15 leading-none">
                 {stage.step}
               </span>
-              <div class="inline-block px-3 py-1.5 rounded-lg bg-navy-900 text-gold-400 text-xs font-bold uppercase tracking-wider mt-2">
-                Stage {stage.step}
+              <div class="inline-block px-3 py-1.5 rounded-lg bg-navy-900 text-amber-brand font-mono text-[11px] font-bold uppercase tracking-wider mt-2">
+                {stage.phase}
               </div>
             </div>
 
             <div class="lg:col-span-9 space-y-4">
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 font-heading">
+              <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-navy-900">
                 {stage.title}
               </h2>
-              <p class="text-sm font-semibold text-gold-700 bg-gold-400/10 px-3.5 py-1.5 rounded-lg border border-gold-400/20 inline-block">
+              <p class="font-sans text-xs font-semibold text-amber-dark bg-amber-brand/10 px-3.5 py-1.5 rounded-lg border border-amber-brand/20 inline-block">
                 {stage.summary}
               </p>
-              <p class="text-sm sm:text-base text-slate-custom leading-relaxed">
+              <p class="font-sans text-sm sm:text-base text-slate-700 leading-relaxed">
                 {stage.details}
               </p>
 
               <!-- Stage Key Milestones -->
-              <div class="pt-4 border-t border-cloud-100">
-                <span class="text-xs font-bold uppercase tracking-wider text-navy-900 block mb-2">
+              <div class="pt-4 border-t border-ivory-300">
+                <span class="font-mono text-xs font-bold uppercase tracking-wider text-navy-900 block mb-2">
                   Key Deliverables for This Stage:
                 </span>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-slate-600">
                   {idx === 0 && (
                     <>
                       <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Site condition survey & existing services audit</span></div>
@@ -124,77 +126,18 @@ const processFaqs = [
     </div>
   </section>
 
-  <!-- Quality & Safety Commitments -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <div class="lg:col-span-6 space-y-6">
-          <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
-            Health, Safety & Environment
-          </span>
-          <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight">
-            Safety Standards Aligned with UAE National Directives
-          </h2>
-          <p class="text-slate-custom text-base leading-relaxed">
-            At Al Manar Tech, safety is not an afterthought—it is engineered into every daily operational briefing. Because electrical power and pressurized mechanical systems carry inherent hazards, our technicians operate under strict protocols to protect lives, equipment, and structural assets.
-          </p>
-
-          <div class="space-y-3 pt-2 text-sm text-slate-700">
-            <div class="flex items-start gap-3">
-              <Icon name="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <span>Zero-tolerance protocol for energized electrical work without verified isolation.</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <Icon name="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <span>Mandatory daily safety briefings and hazard identification at every jobsite.</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <Icon name="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <span>Comprehensive insurance coverage including Workmen’s Compensation and CAR policies.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-6 bg-navy-950 text-white rounded-3xl p-8 sm:p-10 border border-navy-800 space-y-6">
-          <span class="text-xs font-bold uppercase tracking-wider text-gold-500">
-            Client Assurances
-          </span>
-          <h3 class="text-2xl font-bold font-heading text-white">
-            Why Our Workflow Protects Your Investment
-          </h3>
-          <div class="space-y-4 text-xs sm:text-sm text-slate-300">
-            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800">
-              <strong class="text-white block mb-1">Fixed Commercial Transparency:</strong>
-              Detailed bill of quantities (BOQ) with no hidden variations or surprise add-ons.
-            </div>
-            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800">
-              <strong class="text-white block mb-1">Direct Authority Representation:</strong>
-              We handle all interactions with ADDC, Abu Dhabi Municipality, and Civil Defence directly.
-            </div>
-            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800">
-              <strong class="text-white block mb-1">Guaranteed Handover Support:</strong>
-              Clear warranty periods and immediate transition to Planned Preventive Maintenance (PPM).
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Process FAQs -->
-  <section class="py-20 bg-cloud-100 border-t border-cloud-200">
+  <!-- Process FAQs (Navy) -->
+  <section class="py-24 bg-navy-950 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <div class="text-center space-y-3">
-        <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
-          Delivery Questions
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-amber-brand">
+          FAQ // EXECUTION TIMELINES
         </span>
-        <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight">
-          Process & Timelines FAQ
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Frequently Asked Questions
         </h2>
-        <p class="text-slate-custom text-sm">
-          Everything you need to know about initiating a project with Al Manar Tech.
+        <p class="font-sans text-slate-300 text-sm">
+          Everything you need to know about initiating an engineering project with Al Manar Tech.
         </p>
       </div>
 

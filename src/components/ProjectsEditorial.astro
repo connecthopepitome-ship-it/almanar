@@ -1,0 +1,229 @@
+---
+import Icon from './Icon.astro';
+import { VERIFIED_PROJECTS } from '../data/company';
+
+interface Props {
+  showFilters?: boolean;
+}
+
+const { showFilters = true } = Astro.props;
+
+const featuredProject = VERIFIED_PROJECTS.find(p => p.featured) || VERIFIED_PROJECTS[0];
+const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id);
+
+const categories = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'commercial', label: 'Commercial & Corporate' },
+  { id: 'retail', label: 'Retail & Showrooms' },
+  { id: 'food-beverage', label: 'Food & Beverage' },
+  { id: 'hospitality', label: 'Hospitality & Leisure' },
+  { id: 'institutional', label: 'Institutional & Sports' },
+];
+---
+
+<div class="projects-editorial-root space-y-12">
+  
+  {showFilters && (
+    <!-- Technical Filter Navigation Tabs -->
+    <div class="flex flex-wrap items-center justify-start sm:justify-center gap-2 pb-2">
+      {categories.map((cat, idx) => (
+        <button
+          type="button"
+          data-category={cat.id}
+          class={`proj-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border ${
+            idx === 0 
+              ? 'bg-amber-brand text-navy-950 border-amber-brand shadow-amber-sm' 
+              : 'bg-navy-900/80 text-slate-300 border-navy-800 hover:border-amber-brand/50 hover:text-white'
+          }`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  )}
+
+  <!-- Asymmetrical Editorial Showcase (Featured + 2 Offset Grid) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" id="featured-editorial-strip">
+    
+    <!-- 1 Large Featured Project (7 Cols) -->
+    <div 
+      class="lg:col-span-7 editorial-project-card group bg-navy-900 rounded-3xl overflow-hidden border border-navy-800 shadow-editorial relative flex flex-col justify-between"
+      data-cat={featuredProject.categorySlug}
+      data-cursor="view"
+    >
+      <div class="relative aspect-[16/10] overflow-hidden bg-navy-950 crosshair-corner">
+        <img 
+          src={featuredProject.image} 
+          alt={`${featuredProject.title} - ${featuredProject.client}`}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
+
+        <!-- Telemetry Tags -->
+        <div class="absolute top-4 left-4 flex items-center gap-2">
+          <span class="px-2.5 py-1 rounded-md bg-navy-950/90 text-amber-brand font-mono text-[10px] font-bold border border-navy-800 backdrop-blur-sm">
+            FEATURED INSTALLATION
+          </span>
+          <span class="px-2.5 py-1 rounded-md bg-navy-900/80 text-slate-300 font-mono text-[10px] backdrop-blur-sm">
+            {featuredProject.location}
+          </span>
+        </div>
+
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+          <span class="font-mono text-xs uppercase tracking-wider text-amber-brand block mb-1">
+            {featuredProject.category}
+          </span>
+          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-amber-brand transition-colors">
+            {featuredProject.title}
+          </h3>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-8 space-y-4 bg-navy-900">
+        <div class="flex items-center justify-between font-mono text-xs text-slate-400">
+          <span>CLIENT: <strong class="text-white">{featuredProject.client}</strong></span>
+          <span class="text-emerald-400 font-semibold flex items-center gap-1">
+            <Icon name="check-circle" class="w-3.5 h-3.5" />
+            Verified Execution
+          </span>
+        </div>
+        <p class="text-sm text-slate-300 leading-relaxed font-sans">
+          {featuredProject.scopeSummary}
+        </p>
+        <div class="pt-2 flex items-center justify-between">
+          <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+            {featuredProject.sectors.map((sec) => (
+              <span class="px-2 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">{sec}</span>
+            ))}
+          </div>
+          <a href="/contact" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-brand hover:text-white">
+            <span>Inquire Specs</span>
+            <Icon name="arrow-right" class="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Smaller Alternating Project Cards (5 Cols) -->
+    <div class="lg:col-span-5 flex flex-col gap-8 justify-between">
+      {otherProjects.slice(0, 2).map((proj) => (
+        <div 
+          class="editorial-project-card group bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-card-dark flex flex-col justify-between"
+          data-cat={proj.categorySlug}
+          data-cursor="view"
+        >
+          <div class="relative aspect-[16/9] overflow-hidden bg-navy-950">
+            <img 
+              src={proj.image} 
+              alt={`${proj.title} - ${proj.client}`}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
+            
+            <div class="absolute bottom-3 left-4 right-4">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-amber-brand block">
+                {proj.category}
+              </span>
+              <h4 class="font-display text-lg font-bold text-white group-hover:text-amber-brand transition-colors leading-snug">
+                {proj.title}
+              </h4>
+            </div>
+          </div>
+
+          <div class="p-5 space-y-3 bg-navy-900">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+              <span class="truncate">Client: <strong class="text-white">{proj.client}</strong></span>
+              <span class="shrink-0">{proj.location}</span>
+            </div>
+            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+              {proj.scopeSummary}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+  <!-- Additional Projects Grid (Filtered) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4" id="all-editorial-grid">
+    {otherProjects.slice(2).map((proj) => (
+      <div 
+        class="editorial-project-card group bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-card-dark flex flex-col justify-between hover:border-amber-brand/50 transition-all duration-300"
+        data-cat={proj.categorySlug}
+        data-cursor="view"
+      >
+        <div class="relative aspect-[16/10] overflow-hidden bg-navy-950">
+          <img 
+            src={proj.image} 
+            alt={`${proj.title} - ${proj.client}`}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent"></div>
+          
+          <div class="absolute top-3 left-3 bg-navy-950/90 text-amber-brand text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-navy-800">
+            {proj.category}
+          </div>
+
+          <div class="absolute bottom-3 left-3 right-3">
+            <h4 class="font-display text-base font-bold text-white group-hover:text-amber-brand transition-colors">
+              {proj.title}
+            </h4>
+          </div>
+        </div>
+
+        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-navy-900">
+          <div>
+            <div class="text-xs font-mono text-slate-400 mb-1">
+              Client: <strong class="text-white">{proj.client}</strong>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
+              {proj.scopeSummary}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-navy-800 flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-400">{proj.location}</span>
+            <a href="/contact" class="text-amber-brand hover:text-white font-semibold flex items-center gap-1">
+              <span>Scope</span>
+              <Icon name="chevron-right" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+</div>
+
+<script>
+  // Project filtering script
+  const filterBtns = document.querySelectorAll('.proj-filter-btn');
+  const allCards = document.querySelectorAll('.editorial-project-card');
+
+  if (filterBtns.length > 0 && allCards.length > 0) {
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => {
+          b.className = 'proj-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border bg-navy-900/80 text-slate-300 border-navy-800 hover:border-amber-brand/50 hover:text-white';
+        });
+
+        btn.className = 'proj-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border bg-amber-brand text-navy-950 border-amber-brand shadow-amber-sm';
+
+        const category = btn.getAttribute('data-category');
+
+        allCards.forEach((card) => {
+          const cardCat = card.getAttribute('data-cat');
+          if (category === 'all' || cardCat === category) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+</script>

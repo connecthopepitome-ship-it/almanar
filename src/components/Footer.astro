@@ -8,28 +8,30 @@ const currentYear = new Date().getFullYear();
 <footer class="bg-navy-950 text-slate-300 border-t border-navy-800" aria-labelledby="footer-heading">
   <h2 id="footer-heading" class="sr-only">Footer</h2>
 
-  <!-- Pre-Footer Quick Contact Strip -->
-  <div class="bg-navy-900 border-b border-navy-800 py-8 px-4 sm:px-6 lg:px-8">
+  <!-- Pre-Footer Strip -->
+  <div class="bg-navy-900 border-b border-navy-800 py-10 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div>
-        <span class="text-xs font-bold uppercase tracking-wider text-gold-500 block mb-1">
-          Have an Upcoming Project or Tender?
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-amber-brand block mb-1">
+          HAVE AN UPCOMING PROJECT OR MEP TENDER?
         </span>
-        <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">
-          Speak with our Abu Dhabi engineering desk today.
+        <h3 class="font-display text-xl sm:text-2xl font-extrabold text-white">
+          Speak with our Abu Dhabi engineering estimating desk today.
         </h3>
       </div>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
         <a 
           href={`tel:${COMPANY.contact.phone.replace(/[^0-9]/g, '')}`}
-          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-semibold bg-navy-800 text-white hover:bg-navy-700 border border-navy-700 transition-colors"
+          data-magnetic="true"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold bg-navy-850 text-white hover:bg-navy-800 border border-navy-700 transition-colors"
         >
-          <Icon name="phone" class="w-4 h-4 text-gold-500" />
-          <span>Call 02-5829700</span>
+          <Icon name="phone" class="w-4 h-4 text-amber-brand" />
+          <span>02-5829700</span>
         </a>
         <a 
           href="/contact"
-          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-semibold bg-gold-500 text-navy-950 hover:bg-gold-400 transition-colors shadow-sm"
+          data-magnetic="true"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold bg-amber-brand text-navy-950 hover:bg-amber-glow transition-all shadow-amber-sm"
         >
           <span>Submit Project Specifications</span>
           <Icon name="arrow-right" class="w-4 h-4" />
@@ -45,7 +47,7 @@ const currentYear = new Date().getFullYear();
       <!-- Col 1: Brand & Credibility (Spans 2 columns on lg) -->
       <div class="lg:col-span-2 space-y-5">
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-white rounded-lg p-1.5 flex items-center justify-center border border-navy-700">
+          <div class="w-12 h-12 bg-white rounded-xl p-1.5 flex items-center justify-center border border-navy-800">
             <img 
               src="/images/original/Logo-Al-Manar-1-1024x1024.png" 
               alt="Al Manar Tech Logo" 
@@ -56,32 +58,32 @@ const currentYear = new Date().getFullYear();
             />
           </div>
           <div>
-            <span class="text-xl font-extrabold tracking-tight text-white font-heading block">
-              AL MANAR <span class="text-gold-500">TECH</span>
+            <span class="text-xl font-extrabold tracking-tight text-white font-display block">
+              AL MANAR <span class="text-amber-brand">TECH</span>
             </span>
-            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold block">
+            <span class="text-[9px] font-mono uppercase tracking-widest text-slate-400 font-semibold block">
               Integrated Building & Infrastructure Solutions
             </span>
           </div>
         </div>
 
-        <p class="text-sm text-slate-300 leading-relaxed pr-4">
+        <p class="text-sm text-slate-300 leading-relaxed font-sans pr-4">
           Established in 2001, Al Manar Tech is an approved engineering contractor delivering turnkey electromechanical, HVAC, fire detection, IT and telecommunications, security, and facility maintenance systems across Abu Dhabi and Al Ain.
         </p>
 
         <!-- Authority Licensures -->
-        <div class="pt-2">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">
-            Recognized & Approved By
+        <div class="pt-2 font-mono text-xs">
+          <span class="text-slate-500 block mb-2 text-[10px] uppercase tracking-widest">
+            LICENSED & APPROVED BY:
           </span>
-          <div class="flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 rounded bg-navy-900 border border-navy-700 text-slate-200">
-              Abu Dhabi Distribution Co. (ADDC)
+          <div class="flex flex-wrap gap-2 text-[11px]">
+            <span class="px-2.5 py-1 rounded bg-navy-900 border border-navy-800 text-amber-brand">
+              ADDC Approved
             </span>
-            <span class="px-2.5 py-1 rounded bg-navy-900 border border-navy-700 text-slate-200">
-              Abu Dhabi Municipality (ADM)
+            <span class="px-2.5 py-1 rounded bg-navy-900 border border-navy-800 text-slate-200">
+              ADM Recognized
             </span>
-            <span class="px-2.5 py-1 rounded bg-navy-900 border border-navy-700 text-slate-200">
+            <span class="px-2.5 py-1 rounded bg-navy-900 border border-navy-800 text-slate-200">
               ADQCC Standards
             </span>
           </div>
@@ -90,13 +92,13 @@ const currentYear = new Date().getFullYear();
 
       <!-- Col 2: Services -->
       <div class="space-y-4">
-        <h4 class="text-sm font-bold uppercase tracking-wider text-white font-heading">
+        <h4 class="font-display text-sm font-bold uppercase tracking-wider text-white">
           Engineering Divisions
         </h4>
-        <ul class="space-y-2.5 text-sm">
+        <ul class="space-y-2 text-sm font-sans">
           {SERVICES.map((s) => (
             <li>
-              <a href={`/services/${s.slug}`} class="text-slate-300 hover:text-gold-400 transition-colors inline-block">
+              <a href={`/services/${s.slug}`} class="text-slate-300 hover:text-amber-brand transition-colors inline-block">
                 {s.shortTitle}
               </a>
             </li>
@@ -106,39 +108,39 @@ const currentYear = new Date().getFullYear();
 
       <!-- Col 3: Company & Information -->
       <div class="space-y-4">
-        <h4 class="text-sm font-bold uppercase tracking-wider text-white font-heading">
-          Company
+        <h4 class="font-display text-sm font-bold uppercase tracking-wider text-white">
+          Navigation
         </h4>
-        <ul class="space-y-2.5 text-sm">
-          <li><a href="/about" class="text-slate-300 hover:text-gold-400 transition-colors">About Al Manar Tech</a></li>
-          <li><a href="/industries" class="text-slate-300 hover:text-gold-400 transition-colors">Industries Served</a></li>
-          <li><a href="/projects" class="text-slate-300 hover:text-gold-400 transition-colors">Project Portfolio</a></li>
-          <li><a href="/process" class="text-slate-300 hover:text-gold-400 transition-colors">Our 4-Stage Process</a></li>
-          <li><a href="/contact" class="text-slate-300 hover:text-gold-400 transition-colors">Contact Engineering Desk</a></li>
+        <ul class="space-y-2 text-sm font-sans">
+          <li><a href="/about" class="text-slate-300 hover:text-amber-brand transition-colors">About Us</a></li>
+          <li><a href="/industries" class="text-slate-300 hover:text-amber-brand transition-colors">Industries</a></li>
+          <li><a href="/projects" class="text-slate-300 hover:text-amber-brand transition-colors">Project Portfolio</a></li>
+          <li><a href="/process" class="text-slate-300 hover:text-amber-brand transition-colors">Our 4-Stage Process</a></li>
+          <li><a href="/contact" class="text-slate-300 hover:text-amber-brand transition-colors">Contact Engineering Desk</a></li>
         </ul>
       </div>
 
       <!-- Col 4: Abu Dhabi Headquarters -->
       <div class="space-y-4">
-        <h4 class="text-sm font-bold uppercase tracking-wider text-white font-heading">
-          Abu Dhabi Head Office
+        <h4 class="font-display text-sm font-bold uppercase tracking-wider text-white">
+          Abu Dhabi Office
         </h4>
-        <div class="space-y-3 text-sm text-slate-300">
-          <div class="flex items-start gap-2.5">
-            <Icon name="map-pin" class="w-4 h-4 text-gold-500 shrink-0 mt-1" />
-            <span>Warehouse 2, Al Afou 3St, Musaffah M35, Abu Dhabi, United Arab Emirates</span>
+        <div class="space-y-3 text-xs font-mono text-slate-300">
+          <div class="flex items-start gap-2.5 font-sans">
+            <Icon name="map-pin" class="w-4 h-4 text-amber-brand shrink-0 mt-0.5" />
+            <span>Warehouse 2, Al Afou 3St, Musaffah M35, Abu Dhabi, UAE</span>
           </div>
           <div class="flex items-center gap-2.5">
-            <Icon name="phone" class="w-4 h-4 text-gold-500 shrink-0" />
-            <a href="tel:025829700" class="hover:text-gold-400">02-5829700</a>
+            <Icon name="phone" class="w-4 h-4 text-amber-brand shrink-0" />
+            <a href="tel:025829700" class="hover:text-amber-brand text-white font-bold">02-5829700</a>
           </div>
           <div class="flex items-center gap-2.5">
-            <Icon name="mail" class="w-4 h-4 text-gold-500 shrink-0" />
-            <a href="mailto:info@almanartech.com" class="hover:text-gold-400">info@almanartech.com</a>
+            <Icon name="mail" class="w-4 h-4 text-amber-brand shrink-0" />
+            <a href="mailto:info@almanartech.com" class="hover:text-amber-brand text-white">info@almanartech.com</a>
           </div>
-          <div class="flex items-start gap-2.5 text-xs text-slate-400">
-            <Icon name="clock" class="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
-            <span>Mon – Sat: 09:00 – 18:00<br/>Emergency Support: On Call</span>
+          <div class="flex items-start gap-2.5 text-slate-400">
+            <Icon name="clock" class="w-4 h-4 text-amber-brand shrink-0 mt-0.5" />
+            <span>Mon–Sat: 09:00–18:00<br/>Emergency On-Call: 24/7</span>
           </div>
         </div>
       </div>
@@ -146,26 +148,27 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Operating Regions Strip -->
-    <div class="mt-12 pt-8 border-t border-navy-800 text-xs text-slate-400">
+    <div class="mt-12 pt-8 border-t border-navy-800 text-xs font-mono text-slate-400">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <span class="font-semibold text-slate-300">Service Coverage:</span> Abu Dhabi Island • Musaffah Industrial Area (M35 / M37) • ICAD I, II & III • Khalifa Industrial Zone Abu Dhabi (KIZAD) • Al Ain • Al Dhafra Region
+          <span class="text-amber-brand font-bold">COVERAGE:</span> Abu Dhabi Island • Musaffah Industrial Area (M35 / M37) • ICAD • KIZAD • Al Ain • Al Dhafra
         </div>
-        <div class="shrink-0 font-medium text-slate-400">
+        <div class="shrink-0 text-slate-400">
           ADDC Electrical Contracting Licensure
         </div>
       </div>
     </div>
 
     <!-- Bottom Copyright -->
-    <div class="mt-8 pt-8 border-t border-navy-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+    <div class="mt-8 pt-8 border-t border-navy-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
       <p>
-        © {currentYear} Al Manar Technical Contracting (Al Manar Tech). All rights reserved.
+        © {currentYear} Al Manar Technical Contracting. All rights reserved.
       </p>
       <div class="flex items-center gap-6">
-        <a href="/about" class="hover:text-slate-300">Company Overview</a>
-        <a href="/process" class="hover:text-slate-300">Quality Assurance</a>
-        <a href="/contact" class="hover:text-slate-300">Inquire</a>
+        <a href="/about" class="hover:text-amber-brand">About</a>
+        <a href="/services" class="hover:text-amber-brand">Services</a>
+        <a href="/process" class="hover:text-amber-brand">Quality Assurance</a>
+        <a href="/contact" class="hover:text-amber-brand">Inquire</a>
       </div>
     </div>
 

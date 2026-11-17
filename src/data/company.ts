@@ -1,4 +1,5 @@
 export interface ServiceDivision {
+  number: string;
   id: string;
   slug: string;
   title: string;
@@ -13,9 +14,11 @@ export interface ServiceDivision {
   faqs: { question: string; answer: string }[];
   icon: string;
   heroImage: string;
+  specs: { label: string; value: string }[];
 }
 
 export interface Industry {
+  number: string;
   id: string;
   name: string;
   tagline: string;
@@ -38,6 +41,7 @@ export interface ProjectItem {
   verified: boolean;
   completionYear?: string;
   sectors: string[];
+  featured?: boolean;
 }
 
 export const COMPANY = {
@@ -49,6 +53,7 @@ export const COMPANY = {
   experienceYears: "Over 2 Decades",
   projectsCompleted: "160+",
   primaryMarket: "Abu Dhabi & Al Ain, UAE",
+  headquarters: "Warehouse 2, Al Afou 3St, Musaffah M35, Abu Dhabi, UAE",
   description: "Al Manar Tech delivers integrated electromechanical, HVAC, fire detection, IT and telecommunications, security and maintenance solutions for commercial, industrial and residential environments across Abu Dhabi and Al Ain.",
   contact: {
     phone: "02-5829700",
@@ -66,29 +71,33 @@ export const COMPANY = {
     {
       name: "ADDC Approved",
       authority: "Abu Dhabi Distribution Company",
+      code: "ADDC-CON-ELEC",
       desc: "Licensed contractor for power distribution, substation works, and electromechanical connections."
     },
     {
       name: "ADM Recognized",
       authority: "Abu Dhabi Municipality",
+      code: "ADM-ENG-2001",
       desc: "Conforming to municipal engineering specifications, structural approvals, and commercial fit-out standards."
     },
     {
       name: "ADQCC Compliant",
       authority: "Abu Dhabi Quality and Conformity Council",
+      code: "ADQCC-QAS",
       desc: "Adherence to UAE national technical conformity standards, electrical safety, and verified materials."
     }
   ],
   stats: [
-    { value: "2001", label: "Established In", detail: "Over 2 decades of continuous operational experience" },
+    { value: "2001", label: "Established In", detail: "Over two decades of continuous operational experience in UAE" },
     { value: "160+", label: "Verified Projects", detail: "Successfully executed across Abu Dhabi & Al Ain" },
-    { value: "6", label: "Core Engineering Divisions", detail: "Integrated MEP, HVAC, Fire, IT, Security & AMC" },
-    { value: "100%", label: "Authority Compliance", detail: "ADDC, ADM & ADQCC aligned procedures" }
+    { value: "06", label: "Core Divisions", detail: "Integrated MEP, HVAC, Fire, IT, Security & AMC" },
+    { value: "100%", label: "Authority Compliance", detail: "ADDC, ADM & Civil Defence aligned procedures" }
   ]
 };
 
 export const SERVICES: ServiceDivision[] = [
   {
+    number: "01",
     id: "mep-contracting",
     slug: "mep-contracting",
     title: "Electromechanical & MEP Contracting",
@@ -96,8 +105,14 @@ export const SERVICES: ServiceDivision[] = [
     category: "Electromechanical",
     tagline: "Precision Electrical, Mechanical, and Plumbing Engineering for Abu Dhabi's Built Environment",
     description: "As an ADDC-approved electromechanical contractor, Al Manar Tech engineers and delivers turnkey MEP installations. From high-capacity power distribution systems and LV panels to sanitary engineering and industrial containment, we ensure code-compliant, energy-efficient operational infrastructure.",
-    icon: "Zap",
-    heroImage: "/images/original/alybo5_professionals_in_Abu_Dhabi_working_on_a_big_electrical_i_9c3c592b-a369-4b7e-8b61-72bc56261dcb.png",
+    icon: "zap",
+    heroImage: "/images/original/electrical-team-abu-dhabi.png",
+    specs: [
+      { label: "Voltage Level", value: "LV / 415V 3-Phase" },
+      { label: "Authority", value: "ADDC Approved" },
+      { label: "Standards", value: "BS 7671 / IEC" },
+      { label: "Testing", value: "Megger & Loop Verified" }
+    ],
     technicalHighlights: [
       "ADDC-certified load calculations, shop drawings, and power energization approvals",
       "Low Voltage (LV) switchgear, Main Distribution Boards (MDB), and Sub-MDB design",
@@ -155,6 +170,7 @@ export const SERVICES: ServiceDivision[] = [
     ]
   },
   {
+    number: "02",
     id: "it-telecom",
     slug: "it-telecom",
     title: "IT & Telecommunications Infrastructure",
@@ -162,8 +178,14 @@ export const SERVICES: ServiceDivision[] = [
     category: "Information Systems",
     tagline: "High-Performance Structured Cabling, Fiber Networks, and Data Center Infrastructure",
     description: "Reliable digital connectivity forms the nervous system of modern business operations. Al Manar Tech designs, implements, and certifies high-performance copper and optical fiber structured cabling, enterprise server rooms, PABX systems, and unified communications for enterprise resilience.",
-    icon: "Network",
-    heroImage: "/images/original/cropped-Logo-Al-Manar-1-192x192.png",
+    icon: "network",
+    heroImage: "/images/original/Al-Dar-Academies-HQ.jpeg",
+    specs: [
+      { label: "Cabling Tier", value: "Cat6A / Cat7 / OS2 / OM4" },
+      { label: "Certification", value: "Fluke DSX Tested" },
+      { label: "Service Providers", value: "e& (Etisalat) / du Aligned" },
+      { label: "Containment", value: "Structured Trays / Racks" }
+    ],
     technicalHighlights: [
       "Cat6, Cat6A, and Cat7 structured cabling installations with Fluke DTX/DSX certification",
       "Single-mode (OS2) and multi-mode (OM3/OM4) fiber optic fusion splicing and OTDR testing",
@@ -215,6 +237,7 @@ export const SERVICES: ServiceDivision[] = [
     ]
   },
   {
+    number: "03",
     id: "fire-detection",
     slug: "fire-detection",
     title: "Fire Detection & Life Safety Systems",
@@ -222,8 +245,14 @@ export const SERVICES: ServiceDivision[] = [
     category: "Life Safety",
     tagline: "Certified Fire Hazard Detection and Life Safety Systems Aligned with UAE Civil Defence Requirements",
     description: "Protecting lives, structural assets, and operational continuity requires early, reliable fire hazard detection. Al Manar Tech installs advanced analogue addressable fire alarm systems, smoke evacuation interface modules, emergency voice evacuation, and central monitoring compliant with UAE Fire and Life Safety Codes.",
-    icon: "ShieldAlert",
-    heroImage: "/images/original/alybo5_professionals_installing_fire_safety_systems_in_abu_dhab_a55692c7-3cd0-4a1f-b587-df131eebe6a3-768x768.png",
+    icon: "shield-alert",
+    heroImage: "/images/original/fire-safety-install-abu-dhabi.png",
+    specs: [
+      { label: "System Protocol", value: "Analogue Addressable" },
+      { label: "Regulation", value: "UAE Civil Defence Code" },
+      { label: "Audits", value: "Cause & Effect Matrix" },
+      { label: "Integrations", value: "BMS / HVAC Damper / EVAC" }
+    ],
     technicalHighlights: [
       "Analogue addressable and conventional Fire Alarm Control Panels (FACP)",
       "Multi-sensor, optical smoke, thermal heat, and infrared flame detectors",
@@ -275,6 +304,7 @@ export const SERVICES: ServiceDivision[] = [
     ]
   },
   {
+    number: "04",
     id: "hvac",
     slug: "hvac",
     title: "HVAC Installations & Climate Engineering",
@@ -282,8 +312,14 @@ export const SERVICES: ServiceDivision[] = [
     category: "Thermal Comfort",
     tagline: "Industrial and Commercial Thermal Comfort, Air Quality, and Energy-Efficient Cooling",
     description: "Given the demanding climatic conditions of Abu Dhabi and Al Ain, robust HVAC systems are vital for occupant comfort, product integrity, and energy sustainability. Al Manar Tech provides complete HVAC engineering, from chilled water networks and VRF systems to specialized ventilation and precision climate control.",
-    icon: "Fan",
-    heroImage: "/images/original/alybo5_professionals_in_Abu_Dhabi_working_on_a_big_electrical_i_9c3c592b-a369-4b7e-8b61-72bc56261dcb.png",
+    icon: "fan",
+    heroImage: "/images/original/Puma-Outlet-Showroom.jpeg",
+    specs: [
+      { label: "Cooling Medium", value: "Chilled Water / VRF / DX" },
+      { label: "Air Balancing", value: "Certified TAB Protocols" },
+      { label: "Ductwork", value: "SMACNA / GI & Pre-Insulated" },
+      { label: "Efficiency", value: "Estidama / Pearl Aligned" }
+    ],
     technicalHighlights: [
       "Chilled water fan coil units (FCU) and Air Handling Units (AHU) installations",
       "Variable Refrigerant Flow (VRF/VRV) systems for zoning flexibility and high COP efficiency",
@@ -335,6 +371,7 @@ export const SERVICES: ServiceDivision[] = [
     ]
   },
   {
+    number: "05",
     id: "security",
     slug: "security",
     title: "Security & Surveillance Systems",
@@ -342,8 +379,14 @@ export const SERVICES: ServiceDivision[] = [
     category: "Electronic Security",
     tagline: "Protocolled IP-CCTV, Access Control, and Physical Perimeter Security Solutions",
     description: "Operational continuity and asset protection require dependable physical security. Al Manar Tech installs compliant IP video surveillance, biometric access control, automated vehicle barrier systems, and centralized security monitoring infrastructure tailored to Abu Dhabi facility standards.",
-    icon: "Camera",
-    heroImage: "/images/original/Logo-Al-Manar-1-1024x1024.png",
+    icon: "camera",
+    heroImage: "/images/original/Emirates-NBD-Bank.jpeg",
+    specs: [
+      { label: "Video Standards", value: "Ultra-HD IP / ONVIF Compliant" },
+      { label: "Storage Archival", value: "RAID NVR / SAN Storage" },
+      { label: "Biometrics", value: "Multi-Spectral Face / RFID" },
+      { label: "Perimeter", value: "ANPR / Motorized Barriers" }
+    ],
     technicalHighlights: [
       "High-definition IP surveillance cameras (dome, bullet, PTZ, panoramic 360°, thermal)",
       "Network Video Recorders (NVR) and enterprise Storage Area Networks (SAN) with RAID redundancy",
@@ -395,6 +438,7 @@ export const SERVICES: ServiceDivision[] = [
     ]
   },
   {
+    number: "06",
     id: "facility-maintenance",
     slug: "facility-maintenance",
     title: "Facility Maintenance & Annual Contracts",
@@ -402,8 +446,14 @@ export const SERVICES: ServiceDivision[] = [
     category: "Lifecycle Support",
     tagline: "Planned Preventive Maintenance (PPM) and Rapid Breakdown Response for Infrastructure Longevity",
     description: "Installed infrastructure represents a major capital investment that demands disciplined ongoing care. Al Manar Tech provides structured Annual Maintenance Contracts (AMC), predictive thermal thermography, 24/7 on-call emergency response, and scheduled servicing across electromechanical and HVAC assets.",
-    icon: "Wrench",
-    heroImage: "/images/original/Logo-Al-Manar-white.png",
+    icon: "wrench",
+    heroImage: "/images/original/Yas-Water-World-Miral.jpeg",
+    specs: [
+      { label: "Response Time", value: "Guaranteed SLA / 24/7" },
+      { label: "Inspections", value: "FLIR Thermal Thermography" },
+      { label: "Contracts", value: "Quarterly / Bi-Annual AMC" },
+      { label: "Logbooks", value: "Digital Preventive Reports" }
+    ],
     technicalHighlights: [
       "Customized Annual Maintenance Contracts (AMC) with guaranteed Service Level Agreements (SLA)",
       "Scheduled Planned Preventive Maintenance (PPM) checklists executed by certified technicians",
@@ -458,6 +508,7 @@ export const SERVICES: ServiceDivision[] = [
 
 export const INDUSTRIES: Industry[] = [
   {
+    number: "01",
     id: "industrial",
     name: "Industrial & Manufacturing",
     tagline: "Heavy-duty electrical, ventilation, and life safety systems for harsh industrial operations",
@@ -473,11 +524,12 @@ export const INDUSTRIES: Industry[] = [
       "Optical beam smoke detection and integrated hazard shutdown controls"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "Fire Detection", "Facility Maintenance"],
-    image: "/images/original/alybo5_professionals_in_Abu_Dhabi_working_on_a_big_electrical_i_9c3c592b-a369-4b7e-8b61-72bc56261dcb.png"
+    image: "/images/original/electrical-team-abu-dhabi.png"
   },
   {
+    number: "02",
     id: "commercial",
-    name: "Commercial & Corporate Offices",
+    name: "Commercial & Corporate",
     tagline: "Refined aesthetic MEP, smart building connectivity, and acoustic comfort",
     description: "Modern commercial spaces require seamless electromechanical engineering that blends into sophisticated interior architecture while delivering uninterrupted power, high-speed data, and balanced thermal comfort.",
     challenges: [
@@ -494,6 +546,7 @@ export const INDUSTRIES: Industry[] = [
     image: "/images/original/Al-Dar-Academies-HQ.jpeg"
   },
   {
+    number: "03",
     id: "retail",
     name: "Retail & Shopping Malls",
     tagline: "High-impact retail illumination, fast-track fit-out execution, and life safety",
@@ -512,8 +565,28 @@ export const INDUSTRIES: Industry[] = [
     image: "/images/original/Puma-Outlet-Showroom.jpeg"
   },
   {
+    number: "04",
+    id: "healthcare",
+    name: "Healthcare & Clean Rooms",
+    tagline: "Clean power continuity, hygienic air filtration, and stringent regulatory compliance",
+    description: "Medical centers, dental clinics, and laboratories require specialized engineering where power interruption or airborne contamination can directly compromise patient well-being.",
+    challenges: [
+      "Critical medical equipment requiring isolated clean power and zero voltage surges",
+      "Strict airborne infection control and positive/negative pressure room isolation",
+      "Compliance with Department of Health (DoH) engineering standards"
+    ],
+    solutions: [
+      "Medical-grade isolation panels and dedicated UPS power distribution",
+      "HEPA filtration modules and precision pressure-controlled ventilation",
+      "Access-controlled pharmacy and laboratory entry security"
+    ],
+    servicesOffered: ["MEP Contracting", "HVAC Systems", "IT & Telecom", "Security & Surveillance"],
+    image: "/images/original/fire-safety-install-abu-dhabi.png"
+  },
+  {
+    number: "05",
     id: "food-beverage",
-    name: "Food & Beverage and Central Kitchens",
+    name: "Food & Beverage",
     tagline: "Hygiene-compliant drainage, kitchen exhaust ecology, and heavy electrical loads",
     description: "Restaurants, bakeries, and food preparation facilities combine demanding thermal kitchen loads, grease extraction standards, and strict health and hygiene regulations.",
     challenges: [
@@ -530,26 +603,47 @@ export const INDUSTRIES: Industry[] = [
     image: "/images/original/Katrina-Sweets.jpeg"
   },
   {
-    id: "healthcare",
-    name: "Healthcare & Medical Clinics",
-    tagline: "Clean power continuity, hygienic air filtration, and stringent regulatory compliance",
-    description: "Medical centers, dental clinics, and laboratories require specialized engineering where power interruption or airborne contamination can directly compromise patient well-being.",
+    number: "06",
+    id: "hospitality",
+    name: "Hospitality & Leisure",
+    tagline: "High-capacity public entertainment power, architectural lighting, and rapid maintenance",
+    description: "Theme parks, hotels, and entertainment complexes demand continuous technical reliability with zero tolerance for visible equipment failures in guest spaces.",
     challenges: [
-      "Critical medical equipment requiring isolated clean power and zero voltage surges",
-      "Strict airborne infection control and positive/negative pressure room isolation",
-      "Compliance with Department of Health (DoH) engineering standards"
+      "High instantaneous electrical surges from rides, shows, and aquatic pumps",
+      "Stringent guest safety, public address life safety, and discrete monitoring",
+      "Rigid night-shift maintenance windows to avoid daytime disruption"
     ],
     solutions: [
-      "Medical-grade isolation panels and dedicated UPS power distribution",
-      "HEPA filtration modules and precision pressure-controlled ventilation",
-      "Access-controlled pharmacy and laboratory entry security"
+      "Robust electrical power distribution and redundant backup transfer switches",
+      "Centralized emergency sound systems and integrated CCTV coverage",
+      "Dedicated on-call maintenance teams stationed for immediate resolution"
     ],
-    servicesOffered: ["MEP Contracting", "HVAC Systems", "IT & Telecom", "Security & Surveillance"],
-    image: "/images/original/alybo5_professionals_installing_fire_safety_systems_in_abu_dhab_a55692c7-3cd0-4a1f-b587-df131eebe6a3-768x768.png"
+    servicesOffered: ["MEP Contracting", "Facility Maintenance", "Fire Detection", "Security"],
+    image: "/images/original/Yas-Water-World-Miral.jpeg"
   },
   {
+    number: "07",
+    id: "institutional",
+    name: "Institutional & Sports",
+    tagline: "High-bay sports hall illumination, large-scale ventilation, and durable power distribution",
+    description: "Sports federations, training centers, and government institutions require durable electromechanical systems capable of accommodating large crowds and high-intensity lighting.",
+    challenges: [
+      "High ceiling clearance requiring specialized acoustic beam detectors and lighting access",
+      "Rapid temperature fluctuations during high occupancy sports events",
+      "Sturdy mechanical protection against impact in sports environments"
+    ],
+    solutions: [
+      "High-bay LED arena lighting with calibrated lux levels for broadcast standards",
+      "High-volume air distribution with silent air delivery ducts",
+      "Protective cage containment for all fire and security devices"
+    ],
+    servicesOffered: ["MEP Contracting", "HVAC Systems", "Fire Detection", "IT & Telecom"],
+    image: "/images/original/Emirates-Judo-and-Wrestling-Federation.jpeg"
+  },
+  {
+    number: "08",
     id: "residential",
-    name: "Residential & Luxury Developments",
+    name: "Residential Developments",
     tagline: "Energy-efficient home comfort, quiet air conditioning, and reliable domestic plumbing",
     description: "From luxury private villas to multi-unit residential communities in Abu Dhabi, we provide turnkey electromechanical engineering that delivers whisper-quiet cooling and low utility consumption.",
     challenges: [
@@ -579,7 +673,8 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
     image: "/images/original/Al-Dar-Academies-HQ.jpeg",
     verified: true,
     completionYear: "Completed",
-    sectors: ["Corporate", "IT & Telecom", "Electrical"]
+    sectors: ["Corporate", "IT & Telecom", "Electrical"],
+    featured: true
   },
   {
     id: "yas-waterworld",
@@ -598,7 +693,7 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
     id: "puma-outlet-showroom",
     title: "Puma Flagship Outlet Showroom",
     client: "Puma Middle East",
-    category: "Retail Showrooms",
+    category: "Retail & Showrooms",
     categorySlug: "retail",
     location: "Abu Dhabi, UAE",
     scopeSummary: "Complete retail MEP installation: architectural track lighting, low-profile HVAC distribution, Cat6 POS cabling, and integrated EAS security systems.",
@@ -611,18 +706,18 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
     id: "emirates-nbd-bank",
     title: "Emirates NBD Bank Branch",
     client: "Emirates NBD",
-    category: "Financial Institutions",
-    categorySlug: "financial",
+    category: "Commercial & Corporate",
+    categorySlug: "commercial",
     location: "Abu Dhabi, UAE",
     scopeSummary: "Secure banking facility electromechanical fit-out, dedicated UPS clean power network, structured telecommunication cabling, and CCTV surveillance integration.",
     image: "/images/original/Emirates-NBD-Bank.jpeg",
     verified: true,
     completionYear: "Completed",
-    sectors: ["Financial", "Security", "IT & Telecom"]
+    sectors: ["Corporate", "Security", "IT & Telecom"]
   },
   {
     id: "katrina-sweets",
-    title: "Katrina Sweets Production Facility & Outlets",
+    title: "Katrina Sweets Production Facility",
     client: "Katrina Sweets & Confectionery",
     category: "Food & Beverage",
     categorySlug: "food-beverage",
@@ -635,7 +730,7 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
   },
   {
     id: "emirates-judo-federation",
-    title: "Emirates Judo & Wrestling Federation Facility",
+    title: "Emirates Judo & Wrestling Federation",
     client: "Emirates Judo & Wrestling Federation",
     category: "Institutional & Sports",
     categorySlug: "institutional",
@@ -650,20 +745,20 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
     id: "city-challenge",
     title: "City Challenge Entertainment Center",
     client: "City Challenge UAE",
-    category: "Commercial Entertainment",
-    categorySlug: "commercial",
+    category: "Hospitality & Leisure",
+    categorySlug: "hospitality",
     location: "Abu Dhabi, UAE",
     scopeSummary: "Electromechanical power distribution for interactive electronic attractions, emergency lighting, primary and secondary DB installations, and HVAC balance.",
     image: "/images/original/City-Challenge.jpeg",
     verified: true,
     completionYear: "Completed",
-    sectors: ["Commercial", "MEP", "Lighting"]
+    sectors: ["Hospitality", "MEP", "Lighting"]
   },
   {
     id: "bayara-world",
     title: "Bayara World — Mushrif Mall",
     client: "Bayara World",
-    category: "Retail & F&B",
+    category: "Retail & Showrooms",
     categorySlug: "retail",
     location: "Mushrif Mall, Abu Dhabi",
     scopeSummary: "Retail unit MEP fit-out conforming to Mushrif Mall management specifications: electrical panels, display lighting, branch ductwork, and drainage ties.",
@@ -676,7 +771,7 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
     id: "la-molina",
     title: "La Molina Luxury Chocolaterie",
     client: "La Molina UAE",
-    category: "Boutique Retail",
+    category: "Retail & Showrooms",
     categorySlug: "retail",
     location: "Abu Dhabi, UAE",
     scopeSummary: "Precision climate and humidity control installation for gourmet confectionery storage and display, recessed architectural lighting, and power feeds.",
@@ -690,25 +785,29 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
 export const WORK_PROCESS = [
   {
     step: "01",
+    phase: "PHASE_01 // DISCOVERY",
     title: "Consultation & Engineering Assessment",
     summary: "Thorough site evaluation, load requirement calculation, and client specification review.",
     details: "Our senior engineering team conducts on-site surveys, assesses power/cooling demands, inspects existing infrastructure, and reviews authority jurisdiction parameters (ADDC, ADM, Civil Defence). We provide a detailed technical feasibility review and competitive commercial quotation."
   },
   {
     step: "02",
-    title: "Design, Approvals & Project Management",
+    phase: "PHASE_02 // REGULATORY",
+    title: "Design, Approvals & Authority Engineering",
     summary: "Precision engineering drawings, authority documentation, procurement, and project timelines.",
     details: "We draft detailed shop drawings, load schedules, single-line diagrams (SLD), and equipment submittals. Our team coordinates formal authority approvals with Abu Dhabi Distribution Company and Municipality while establishing rigorous milestone schedules."
   },
   {
     step: "03",
+    phase: "PHASE_03 // EXECUTION",
     title: "Certified Technical Execution",
     summary: "Methodical on-site installation by licensed engineers and technicians adhering to UAE codes.",
     details: "All field installations are carried out under dedicated project manager supervision using certified materials. We enforce stringent quality control checklists, safety protocols (EHS), and continuous coordination with main contractors and architects."
   },
   {
     step: "04",
-    title: "Commissioning, Handover & Maintenance",
+    phase: "PHASE_04 // COMMISSIONING",
+    title: "Commissioning, Handover & Lifecycle Maintenance",
     summary: "Stringent testing and balancing, authority inspection sign-off, operation manuals, and AMC plans.",
     details: "We execute pre-commissioning Megger tests, TAB balancing, and system interlocks prior to scheduling authority inspection. Upon energization and handover, we furnish As-Built drawings, O&M manuals, and tailored Planned Preventive Maintenance contracts."
   }

@@ -1,0 +1,47 @@
+---
+interface Props {
+  variant?: 'navy' | 'amber';
+}
+
+const { variant = 'navy' } = Astro.props;
+
+const items = [
+  "MEP ENGINEERING",
+  "HVAC SYSTEMS",
+  "FIRE DETECTION",
+  "IT & TELECOM",
+  "SECURITY SYSTEMS",
+  "FACILITY MAINTENANCE",
+  "ADDC LICENSED",
+  "ABU DHABI & AL AIN"
+];
+
+const isAmber = variant === 'amber';
+---
+
+<div class={`overflow-hidden border-y py-3.5 select-none ${
+  isAmber 
+    ? 'bg-amber-brand text-navy-950 border-amber-dark' 
+    : 'bg-navy-950 text-slate-300 border-navy-800'
+}`} aria-hidden="true">
+  <div class="flex w-max animate-marquee hover:[animation-play-state:paused]">
+    <!-- Repeat list twice to achieve an unbroken infinite marquee -->
+    <div class="flex items-center gap-8 px-4 font-mono text-xs sm:text-sm font-semibold tracking-widest shrink-0">
+      {items.map((item) => (
+        <div class="flex items-center gap-8 shrink-0">
+          <span class="hover:text-amber-brand transition-colors">{item}</span>
+          <span class={`${isAmber ? 'text-navy-900/40' : 'text-amber-brand'}`}>✦</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-8 px-4 font-mono text-xs sm:text-sm font-semibold tracking-widest shrink-0">
+      {items.map((item) => (
+        <div class="flex items-center gap-8 shrink-0">
+          <span class="hover:text-amber-brand transition-colors">{item}</span>
+          <span class={`${isAmber ? 'text-navy-900/40' : 'text-amber-brand'}`}>✦</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
