@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-navy: #101D2D;
+    --color-steel: #203B53;
+    --color-gold: #F0B641;
+    --color-cloud: #F2F4F6;
+    --color-slate: #667483;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #101D2D;
+    background-color: #ffffff;
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', 'Sora', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom engineering grid background */
+.engineering-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(32, 59, 83, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(32, 59, 83, 0.05) 1px, transparent 1px);
+}
+
+.engineering-grid-dark {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(240, 182, 65, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 182, 65, 0.06) 1px, transparent 1px);
+}
+
+/* Restrained subtle badge and highlight */
+.gold-badge {
+  background: rgba(240, 182, 65, 0.12);
+  border: 1px solid rgba(240, 182, 65, 0.35);
+  color: #b8811b;
+}
+
+.gold-badge-dark {
+  background: rgba(240, 182, 65, 0.15);
+  border: 1px solid rgba(240, 182, 65, 0.3);
+  color: #F0B641;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #F0B641;
+  outline-offset: 2px;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F2F4F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #203B53;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F0B641;
+}
+
+/* Smooth motion respecting user preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

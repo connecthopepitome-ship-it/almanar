@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import { COMPANY } from '../data/company';
+
+const pageTitle = "Executed Project Portfolio | Verified MEP & Contracting Works Abu Dhabi";
+const pageDescription = "View verified commercial, retail, hospitality, institutional, and industrial engineering projects completed by Al Manar Tech across Abu Dhabi and the UAE.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <!-- Projects Hero -->
+  <section class="bg-navy-950 text-white py-16 lg:py-24 engineering-grid-dark relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-navy-800 border border-gold-500/40 text-gold-400 text-xs font-semibold">
+          <Icon name="briefcase" class="w-4 h-4 text-gold-500" />
+          <span>Proven Contracting Portfolio</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
+          Executed Engineering & Infrastructure Projects
+        </h1>
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+          Al Manar Tech has successfully completed over 160 technical and electromechanical contracting projects in Abu Dhabi. Explore our verified portfolio across corporate, retail, leisure, and industrial sectors.
+        </p>
+
+        <!-- Transparency Note -->
+        <div class="pt-4 flex items-center gap-3 text-xs text-slate-400">
+          <Icon name="shield-check" class="w-4 h-4 text-gold-500 shrink-0" />
+          <span>All portfolio items represent authentic, company-verified project execution in the UAE.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Project Gallery Section -->
+  <section class="py-20 bg-cloud-100 min-h-[600px]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
+          Verified Installations
+        </span>
+        <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight">
+          Select a Sector to Filter Projects
+        </h2>
+        <p class="text-slate-custom text-sm">
+          Browse through completed electromechanical, HVAC, and low-current installations across Abu Dhabi and Al Ain.
+        </p>
+      </div>
+
+      <ProjectGallery showFilters={true} />
+
+    </div>
+  </section>
+
+  <!-- Pre-qualification CTA -->
+  <section class="py-20 bg-white border-t border-cloud-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-navy-900 rounded-3xl p-8 sm:p-12 lg:p-16 text-white border border-navy-800 flex flex-col lg:flex-row items-center justify-between gap-10">
+        <div class="space-y-4 max-w-2xl">
+          <span class="text-xs font-bold uppercase tracking-wider text-gold-500">
+            Contractor Prequalification
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
+            Need Our Company Profile & Trade Licensure for Tenders?
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            We provide comprehensive pre-qualification dossiers including our ADDC contractor registration, ADM trade license, insurance coverage, and audited project lists for developer and main contractor evaluation.
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400 pt-2">
+            <span>• ADDC License</span>
+            <span>• Municipality Trade License</span>
+            <span>• Workmen Compensation & CAR Insurance</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
+          <a 
+            href="/contact" 
+            class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-sm font-bold bg-gold-500 text-navy-950 hover:bg-gold-400 shadow-md transition-colors"
+          >
+            <span>Request Prequalification Dossier</span>
+            <Icon name="arrow-right" class="w-4 h-4 ml-2" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

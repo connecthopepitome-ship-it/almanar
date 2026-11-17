@@ -1,0 +1,206 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { COMPANY } from '../data/company';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  schema?: Record<string, any>;
+}
+
+const {
+  title,
+  description = "Al Manar Tech delivers integrated electromechanical, HVAC, fire detection, IT and telecommunications, security and maintenance solutions for commercial, industrial and residential environments across Abu Dhabi and Al Ain.",
+  canonicalPath = Astro.url.pathname,
+  ogImage = "/images/original/Logo-Al-Manar-1-1024x1024.png",
+  schema
+} = Astro.props;
+
+const siteUrl = "https://almanartech.ae";
+const fullCanonicalUrl = new URL(canonicalPath, siteUrl).href;
+const fullOgImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteUrl).href;
+
+// Default Organization & LocalBusiness JSON-LD Schema
+const defaultLocalBusinessSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://almanartech.ae/#organization",
+      "name": COMPANY.name,
+      "legalName": COMPANY.legalName,
+      "url": "https://almanartech.ae",
+      "logo": `${siteUrl}/images/original/Logo-Al-Manar-1-1024x1024.png`,
+      "foundingDate": "2001",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Warehouse 2, Al Afou 3St, Musaffah M35",
+        "addressLocality": "Abu Dhabi",
+        "addressRegion": "Abu Dhabi",
+        "addressCountry": "AE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971-2-5829700",
+        "contactType": "customer service",
+        "areaServed": ["Abu Dhabi", "Al Ain", "United Arab Emirates"],
+        "availableLanguage": ["English", "Arabic"]
+      }
+    },
+    {
+      "@type": ["LocalBusiness", "Electrician", "GeneralContractor"],
+      "@id": "https://almanartech.ae/#localbusiness",
+      "name": COMPANY.name,
+      "image": `${siteUrl}/images/original/Logo-Al-Manar-1-1024x1024.png`,
+      "telephone": "+971-2-5829700",
+      "email": "info@almanartech.com",
+      "url": "https://almanartech.ae",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Warehouse 2, Al Afou 3St, Musaffah M35",
+        "addressLocality": "Abu Dhabi",
+        "addressRegion": "Abu Dhabi",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.3496,
+        "longitude": 54.5103
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": [
+        { "@type": "City", "name": "Abu Dhabi" },
+        { "@type": "City", "name": "Al Ain" },
+        { "@type": "Country", "name": "United Arab Emirates" }
+      ]
+    }
+  ]
+};
+
+const pageSchema = schema || defaultLocalBusinessSchema;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/original/cropped-Logo-Al-Manar-1-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/original/cropped-Logo-Al-Manar-1-192x192.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title} | Al Manar Tech Abu Dhabi</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={fullCanonicalUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonicalUrl} />
+    <meta property="og:title" content={`${title} | Al Manar Tech Abu Dhabi`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:site_name" content="Al Manar Tech" />
+    <meta property="og:locale" content="en_AE" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonicalUrl} />
+    <meta name="twitter:title" content={`${title} | Al Manar Tech Abu Dhabi`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImageUrl} />
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#101D2D" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-navy-900 antialiased selection:bg-gold-500 selection:text-navy-950">
+    <Header currentPath={Astro.url.pathname} />
+
+    <main id="main-content" class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Floating Actions (Scroll to Top & Mobile Quick Action) -->
+    <button 
+      id="scroll-to-top" 
+      type="button" 
+      class="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-navy-900 text-gold-500 border border-navy-700 shadow-xl opacity-0 invisible translate-y-3 transition-all duration-300 hover:bg-gold-500 hover:text-navy-950 focus:outline-none focus:ring-2 focus:ring-gold-500"
+      aria-label="Scroll to top of page"
+    >
+      <Icon name="arrow-up" class="w-5 h-5" />
+    </button>
+
+    <!-- Mobile Sticky Quick Enquiry Bar -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-navy-950/95 backdrop-blur-md border-t border-navy-800 p-2.5 px-4 flex items-center justify-between gap-3 shadow-2xl">
+      <a 
+        href="tel:025829700" 
+        class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-navy-800 text-white text-xs font-semibold border border-navy-700 hover:bg-navy-700"
+      >
+        <Icon name="phone" class="w-4 h-4 text-gold-500" />
+        <span>Call 02-5829700</span>
+      </a>
+      <a 
+        href="/contact" 
+        class="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-gold-500 text-navy-950 text-xs font-bold hover:bg-gold-400 shadow-sm"
+      >
+        <span>Request Quote</span>
+        <Icon name="arrow-right" class="w-3.5 h-3.5" />
+      </a>
+    </div>
+
+    <!-- Interactive script: scroll to top & reveal observer -->
+    <script>
+      // Scroll to top button
+      const scrollBtn = document.getElementById('scroll-to-top');
+      if (scrollBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 400) {
+            scrollBtn.classList.remove('opacity-0', 'invisible', 'translate-y-3');
+            scrollBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+          } else {
+            scrollBtn.classList.add('opacity-0', 'invisible', 'translate-y-3');
+            scrollBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+          }
+        }, { passive: true });
+
+        scrollBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Smooth scroll-reveal observer
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      if ('IntersectionObserver' in window && revealElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>

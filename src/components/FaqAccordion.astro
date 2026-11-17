@@ -1,0 +1,55 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  faqs: { question: string; answer: string }[];
+}
+
+const { faqs } = Astro.props;
+---
+
+<div class="space-y-3 faq-accordion-container">
+  {faqs.map((faq, index) => (
+    <div class="border border-cloud-200 rounded-xl bg-white overflow-hidden transition-colors hover:border-cloud-300">
+      <button 
+        type="button" 
+        class="faq-trigger w-full flex items-center justify-between p-5 text-left text-navy-900 font-semibold font-heading text-base hover:text-gold-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500"
+        aria-expanded="false"
+        id={`faq-btn-${index}`}
+        aria-controls={`faq-panel-${index}`}
+      >
+        <span class="pr-4">{faq.question}</span>
+        <span class="p-1.5 rounded-full bg-cloud-100 text-navy-900 shrink-0 transition-transform duration-200 icon-wrapper">
+          <Icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" />
+        </span>
+      </button>
+
+      <div 
+        id={`faq-panel-${index}`} 
+        role="region" 
+        aria-labelledby={`faq-btn-${index}`} 
+        class="faq-content hidden px-5 pb-5 pt-1 text-slate-custom text-sm leading-relaxed border-t border-cloud-100"
+      >
+        <p>{faq.answer}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.faq-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      const panel = btn.nextElementSibling as HTMLElement;
+      const icon = btn.querySelector('.icon-wrapper svg') as HTMLElement;
+
+      btn.setAttribute('aria-expanded', (!isExpanded).toString());
+      if (panel) {
+        panel.classList.toggle('hidden');
+      }
+      if (icon) {
+        icon.classList.toggle('rotate-180');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { WORK_PROCESS } from '../data/company';
+
+const pageTitle = "Our Engineering Delivery Process | ADDC Approved Workflow Abu Dhabi";
+const pageDescription = "Learn how Al Manar Tech delivers electromechanical and MEP projects in Abu Dhabi through a structured 4-stage process ensuring regulatory compliance, safety, and punctuality.";
+
+const processFaqs = [
+  {
+    question: "How long does ADDC electrical drawing approval typically take?",
+    answer: "Drawing submission and review timelines vary depending on electrical load capacity and substation availability. For standard low-voltage commercial fit-outs, ADDC review generally takes 7 to 14 working days once all single-line diagrams (SLD) and load schedules are submitted in order."
+  },
+  {
+    question: "How does Al Manar Tech ensure on-site health, safety, and environmental (HSE) standards?",
+    answer: "All technicians and project engineers operate under strict HSE guidelines. We conduct mandatory daily toolbox talks, enforce certified Personal Protective Equipment (PPE), adhere to lockout-tagout (LOTO) protocols for energized systems, and maintain active contractor all-risk (CAR) insurance."
+  },
+  {
+    question: "Do you coordinate with main contractors and interior design consultants?",
+    answer: "Yes. Our project managers participate in weekly progress meetings, resolve MEP-architectural clash detections via coordinated shop drawings, and align our conduit, ducting, and cabling schedules with false ceiling and floor finish timelines."
+  },
+  {
+    question: "What documentation is provided upon project handover?",
+    answer: "Every completed project includes a comprehensive handover binder containing: approved As-Built drawings, ADDC inspection test certificates, Fluke network cabling test sheets, TAB air and water balancing logs, equipment warranty certificates, and Operation & Maintenance (O&M) manuals."
+  }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <!-- Process Hero -->
+  <section class="bg-navy-950 text-white py-16 lg:py-24 engineering-grid-dark relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-navy-800 border border-gold-500/40 text-gold-400 text-xs font-semibold">
+          <Icon name="layers" class="w-4 h-4 text-gold-500" />
+          <span>Engineering Methodology</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
+          A Disciplined 4-Stage Approach to Infrastructure Execution
+        </h1>
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+          Electromechanical installations succeed or fail on the rigor of their engineering workflow. Al Manar Tech follows a systematic milestone lifecycle designed to eliminate delays, prevent rework, and secure authority approvals efficiently.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed 4-Step Process Section -->
+  <section class="py-20 bg-cloud-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      {WORK_PROCESS.map((stage, idx) => (
+        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-cloud-200 shadow-premium transition-all hover:shadow-premium-lg">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-3 flex lg:flex-col items-center lg:items-start justify-between">
+              <span class="text-6xl sm:text-7xl font-black font-heading text-navy-900/20">
+                {stage.step}
+              </span>
+              <div class="inline-block px-3 py-1.5 rounded-lg bg-navy-900 text-gold-400 text-xs font-bold uppercase tracking-wider mt-2">
+                Stage {stage.step}
+              </div>
+            </div>
+
+            <div class="lg:col-span-9 space-y-4">
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 font-heading">
+                {stage.title}
+              </h2>
+              <p class="text-sm font-semibold text-gold-700 bg-gold-400/10 px-3.5 py-1.5 rounded-lg border border-gold-400/20 inline-block">
+                {stage.summary}
+              </p>
+              <p class="text-sm sm:text-base text-slate-custom leading-relaxed">
+                {stage.details}
+              </p>
+
+              <!-- Stage Key Milestones -->
+              <div class="pt-4 border-t border-cloud-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-navy-900 block mb-2">
+                  Key Deliverables for This Stage:
+                </span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
+                  {idx === 0 && (
+                    <>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Site condition survey & existing services audit</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Electrical load demand calculation (kVA/kW)</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>HVAC heat load estimation (BTU/TR)</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Detailed commercial quotation & timeline outline</span></div>
+                    </>
+                  )}
+                  {idx === 1 && (
+                    <>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Single-Line Diagrams (SLD) & DB Schedules</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>ADDC official drawing submission & tracking</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Material submittals & ADQCC compliance verification</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Civil Defence fire alarm cause-and-effect matrix</span></div>
+                    </>
+                  )}
+                  {idx === 2 && (
+                    <>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Certified on-site engineering supervision</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Conduit, tray, duct, and pipe pressure containment</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Weekly coordination meetings & milestone tracking</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Full adherence to UAE safety & EHS regulations</span></div>
+                    </>
+                  )}
+                  {idx === 3 && (
+                    <>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Megger insulation resistance & continuity testing</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>TAB air flow balancing and chiller water delta-T checks</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>Official ADDC meter energization inspection sign-off</span></div>
+                      <div class="flex items-center gap-2"><Icon name="check-circle" class="w-4 h-4 text-emerald-600" /><span>As-Built drawings, O&M manuals & warranty handover</span></div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+  <!-- Quality & Safety Commitments -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
+            Health, Safety & Environment
+          </span>
+          <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight">
+            Safety Standards Aligned with UAE National Directives
+          </h2>
+          <p class="text-slate-custom text-base leading-relaxed">
+            At Al Manar Tech, safety is not an afterthought—it is engineered into every daily operational briefing. Because electrical power and pressurized mechanical systems carry inherent hazards, our technicians operate under strict protocols to protect lives, equipment, and structural assets.
+          </p>
+
+          <div class="space-y-3 pt-2 text-sm text-slate-700">
+            <div class="flex items-start gap-3">
+              <Icon name="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <span>Zero-tolerance protocol for energized electrical work without verified isolation.</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <Icon name="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <span>Mandatory daily safety briefings and hazard identification at every jobsite.</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <Icon name="shield-check" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <span>Comprehensive insurance coverage including Workmen’s Compensation and CAR policies.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-navy-950 text-white rounded-3xl p-8 sm:p-10 border border-navy-800 space-y-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-gold-500">
+            Client Assurances
+          </span>
+          <h3 class="text-2xl font-bold font-heading text-white">
+            Why Our Workflow Protects Your Investment
+          </h3>
+          <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800">
+              <strong class="text-white block mb-1">Fixed Commercial Transparency:</strong>
+              Detailed bill of quantities (BOQ) with no hidden variations or surprise add-ons.
+            </div>
+            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800">
+              <strong class="text-white block mb-1">Direct Authority Representation:</strong>
+              We handle all interactions with ADDC, Abu Dhabi Municipality, and Civil Defence directly.
+            </div>
+            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800">
+              <strong class="text-white block mb-1">Guaranteed Handover Support:</strong>
+              Clear warranty periods and immediate transition to Planned Preventive Maintenance (PPM).
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Process FAQs -->
+  <section class="py-20 bg-cloud-100 border-t border-cloud-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="text-center space-y-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-gold-600">
+          Delivery Questions
+        </span>
+        <h2 class="text-3xl font-extrabold text-navy-900 font-heading tracking-tight">
+          Process & Timelines FAQ
+        </h2>
+        <p class="text-slate-custom text-sm">
+          Everything you need to know about initiating a project with Al Manar Tech.
+        </p>
+      </div>
+
+      <FaqAccordion faqs={processFaqs} />
+    </div>
+  </section>
+
+</Layout>

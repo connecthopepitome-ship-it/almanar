@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import { COMPANY } from '../data/company';
+
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'dark' } = Astro.props;
+
+const isDark = variant === 'dark';
+---
+
+<section class={`py-16 ${isDark ? 'bg-navy-950 text-white border-y border-navy-800' : 'bg-cloud-100 text-navy-900 border-y border-cloud-200'}`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      
+      {COMPANY.stats.map((stat, index) => (
+        <div class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-2">
+          <div class="flex items-baseline gap-1">
+            <span 
+              class={`text-4xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight ${isDark ? 'text-gold-500' : 'text-navy-900'}`}
+              data-target={stat.value}
+            >
+              {stat.value}
+            </span>
+          </div>
+          <span class={`text-sm sm:text-base font-bold font-heading ${isDark ? 'text-white' : 'text-navy-900'}`}>
+            {stat.label}
+          </span>
+          <p class={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-600'} leading-relaxed max-w-[240px]`}>
+            {stat.detail}
+          </p>
+        </div>
+      ))}
+
+    </div>
+
+    <!-- Accreditations Banner within Stats -->
+    <div class="mt-12 pt-8 border-t border-navy-800/80 flex flex-wrap items-center justify-between gap-6">
+      <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <Icon name="shield-check" class="w-4 h-4 text-gold-500" />
+        <span>Official Government Licensures & Conformity</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Abu Dhabi Distribution Company (ADDC)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Abu Dhabi Municipality (ADM)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Abu Dhabi Quality & Conformity (ADQCC)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

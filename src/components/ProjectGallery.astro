@@ -1,0 +1,145 @@
+---
+import Icon from './Icon.astro';
+import { VERIFIED_PROJECTS } from '../data/company';
+
+interface Props {
+  limit?: number;
+  showFilters?: boolean;
+}
+
+const { limit, showFilters = true } = Astro.props;
+
+const projects = limit ? VERIFIED_PROJECTS.slice(0, limit) : VERIFIED_PROJECTS;
+
+const filterCategories = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'commercial', label: 'Commercial & Corporate' },
+  { id: 'retail', label: 'Retail & Showrooms' },
+  { id: 'food-beverage', label: 'Food & Beverage' },
+  { id: 'hospitality', label: 'Hospitality & Leisure' },
+  { id: 'institutional', label: 'Institutional & Sports' },
+];
+---
+
+<div class="project-gallery-wrapper space-y-8">
+  {showFilters && (
+    <!-- Category Filter Tabs -->
+    <div class="flex flex-wrap items-center justify-center gap-2 pb-2">
+      {filterCategories.map((cat, idx) => (
+        <button
+          type="button"
+          data-category={cat.id}
+          class={`filter-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 border ${
+            idx === 0 
+              ? 'bg-navy-900 text-white border-navy-900 shadow-sm' 
+              : 'bg-white text-navy-800 border-cloud-300 hover:border-gold-500 hover:text-gold-600'
+          }`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  )}
+
+  <!-- Projects Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="projects-grid">
+    {projects.map((proj) => (
+      <div 
+        class="project-card group bg-white rounded-2xl border border-cloud-200 shadow-premium overflow-hidden hover:shadow-premium-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
+        data-cat={proj.categorySlug}
+      >
+        <!-- Project Image Container -->
+        <div class="relative aspect-[16/10] bg-navy-900 overflow-hidden">
+          <img 
+            src={proj.image} 
+            alt={`${proj.title} - ${proj.client}`}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            width="600"
+            height="375"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+          
+          <!-- Verified Badge -->
+          <div class="absolute top-3 left-3 bg-navy-900/90 backdrop-blur-sm text-gold-400 text-[11px] font-semibold px-2.5 py-1 rounded-md border border-navy-700/80 flex items-center gap-1.5">
+            <Icon name="shield-check" class="w-3.5 h-3.5 text-gold-500" />
+            <span>Verified Execution</span>
+          </div>
+
+          <!-- Location Pill -->
+          <div class="absolute bottom-3 left-3 bg-navy-950/90 text-white text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1 backdrop-blur-sm">
+            <Icon name="map-pin" class="w-3.5 h-3.5 text-gold-500" />
+            <span>{proj.location}</span>
+          </div>
+        </div>
+
+        <!-- Project Details -->
+        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="text-xs uppercase tracking-wider text-gold-600 font-bold mb-1">
+              {proj.category}
+            </div>
+            <h3 class="text-lg font-bold text-navy-900 font-heading leading-snug group-hover:text-gold-600 transition-colors">
+              {proj.title}
+            </h3>
+            <p class="text-xs font-medium text-slate-500 mt-1">
+              Client: <span class="text-navy-900 font-semibold">{proj.client}</span>
+            </p>
+            <p class="text-sm text-slate-custom mt-2 leading-relaxed">
+              {proj.scopeSummary}
+            </p>
+          </div>
+
+          <!-- Tags & Details Footer -->
+          <div class="pt-3 border-t border-cloud-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="flex flex-wrap gap-1.5">
+              {proj.sectors.map((tag) => (
+                <span class="px-2 py-0.5 rounded bg-cloud-100 text-navy-800 text-[10px] font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <a 
+              href="/contact" 
+              class="inline-flex items-center gap-1 font-semibold text-gold-600 hover:text-gold-700 group-hover:translate-x-0.5 transition-transform"
+            >
+              <span>Inquire Scope</span>
+              <Icon name="chevron-right" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Project filtering script
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  if (filterBtns.length > 0 && projectCards.length > 0) {
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Toggle active button style
+        filterBtns.forEach((b) => {
+          b.classList.remove('bg-navy-900', 'text-white', 'border-navy-900', 'shadow-sm');
+          b.classList.add('bg-white', 'text-navy-800', 'border-cloud-300');
+        });
+        btn.classList.add('bg-navy-900', 'text-white', 'border-navy-900', 'shadow-sm');
+        btn.classList.remove('bg-white', 'text-navy-800', 'border-cloud-300');
+
+        const category = btn.getAttribute('data-category');
+
+        projectCards.forEach((card) => {
+          const cardCat = card.getAttribute('data-cat');
+          if (category === 'all' || cardCat === category) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+</script>
