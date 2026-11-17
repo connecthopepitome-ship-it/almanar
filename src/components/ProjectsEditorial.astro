@@ -24,16 +24,16 @@ const categories = [
 <div class="projects-editorial-root space-y-12">
   
   {showFilters && (
-    <!-- Technical Filter Navigation Tabs -->
+    <!-- Technical Glass Filter Navigation Tabs -->
     <div class="flex flex-wrap items-center justify-start sm:justify-center gap-2 pb-2">
       {categories.map((cat, idx) => (
         <button
           type="button"
           data-category={cat.id}
-          class={`proj-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border ${
+          class={`proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border ${
             idx === 0 
-              ? 'bg-amber-brand text-navy-950 border-amber-brand shadow-amber-sm' 
-              : 'bg-navy-900/80 text-slate-300 border-navy-800 hover:border-amber-brand/50 hover:text-white'
+              ? 'bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber' 
+              : 'glass-panel-navy text-slate-300 border-white/5 hover:border-amber-brand/40 hover:text-white'
           }`}
         >
           {cat.label}
@@ -47,7 +47,7 @@ const categories = [
     
     <!-- 1 Large Featured Project (7 Cols) -->
     <div 
-      class="lg:col-span-7 editorial-project-card group bg-navy-900 rounded-3xl overflow-hidden border border-navy-800 shadow-editorial relative flex flex-col justify-between"
+      class="lg:col-span-7 editorial-project-card group glass-panel-navy rounded-3xl overflow-hidden shadow-glass-floating relative flex flex-col justify-between"
       data-cat={featuredProject.categorySlug}
       data-cursor="view"
     >
@@ -60,12 +60,12 @@ const categories = [
         />
         <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
 
-        <!-- Telemetry Tags -->
+        <!-- Glass Telemetry Tags -->
         <div class="absolute top-4 left-4 flex items-center gap-2">
-          <span class="px-2.5 py-1 rounded-md bg-navy-950/90 text-amber-brand font-mono text-[10px] font-bold border border-navy-800 backdrop-blur-sm">
+          <span class="px-3 py-1 rounded-xl glass-panel-amber font-mono text-[10px] font-bold">
             FEATURED INSTALLATION
           </span>
-          <span class="px-2.5 py-1 rounded-md bg-navy-900/80 text-slate-300 font-mono text-[10px] backdrop-blur-sm">
+          <span class="px-3 py-1 rounded-xl glass-panel-navy text-slate-200 font-mono text-[10px]">
             {featuredProject.location}
           </span>
         </div>
@@ -80,7 +80,7 @@ const categories = [
         </div>
       </div>
 
-      <div class="p-6 sm:p-8 space-y-4 bg-navy-900">
+      <div class="p-6 sm:p-8 space-y-4 bg-navy-950/80">
         <div class="flex items-center justify-between font-mono text-xs text-slate-400">
           <span>CLIENT: <strong class="text-white">{featuredProject.client}</strong></span>
           <span class="text-emerald-400 font-semibold flex items-center gap-1">
@@ -94,7 +94,7 @@ const categories = [
         <div class="pt-2 flex items-center justify-between">
           <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
             {featuredProject.sectors.map((sec) => (
-              <span class="px-2 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">{sec}</span>
+              <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">{sec}</span>
             ))}
           </div>
           <a href="/contact" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-brand hover:text-white">
@@ -109,7 +109,7 @@ const categories = [
     <div class="lg:col-span-5 flex flex-col gap-8 justify-between">
       {otherProjects.slice(0, 2).map((proj) => (
         <div 
-          class="editorial-project-card group bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-card-dark flex flex-col justify-between"
+          class="editorial-project-card group glass-panel-navy rounded-3xl overflow-hidden shadow-glass-navy flex flex-col justify-between"
           data-cat={proj.categorySlug}
           data-cursor="view"
         >
@@ -132,12 +132,12 @@ const categories = [
             </div>
           </div>
 
-          <div class="p-5 space-y-3 bg-navy-900">
+          <div class="p-5 space-y-3 bg-navy-950/80">
             <div class="flex items-center justify-between text-xs font-mono text-slate-400">
               <span class="truncate">Client: <strong class="text-white">{proj.client}</strong></span>
               <span class="shrink-0">{proj.location}</span>
             </div>
-            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed font-sans">
               {proj.scopeSummary}
             </p>
           </div>
@@ -151,7 +151,7 @@ const categories = [
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4" id="all-editorial-grid">
     {otherProjects.slice(2).map((proj) => (
       <div 
-        class="editorial-project-card group bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-card-dark flex flex-col justify-between hover:border-amber-brand/50 transition-all duration-300"
+        class="editorial-project-card group glass-panel-navy rounded-3xl overflow-hidden shadow-glass-navy flex flex-col justify-between hover:border-amber-brand/50 transition-all duration-300"
         data-cat={proj.categorySlug}
         data-cursor="view"
       >
@@ -164,7 +164,7 @@ const categories = [
           />
           <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent"></div>
           
-          <div class="absolute top-3 left-3 bg-navy-950/90 text-amber-brand text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-navy-800">
+          <div class="absolute top-3 left-3 glass-panel-amber text-amber-brand text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-lg border border-amber-brand/30">
             {proj.category}
           </div>
 
@@ -175,17 +175,17 @@ const categories = [
           </div>
         </div>
 
-        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-navy-900">
+        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-navy-950/80">
           <div>
             <div class="text-xs font-mono text-slate-400 mb-1">
               Client: <strong class="text-white">{proj.client}</strong>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
+            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2 font-sans">
               {proj.scopeSummary}
             </p>
           </div>
 
-          <div class="pt-3 border-t border-navy-800 flex items-center justify-between text-[11px] font-mono">
+          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
             <span class="text-slate-400">{proj.location}</span>
             <a href="/contact" class="text-amber-brand hover:text-white font-semibold flex items-center gap-1">
               <span>Scope</span>
@@ -200,7 +200,6 @@ const categories = [
 </div>
 
 <script>
-  // Project filtering script
   const filterBtns = document.querySelectorAll('.proj-filter-btn');
   const allCards = document.querySelectorAll('.editorial-project-card');
 
@@ -208,10 +207,10 @@ const categories = [
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         filterBtns.forEach((b) => {
-          b.className = 'proj-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border bg-navy-900/80 text-slate-300 border-navy-800 hover:border-amber-brand/50 hover:text-white';
+          b.className = 'proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border glass-panel-navy text-slate-300 border-white/5 hover:border-amber-brand/40 hover:text-white';
         });
 
-        btn.className = 'proj-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200 border bg-amber-brand text-navy-950 border-amber-brand shadow-amber-sm';
+        btn.className = 'proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber';
 
         const category = btn.getAttribute('data-category');
 

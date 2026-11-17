@@ -16,39 +16,39 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
 <Layout title={pageTitle} description={pageDescription}>
 
   <!-- =========================================================================
-       1. HERO SECTION — KINETIC ENGINEERING SPLIT COMPOSITION
+       1. HERO SECTION — ARCHITECTURAL GLASS × KINETIC METALLIC TYPOGRAPHY
        ========================================================================= -->
-  <section class="relative bg-navy-950 text-white min-h-[92vh] flex items-center overflow-hidden hud-grid pt-12 pb-20 lg:py-24">
+  <section class="relative bg-navy-950 text-white min-h-[92vh] flex items-center overflow-hidden hud-grid pt-8 pb-20 lg:py-24">
     
-    <!-- Subtle moving radial ambient light behind hero -->
-    <div class="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-amber-brand/5 rounded-full blur-[140px] pointer-events-none -z-0"></div>
+    <!-- Ambient radial amber lighting behind hero -->
+    <div class="absolute top-1/4 left-1/3 w-[650px] h-[650px] bg-amber-brand/8 rounded-full blur-[150px] pointer-events-none -z-0"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        <!-- LEFT COLUMN: Headline & Telemetry (7 Cols) -->
+        <!-- LEFT COLUMN: Headline, Glass Badges & Telemetry (7 Cols) -->
         <div class="lg:col-span-7 space-y-8 mask-reveal-trigger">
           
-          <!-- Animated Engineering Approval Label -->
-          <div class="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-navy-900 border border-amber-brand/40 text-slate-200 text-xs font-mono tracking-wider backdrop-blur-md">
+          <!-- Glass Approval Badge -->
+          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel-amber font-mono text-xs tracking-wider">
             <span class="w-2 h-2 rounded-full bg-amber-brand animate-ping"></span>
-            <span class="text-amber-brand font-bold">[SYS_AUTH: ADDC-CON-2001]</span>
-            <span class="hidden sm:inline text-slate-400">• ABU DHABI MUNICIPALITY LICENSED</span>
+            <span class="font-bold tracking-widest">[SYS_AUTH: ADDC-CON-2001]</span>
+            <span class="hidden sm:inline text-slate-300">• ABU DHABI MUNICIPALITY LICENSED</span>
           </div>
 
-          <!-- Large Kinetic Headline with Deliberate Line Breaks -->
-          <h1 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl xl:text-[82px] leading-compressed tracking-tighter text-white">
+          <!-- Oversized Kinetic Headline with Metallic Gradient Text -->
+          <h1 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl xl:text-[84px] leading-compressed tracking-tighter text-white">
             <span class="mask-line">
-              <span class="mask-line-inner">Engineering</span>
+              <span class="mask-line-inner">ENGINEERING</span>
             </span>
             <span class="mask-line">
-              <span class="mask-line-inner">the Systems</span>
+              <span class="mask-line-inner font-light text-slate-200">THE SYSTEMS</span>
             </span>
             <span class="mask-line">
-              <span class="mask-line-inner text-slate-200">That Keep Buildings</span>
+              <span class="mask-line-inner">THAT KEEP</span>
             </span>
             <span class="mask-line">
-              <span class="mask-line-inner text-amber-brand underline-reveal active">Running.</span>
+              <span class="mask-line-inner text-metallic-amber drawn-accent active">BUILDINGS RUNNING.</span>
             </span>
           </h1>
 
@@ -57,12 +57,12 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
             {COMPANY.description}
           </p>
 
-          <!-- Primary and Secondary CTAs with Magnetic Effect -->
+          <!-- Glass CTAs with Magnetic Effect -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
             <a 
               href="/contact" 
               data-magnetic="true"
-              class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-sm font-display font-bold uppercase tracking-wider bg-amber-brand text-navy-950 hover:bg-amber-glow shadow-amber-glow transition-all duration-200"
+              class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-xs font-display font-bold uppercase tracking-wider bg-amber-brand text-navy-950 hover:bg-amber-glow shadow-glass-amber transition-all duration-200"
             >
               <span>Discuss Your Project</span>
               <Icon name="arrow-right" class="w-4 h-4" />
@@ -71,41 +71,45 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
             <a 
               href="/services" 
               data-magnetic="true"
-              class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-sm font-mono font-semibold bg-navy-900 text-white hover:bg-navy-850 border border-navy-700 hover:border-amber-brand/40 transition-all duration-200"
+              class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl text-xs font-mono font-semibold glass-panel-navy text-white hover:border-amber-brand/40 transition-all duration-200"
             >
               <span>Explore Divisions</span>
               <span class="text-amber-brand">→</span>
             </a>
           </div>
 
-          <!-- Compact Technical Statistics Strip -->
-          <div class="pt-8 border-t border-navy-800/80 grid grid-cols-3 gap-6 font-mono text-xs">
-            <div>
-              <span class="text-slate-500 block text-[10px] tracking-widest uppercase">FOUNDED</span>
-              <span class="text-2xl font-bold font-display text-white tracking-tight">2001</span>
-              <span class="text-slate-400 block text-[11px]">23+ YRS UAE</span>
+          <!-- Floating Glass Telemetry Strip (4 Verified Stats) -->
+          <div class="pt-6 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+            <div class="p-3.5 rounded-xl glass-panel-navy">
+              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">FOUNDED</span>
+              <span class="text-xl font-bold font-display text-white tracking-tight">2001</span>
+              <span class="text-amber-brand block text-[10px]">23+ YRS UAE</span>
             </div>
-            <div>
-              <span class="text-slate-500 block text-[10px] tracking-widest uppercase">COMPLETED</span>
-              <span class="text-2xl font-bold font-display text-amber-brand tracking-tight">160+</span>
-              <span class="text-slate-400 block text-[11px]">VERIFIED SITES</span>
+            <div class="p-3.5 rounded-xl glass-panel-navy">
+              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">COMPLETED</span>
+              <span class="text-xl font-bold font-display text-metallic-amber tracking-tight">160+</span>
+              <span class="text-slate-300 block text-[10px]">VERIFIED SITES</span>
             </div>
-            <div>
-              <span class="text-slate-500 block text-[10px] tracking-widest uppercase">AUTHORITY</span>
-              <span class="text-2xl font-bold font-display text-white tracking-tight">ADDC</span>
-              <span class="text-slate-400 block text-[11px]">CERTIFIED MEP</span>
+            <div class="p-3.5 rounded-xl glass-panel-navy">
+              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">DIVISIONS</span>
+              <span class="text-xl font-bold font-display text-white tracking-tight">06</span>
+              <span class="text-slate-300 block text-[10px]">INTEGRATED</span>
+            </div>
+            <div class="p-3.5 rounded-xl glass-panel-navy">
+              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">LICENSURE</span>
+              <span class="text-xl font-bold font-display text-white tracking-tight">ADDC</span>
+              <span class="text-amber-brand block text-[10px]">CERTIFIED MEP</span>
             </div>
           </div>
 
         </div>
 
-        <!-- RIGHT COLUMN: Asymmetrical Frame & Interactive Photo (5 Cols) -->
+        <!-- RIGHT COLUMN: Asymmetrical Frame & Interactive Photo with Glass HUD (5 Cols) -->
         <div class="lg:col-span-5 relative" id="hero-photo-wrapper">
           
-          <!-- Outer Asymmetrical Frame with Corner Crosshairs -->
           <div 
             id="hero-photo-frame"
-            class="relative rounded-3xl overflow-hidden border border-navy-800 bg-navy-900 shadow-editorial crosshair-corner group transition-transform duration-500 ease-out"
+            class="relative rounded-3xl overflow-hidden glass-panel-navy shadow-glass-floating crosshair-corner group transition-transform duration-500 ease-out"
             data-cursor="view"
           >
             <!-- Authentic Engineering Photo -->
@@ -129,9 +133,9 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
               </div>
             </div>
 
-            <!-- Floating Technical Metadata HUD Panel -->
-            <div class="absolute bottom-4 left-4 right-4 bg-navy-950/90 backdrop-blur-md p-4 rounded-2xl border border-navy-800 font-mono text-xs space-y-2">
-              <div class="flex items-center justify-between border-b border-navy-800 pb-2">
+            <!-- Layered Floating Glass Information Panel -->
+            <div class="absolute bottom-4 left-4 right-4 glass-panel-navy p-4 rounded-2xl font-mono text-xs space-y-2 border border-white/10">
+              <div class="flex items-center justify-between border-b border-white/5 pb-2">
                 <span class="text-slate-400">TELEMETRY_STATUS</span>
                 <span class="text-emerald-400 font-bold flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -152,7 +156,7 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
           </div>
 
           <!-- Ambient Amber Glow behind photo frame -->
-          <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-amber-brand/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+          <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-amber-brand/12 rounded-full blur-3xl pointer-events-none -z-10"></div>
         </div>
 
       </div>
@@ -171,15 +175,18 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         
-        <!-- Left: Editorial Label & Headline (6 Cols) -->
+        <!-- Left: Designed Section Heading Composition (6 Cols) -->
         <div class="lg:col-span-6 space-y-6">
-          <div class="inline-flex items-center gap-2 font-mono text-xs text-navy-900 font-bold uppercase tracking-widest">
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-navy-900 font-bold uppercase tracking-widest px-3 py-1 rounded-full glass-panel-ivory">
             <span class="text-amber-dark">01 //</span>
-            <span>CORPORATE POSITIONING</span>
+            <span>ABOUT THE COMPANY</span>
           </div>
 
           <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-navy-900 leading-[1.05]">
-            Engineering the invisible arteries of Abu Dhabi’s architecture.
+            Engineering<br/>
+            <span class="font-light text-slate-700">with a purpose.</span><br/>
+            Building for<br/>
+            <span class="text-metallic-amber drawn-accent active">what comes next.</span>
           </h2>
 
           <div class="pt-4 font-mono text-xs text-slate-600 space-y-1">
@@ -188,23 +195,23 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
           </div>
         </div>
 
-        <!-- Right: Analytical Narrative & Highlight Badges (6 Cols) -->
+        <!-- Right: Narrative & Glass Specification Cards (6 Cols) -->
         <div class="lg:col-span-6 space-y-6 font-sans text-slate-700 leading-relaxed text-base sm:text-lg">
           <p>
-            Since our establishment in 2001, Al Manar Tech has engineered and maintained mission-critical electromechanical infrastructure across the built environment of Abu Dhabi and Al Ain.
+            Since our establishment in 2001, Al Manar Tech has engineered and maintained mission-critical electromechanical infrastructure across the built landscape of Abu Dhabi and Al Ain.
           </p>
           <p class="text-sm sm:text-base text-slate-600">
             Behind every modern commercial facade, retail destination, and industrial production plant lies an intricate nervous system of power distribution, climate engineering, life safety alarms, and optical telecommunications. When these systems are engineered with precision, facilities run seamlessly, energy overheads plummet, and statutory compliance is safeguarded.
           </p>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-mono">
-            <div class="p-4 rounded-xl bg-white border border-ivory-300 shadow-sm space-y-1">
-              <span class="text-amber-dark font-bold block">PRECISION MEP</span>
-              <p class="text-slate-600 font-sans">Full load calculations, single-line diagrams, and substation energization approvals.</p>
+            <div class="p-5 rounded-2xl glass-panel-ivory space-y-1">
+              <span class="text-amber-dark font-bold block text-sm">PRECISION MEP</span>
+              <p class="text-slate-600 font-sans text-xs">Full load calculations, single-line diagrams, and substation energization approvals.</p>
             </div>
-            <div class="p-4 rounded-xl bg-white border border-ivory-300 shadow-sm space-y-1">
-              <span class="text-amber-dark font-bold block">LIFECYCLE AMC</span>
-              <p class="text-slate-600 font-sans">Planned preventive servicing, switchgear thermal imaging, and 24/7 on-call repair.</p>
+            <div class="p-5 rounded-2xl glass-panel-ivory space-y-1">
+              <span class="text-amber-dark font-bold block text-sm">LIFECYCLE AMC</span>
+              <p class="text-slate-600 font-sans text-xs">Planned preventive servicing, switchgear thermal imaging, and 24/7 on-call repair.</p>
             </div>
           </div>
 
@@ -221,19 +228,20 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
   </section>
 
   <!-- =========================================================================
-       4. SERVICES SECTION — INTERACTIVE EDITORIAL COCKPIT (NAVY)
+       4. SERVICES SECTION — INTERACTIVE ARCHITECTURAL GLASS COCKPIT (NAVY)
        ========================================================================= -->
   <section class="py-24 lg:py-32 bg-navy-950 text-white border-b border-navy-800 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-navy-800">
+      <!-- Designed Heading Composition -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/5">
         <div class="space-y-3">
-          <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase">
-            <span>02 // CAPABILITIES</span>
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-amber">
+            <span>02 // CAPABILITIES & DIVISIONS</span>
           </div>
-          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Six Core Engineering Divisions
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Not just systems.<br/>
+            <span class="text-metallic-amber">ENGINEERED PERFORMANCE.</span>
           </h2>
         </div>
         <p class="text-slate-400 font-mono text-xs max-w-md">
@@ -253,17 +261,19 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
   <section class="py-24 lg:py-32 bg-ivory-100 text-navy-950 border-b border-ivory-300 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
+      <!-- Designed Heading Composition -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-ivory-300">
         <div class="space-y-3">
-          <div class="inline-flex items-center gap-2 font-mono text-xs text-navy-900 font-bold tracking-widest uppercase">
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-navy-900 font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-ivory">
             <span class="text-amber-dark">03 // SECTOR DEPLOYMENTS</span>
           </div>
           <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-900 tracking-tight">
-            Tailored Engineering for Demanding Sectors
+            Tailored Engineering for<br/>
+            <span class="text-amber-dark font-light">Demanding Operating Environments.</span>
           </h2>
         </div>
         <p class="text-slate-600 font-mono text-xs max-w-sm">
-          MUSAFFAH, KIZAD, ICAD, ABU DHABI ISLAND & AL AIN OPERATING ENVIRONMENTS.
+          MUSAFFAH, KIZAD, ICAD, ABU DHABI ISLAND & AL AIN OPERATING REALITIES.
         </p>
       </div>
 
@@ -279,18 +289,20 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
   <section class="py-24 lg:py-32 bg-navy-950 text-white border-b border-navy-800 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-navy-800">
+      <!-- Designed Heading Composition -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/5">
         <div class="space-y-3">
-          <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase">
-            <span>04 // VERIFIED PORTFOLIO</span>
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-amber">
+            <span>04 // VERIFIED WORKS</span>
           </div>
           <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Selected Executed Works
+            Selected Executed Works.<br/>
+            <span class="text-metallic-amber">REAL INFRASTRUCTURE DELIVERED.</span>
           </h2>
         </div>
         <a 
           href="/projects" 
-          class="font-mono text-xs text-amber-brand hover:text-white font-bold flex items-center gap-2 shrink-0"
+          class="font-mono text-xs text-amber-brand hover:text-white font-bold flex items-center gap-2 shrink-0 px-4 py-2 rounded-xl glass-panel-navy"
         >
           <span>VIEW FULL PORTFOLIO (160+ PROJECTS)</span>
           <Icon name="arrow-right" class="w-3.5 h-3.5" />
@@ -310,7 +322,7 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
       <div class="text-center max-w-3xl mx-auto space-y-4">
-        <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase">
+        <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-amber">
           <span>05 // METHODOLOGY</span>
         </div>
         <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
@@ -323,12 +335,12 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {WORK_PROCESS.map((stage) => (
-          <div class="p-6 rounded-2xl bg-navy-950 border border-navy-800 flex flex-col justify-between space-y-6 hover:border-amber-brand/50 transition-colors">
+          <div class="p-7 rounded-3xl glass-panel-navy flex flex-col justify-between space-y-6 hover:border-amber-brand/50 transition-colors">
             <div class="space-y-3">
               <span class="font-mono text-[10px] text-amber-brand font-bold tracking-wider block">
                 {stage.phase}
               </span>
-              <span class="font-display text-4xl font-extrabold text-slate-600 block">
+              <span class="font-display text-4xl font-extrabold text-slate-500 block">
                 {stage.step}
               </span>
               <h3 class="font-display text-lg font-bold text-white leading-snug">
@@ -339,7 +351,7 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
               </p>
             </div>
 
-            <div class="pt-3 border-t border-navy-800 font-mono text-[10px] text-slate-400 flex items-center gap-1.5">
+            <div class="pt-3 border-t border-white/5 font-mono text-[10px] text-slate-400 flex items-center gap-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-brand"></span>
               <span>CERTIFIED DELIVERABLE</span>
             </div>
@@ -364,11 +376,12 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
         
         <div class="lg:col-span-5 space-y-8">
           <div class="space-y-3">
-            <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase">
+            <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-brand font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-amber">
               <span>06 // INITIATE CONSULTATION</span>
             </div>
             <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              Connect with Our Engineering Desk
+              Connect with Our<br/>
+              <span class="text-metallic-amber">ENGINEERING DESK.</span>
             </h2>
           </div>
 
@@ -377,15 +390,15 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
           </p>
 
           <div class="space-y-4 font-mono text-xs text-slate-300 pt-2">
-            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-between">
+            <div class="p-4 rounded-2xl glass-panel-navy flex items-center justify-between">
               <span>DIRECT TELEPHONE:</span>
               <a href="tel:025829700" class="text-amber-brand font-bold text-sm hover:underline">02-5829700</a>
             </div>
-            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-between">
+            <div class="p-4 rounded-2xl glass-panel-navy flex items-center justify-between">
               <span>OFFICIAL EMAIL:</span>
               <a href="mailto:info@almanartech.com" class="text-white hover:text-amber-brand">info@almanartech.com</a>
             </div>
-            <div class="p-4 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-between">
+            <div class="p-4 rounded-2xl glass-panel-navy flex items-center justify-between">
               <span>HEADQUARTERS:</span>
               <span class="text-slate-300">M35, Musaffah, Abu Dhabi</span>
             </div>
