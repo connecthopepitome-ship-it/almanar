@@ -32,10 +32,22 @@ export function initScrollExperience() {
     return;
   }
 
-  // 2. INTERSECTION OBSERVER FOR CONTAINER REVEALS & MASKS
+  // 2. FAIL-SAFE INTERSECTION OBSERVER FOR CONTAINER REVEALS
   const revealTargets = document.querySelectorAll(
     '.scroll-reveal-up, .scroll-reveal-scale, .mask-reveal-clip, .mask-reveal-side, .img-zoom-reveal, .drawn-accent, .mask-line'
   );
+
+  // Immediately check any element already visible or near top of fold
+  const viewportHeight = window.innerHeight;
+  revealTargets.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= viewportHeight * 0.92) {
+      el.classList.add('in-view', 'mask-revealed');
+      if (el.classList.contains('drawn-accent')) {
+        el.classList.add('active');
+      }
+    }
+  });
 
   if ('IntersectionObserver' in window && revealTargets.length > 0) {
     const observer = new IntersectionObserver(
@@ -43,7 +55,6 @@ export function initScrollExperience() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view', 'mask-revealed');
-            // If it's a drawn accent underline, trigger active
             if (entry.target.classList.contains('drawn-accent')) {
               entry.target.classList.add('active');
             }
@@ -52,29 +63,33 @@ export function initScrollExperience() {
         });
       },
       {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 50px 0px' // Trigger slightly before entering screen for buttery smooth visibility
       }
     );
 
-    revealTargets.forEach((el) => observer.observe(el));
+    revealTargets.forEach((el) => {
+      if (!el.classList.contains('in-view')) {
+        observer.observe(el);
+      }
+    });
   } else {
     revealTargets.forEach((el) => el.classList.add('in-view'));
   }
 
-  // 3. PARALLAX EFFECTS ON DESKTOP
+  // 3. PARALLAX EFFECTS ON DESKTOP (Controlled & Subtle)
   if (isDesktop) {
     const parallaxElements = document.querySelectorAll<HTMLElement>('[data-parallax-speed]');
     parallaxElements.forEach((el) => {
-      const speed = parseFloat(el.getAttribute('data-parallax-speed') || '0.1');
+      const speed = parseFloat(el.getAttribute('data-parallax-speed') || '0.08');
       gsap.to(el, {
-        y: () => `${speed * 120}px`,
+        y: () => `${speed * 80}px`,
         ease: 'none',
         scrollTrigger: {
           trigger: el,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.6,
+          scrub: 0.5,
           invalidateOnRefresh: true
         }
       });
@@ -84,14 +99,13 @@ export function initScrollExperience() {
     const ambientGlow = document.querySelectorAll<HTMLElement>('[data-parallax-glow]');
     ambientGlow.forEach((glow) => {
       gsap.to(glow, {
-        y: '60px',
-        scale: 1.08,
+        y: '40px',
         ease: 'none',
         scrollTrigger: {
           trigger: glow.parentElement || glow,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1
+          scrub: 0.8
         }
       });
     });
@@ -105,46 +119,21 @@ export function initScrollExperience() {
       trigger: timelineSection,
       start: 'top 70%',
       end: 'bottom 80%',
-      scrub: 0.4,
+      scrub: 0.3,
       onUpdate: (self) => {
         timelineBeam.style.height = `${self.progress * 100}%`;
       }
     });
 
-    // Milestone cards active illumination
     const stages = timelineSection.querySelectorAll('.timeline-stage-card');
     stages.forEach((stage) => {
       ScrollTrigger.create({
         trigger: stage,
-        start: 'top 65%',
+        start: 'top 70%',
         onEnter: () => stage.classList.add('stage-active'),
         onLeaveBack: () => stage.classList.remove('stage-active')
       });
     });
-  }
-
-  // 5. HORIZONTAL PROJECTS SEQUENCE (DESKTOP PINNING)
-  const horizontalTrack = document.getElementById('horizontal-projects-track');
-  const horizontalWrapper = document.getElementById('horizontal-projects-wrapper');
-
-  if (isDesktop && horizontalTrack && horizontalWrapper) {
-    const slides = gsap.utils.toArray<HTMLElement>('.horizontal-project-slide');
-    if (slides.length > 1) {
-      const totalMovement = horizontalTrack.scrollWidth - window.innerWidth;
-      gsap.to(slides, {
-        x: () => -totalMovement,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: horizontalWrapper,
-          pin: true,
-          scrub: 0.8,
-          start: 'top top',
-          end: () => `+=${totalMovement + 300}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1
-        }
-      });
-    }
   }
 }
 
@@ -156,4 +145,3 @@ if (typeof document !== 'undefined') {
     initScrollExperience();
   }
 }
-
