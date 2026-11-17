@@ -414,6 +414,36 @@
   border-top-right-radius: 2rem;
 }
 
+/* Hide Scrollbar Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Continuous Auto-Scrolling Reel Animation */
+@keyframes continuousReel {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-reel-slow {
+  animation: continuousReel 36s linear infinite;
+  will-change: transform;
+}
+
+.animate-reel-slow:hover {
+  animation-play-state: paused;
+}
+
 /* Horizontal Projects Track Styles */
 .horizontal-projects-container {
   display: flex;
