@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import AlManarTypographicHero from '../components/AlManarTypographicHero';
 import MarqueeTicker from '../components/MarqueeTicker.astro';
 import ServiceCockpit from '../components/ServiceCockpit.astro';
 import IndustriesEditorial from '../components/IndustriesEditorial.astro';
@@ -17,152 +18,9 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
 <Layout title={pageTitle} description={pageDescription}>
 
   <!-- =========================================================================
-       1. HERO SECTION — ARCHITECTURAL GLASS × KINETIC METALLIC TYPOGRAPHY
+       1. AL MANAR TECH — PHOTO-FREE CINEMATIC TYPOGRAPHIC HERO
        ========================================================================= -->
-  <section class="relative bg-navy-950 text-white min-h-[92vh] flex items-center overflow-hidden hud-grid pt-8 pb-20 lg:py-24">
-    
-    <!-- Ambient radial amber lighting behind hero (Parallax glow) -->
-    <div data-parallax-glow class="absolute top-1/4 left-1/3 w-[650px] h-[650px] bg-amber-brand/8 rounded-full blur-[150px] pointer-events-none -z-0"></div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        
-        <!-- LEFT COLUMN: Headline, Glass Badges & Telemetry (7 Cols) -->
-        <div class="lg:col-span-7 space-y-8 mask-reveal-trigger">
-          
-          <!-- Glass Approval Badge -->
-          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel-amber font-mono text-xs tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-amber-brand animate-ping"></span>
-            <span class="font-bold tracking-widest">[SYS_AUTH: ADDC-CON-2001]</span>
-            <span class="hidden sm:inline text-slate-300">• ABU DHABI MUNICIPALITY LICENSED</span>
-          </div>
-
-          <!-- Oversized Kinetic Headline with Metallic Gradient Text -->
-          <h1 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl xl:text-[84px] leading-compressed tracking-tighter text-white">
-            <span class="mask-line">
-              <span class="mask-line-inner">ENGINEERING</span>
-            </span>
-            <span class="mask-line">
-              <span class="mask-line-inner font-light text-slate-200">THE SYSTEMS</span>
-            </span>
-            <span class="mask-line">
-              <span class="mask-line-inner">THAT KEEP</span>
-            </span>
-            <span class="mask-line">
-              <span class="mask-line-inner text-metallic-amber drawn-accent active">BUILDINGS RUNNING.</span>
-            </span>
-          </h1>
-
-          <!-- Supporting Description -->
-          <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-sans max-w-2xl">
-            {COMPANY.description}
-          </p>
-
-          <!-- Glass CTAs with Magnetic Effect -->
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-            <a 
-              href="/contact" 
-              data-magnetic="true"
-              class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-xs font-display font-bold uppercase tracking-wider bg-amber-brand text-navy-950 hover:bg-amber-glow shadow-glass-amber transition-all duration-200"
-            >
-              <span>Discuss Your Project</span>
-              <Icon name="arrow-right" class="w-4 h-4" />
-            </a>
-
-            <a 
-              href="/services" 
-              data-magnetic="true"
-              class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl text-xs font-mono font-semibold glass-panel-navy text-white hover:border-amber-brand/40 transition-all duration-200"
-            >
-              <span>Explore Divisions</span>
-              <span class="text-amber-brand">→</span>
-            </a>
-          </div>
-
-          <!-- Floating Glass Telemetry Strip (4 Verified Stats) -->
-          <div class="pt-6 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-            <div class="p-3.5 rounded-xl glass-panel-navy">
-              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">FOUNDED</span>
-              <span class="text-xl font-bold font-display text-white tracking-tight">2001</span>
-              <span class="text-amber-brand block text-[10px]">23+ YRS UAE</span>
-            </div>
-            <div class="p-3.5 rounded-xl glass-panel-navy">
-              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">COMPLETED</span>
-              <span class="text-xl font-bold font-display text-metallic-amber tracking-tight">160+</span>
-              <span class="text-slate-300 block text-[10px]">VERIFIED SITES</span>
-            </div>
-            <div class="p-3.5 rounded-xl glass-panel-navy">
-              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">DIVISIONS</span>
-              <span class="text-xl font-bold font-display text-white tracking-tight">06</span>
-              <span class="text-slate-300 block text-[10px]">INTEGRATED</span>
-            </div>
-            <div class="p-3.5 rounded-xl glass-panel-navy">
-              <span class="text-slate-400 block text-[9px] tracking-widest uppercase">LICENSURE</span>
-              <span class="text-xl font-bold font-display text-white tracking-tight">ADDC</span>
-              <span class="text-amber-brand block text-[10px]">CERTIFIED MEP</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- RIGHT COLUMN: Asymmetrical Frame & Interactive Photo with Glass HUD (5 Cols) -->
-        <div class="lg:col-span-5 relative" id="hero-photo-wrapper" data-parallax-speed="-0.1">
-          
-          <div 
-            id="hero-photo-frame"
-            class="relative rounded-3xl overflow-hidden glass-panel-navy shadow-glass-floating crosshair-corner group transition-transform duration-500 ease-out"
-            data-cursor="view"
-          >
-            <!-- Authentic Engineering Photo -->
-            <div class="aspect-[4/5] sm:aspect-[4/4.5] overflow-hidden relative">
-              <img 
-                src="/images/original/electrical-team-abu-dhabi.png" 
-                alt="Al Manar Tech Field Engineering Technicians Executing Switchgear Works in Abu Dhabi"
-                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
-                loading="eager"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent"></div>
-
-              <!-- Animated Moving Amber Scanning Line -->
-              <div class="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-amber-brand to-transparent animate-scanline pointer-events-none"></div>
-
-              <!-- Rotated Vertical Identifier -->
-              <div class="absolute right-3 top-6 bottom-6 hidden sm:flex items-center justify-center pointer-events-none">
-                <span class="font-mono text-[9px] tracking-widest text-amber-brand/80 uppercase [writing-mode:vertical-rl] rotate-180 select-none">
-                  AL MANAR TECH — INFRASTRUCTURE COCKPIT // AUH-M35
-                </span>
-              </div>
-            </div>
-
-            <!-- Layered Floating Glass Information Panel -->
-            <div class="absolute bottom-4 left-4 right-4 glass-panel-navy p-4 rounded-2xl font-mono text-xs space-y-2 border border-white/10">
-              <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                <span class="text-slate-400">TELEMETRY_STATUS</span>
-                <span class="text-emerald-400 font-bold flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  OPERATIONAL
-                </span>
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-300">
-                <div>
-                  <span class="text-slate-500 block text-[9px]">LOAD CAPACITY</span>
-                  <span class="font-semibold text-white">415V / 3-PHASE</span>
-                </div>
-                <div>
-                  <span class="text-slate-500 block text-[9px]">REGULATORY CODE</span>
-                  <span class="font-semibold text-amber-brand">ADDC COMPLIANT</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ambient Amber Glow behind photo frame -->
-          <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-amber-brand/12 rounded-full blur-3xl pointer-events-none -z-10"></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
+  <AlManarTypographicHero client:load />
 
   <!-- =========================================================================
        2. CONTINUOUS ENGINEERING DISCIPLINE MARQUEE
@@ -422,24 +280,5 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
       </div>
     </div>
   </section>
-
-  <!-- Interactive 3D tilt script for hero photo -->
-  <script>
-    const photoFrame = document.getElementById('hero-photo-frame');
-    const photoWrapper = document.getElementById('hero-photo-wrapper');
-
-    if (photoFrame && photoWrapper && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      photoWrapper.addEventListener('mousemove', (e) => {
-        const rect = photoWrapper.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        photoFrame.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
-      });
-
-      photoWrapper.addEventListener('mouseleave', () => {
-        photoFrame.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(0px)';
-      });
-    }
-  </script>
 
 </Layout>

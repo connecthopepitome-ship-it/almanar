@@ -10,17 +10,17 @@ const showcaseProjects = [
   VERIFIED_PROJECTS.find(p => p.id === 'puma-outlet-showroom') || VERIFIED_PROJECTS[2],
   VERIFIED_PROJECTS.find(p => p.id === 'katrina-sweets') || VERIFIED_PROJECTS[4],
 ].filter(Boolean);
-
-// Duplicate list for infinite, seamless loop
-const duplicatedProjects = [...showcaseProjects, ...showcaseProjects];
 ---
 
-<section id="featured-projects-showcase" class="relative py-14 lg:py-20 bg-navy-950 text-white border-b border-navy-800 overflow-hidden">
-  
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+<section 
+  id="featured-projects-showcase" 
+  class="relative py-16 lg:py-24 bg-navy-950 text-white border-b border-navy-800 overflow-hidden"
+  aria-label="Featured Landmark Projects Showcase"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <!-- Compact Header with Continuous Auto-Scroll Indicator -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/5">
+    <!-- Header with Live Auto-Scroll Status Indicator -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/5 mb-8">
       <div class="space-y-2">
         <div class="inline-flex items-center gap-2 font-mono text-[11px] text-amber-brand font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-amber">
           <span class="w-1.5 h-1.5 rounded-full bg-amber-brand animate-ping"></span>
@@ -32,106 +32,350 @@ const duplicatedProjects = [...showcaseProjects, ...showcaseProjects];
         </h2>
       </div>
 
-      <!-- Live Auto-Scroll Status Indicator -->
+      <!-- Live Auto-Scroll Status Indicator & Controls -->
       <div class="flex items-center gap-3">
         <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-900/90 border border-white/10 font-mono text-[11px] text-slate-300 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-slate-400">AUTO-SCROLLING REEL</span>
+          <span id="landmark-pulse-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="landmark-status-text" class="text-slate-400">AUTO-SCROLLING REEL</span>
           <span class="text-slate-600">•</span>
-          <span class="text-amber-brand font-bold">5 LANDMARKS</span>
+          <span class="text-amber-brand font-bold">{showcaseProjects.length} LANDMARKS</span>
+        </div>
+
+        <!-- Prev / Next Navigation Arrows -->
+        <div class="flex items-center gap-1.5">
+          <button 
+            id="landmark-prev-btn" 
+            aria-label="Previous project"
+            class="w-8 h-8 rounded-lg glass-panel-navy border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-amber-brand/50 transition-colors"
+          >
+            <Icon name="arrow-left" class="w-3.5 h-3.5" />
+          </button>
+          <button 
+            id="landmark-next-btn" 
+            aria-label="Next project"
+            class="w-8 h-8 rounded-lg glass-panel-navy border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-amber-brand/50 transition-colors"
+          >
+            <Icon name="arrow-right" class="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
     </div>
 
-  </div>
+    <!-- Carousel Viewport (Compact Medium Size: 3 cards on desktop, 2 on tablet, 1 on mobile) -->
+    <div 
+      id="landmark-carousel-container" 
+      class="relative w-full overflow-x-auto no-scrollbar scroll-smooth focus:outline-none"
+      tabindex="0"
+      aria-roledescription="carousel"
+      style="-webkit-overflow-scrolling: touch;"
+    >
+      <div 
+        id="landmark-carousel-track" 
+        class="flex gap-5 sm:gap-6 py-2 transition-transform duration-500 ease-out"
+      >
+        {showcaseProjects.map((proj, idx) => (
+          <article 
+            class="landmark-card w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 group/card glass-panel-navy rounded-2xl overflow-hidden shadow-glass-navy flex flex-col justify-between border border-white/10 transition-all duration-300 hover:border-amber-brand/50 hover:shadow-glass-floating"
+            data-index={idx}
+            data-cursor="view"
+          >
+            <!-- Photographic Frame (Clean 16:10 Ratio, No Awkward Full-Height Locking) -->
+            <div class="relative aspect-[16/10] overflow-hidden bg-navy-900">
+              <img 
+                src={proj.image} 
+                alt={`${proj.title} - ${proj.client}`}
+                class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent"></div>
 
-  <!-- Continuous Seamless Auto-Scrolling Track (Zero Browser Scrollbars) -->
-  <div class="relative w-full overflow-hidden no-scrollbar py-2">
-    
-    <!-- Subtle gradient edge fade for editorial finish -->
-    <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-navy-950 to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-navy-950 to-transparent z-10 pointer-events-none"></div>
+              <!-- Top Floating Glass Tags -->
+              <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
+                <span class="px-2.5 py-0.5 rounded-md glass-panel-amber font-mono text-[9px] font-bold text-amber-brand border border-amber-brand/30 shadow-sm">
+                  LANDMARK // 0{idx + 1}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-md glass-panel-navy font-mono text-[9px] text-slate-200 border border-white/10">
+                  {proj.location}
+                </span>
+              </div>
+            </div>
 
-    <div class="flex w-max gap-5 sm:gap-6 animate-reel-slow px-4">
-      {duplicatedProjects.map((proj, idx) => (
+            <!-- Descriptive Metadata HUD -->
+            <div class="p-5 space-y-3.5 bg-navy-950/95 font-sans flex-1 flex flex-col justify-between">
+              <div class="space-y-2">
+                <!-- Category Tag -->
+                <span class="font-mono text-[10px] uppercase tracking-wider text-amber-brand block font-semibold">
+                  {proj.category}
+                </span>
+
+                <!-- Title -->
+                <h3 class="font-display text-lg font-bold text-white tracking-tight leading-snug group-hover/card:text-amber-brand transition-colors line-clamp-1">
+                  {proj.title}
+                </h3>
+
+                <!-- Client & Verified Facility Status -->
+                <div class="flex items-center justify-between font-mono text-[11px] text-slate-400 border-b border-white/5 pb-2.5 pt-1">
+                  <div class="truncate pr-2">
+                    <span class="text-slate-500">CLIENT:</span>
+                    <strong class="text-white ml-1">{proj.client}</strong>
+                  </div>
+                  <div class="text-emerald-400 font-semibold flex items-center gap-1 shrink-0 text-[10px]">
+                    <Icon name="check-circle" class="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Verified Facility</span>
+                  </div>
+                </div>
+
+                <!-- Scope Summary Paragraph (Compact 2-line clamp) -->
+                <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                  {proj.scopeSummary}
+                </p>
+              </div>
+
+              <!-- Footer with Sector Tags and Action Button -->
+              <div class="pt-3 border-t border-white/5 flex items-center justify-between gap-2 font-mono text-xs">
+                <div class="flex flex-wrap gap-1">
+                  {proj.sectors.slice(0, 2).map((sec) => (
+                    <span class="px-2 py-0.5 rounded bg-navy-900 border border-white/10 text-slate-300 text-[9px]">
+                      {sec}
+                    </span>
+                  ))}
+                </div>
+
+                <a 
+                  href="/contact" 
+                  data-magnetic="true"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-brand text-navy-950 font-bold hover:bg-amber-glow shadow-glass-amber transition-all text-[11px] shrink-0"
+                >
+                  <span>Request Scope</span>
+                  <Icon name="arrow-right" class="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Progress Bar & Pagination Indicators Track (Exact Match to Image 3) -->
+    <div class="mt-8 space-y-4">
+      <!-- Full-Width Horizontal Animated Progress Line -->
+      <div class="w-full h-1 bg-navy-900 rounded-full overflow-hidden border border-white/5 relative">
         <div 
-          class="project-compact-card w-[310px] sm:w-[350px] lg:w-[380px] shrink-0 group/card glass-panel-navy rounded-2xl overflow-hidden shadow-glass-navy flex flex-col justify-between border border-white/10 transition-all duration-300 hover:border-amber-brand/50 hover:shadow-glass-floating"
-          data-cursor="view"
-        >
-          <!-- Photographic Frame (Clean 16:10 Ratio, No Clipping) -->
-          <div class="relative aspect-[16/10] overflow-hidden bg-navy-900">
-            <img 
-              src={proj.image} 
-              alt={`${proj.title} - ${proj.client}`}
-              class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 ease-out"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent"></div>
+          id="landmark-progress-bar" 
+          class="h-full bg-gradient-to-r from-amber-dark via-amber-brand to-amber-glow rounded-full transition-all duration-300"
+          style="width: 20%;"
+        ></div>
+      </div>
 
-            <!-- Top Floating Glass Tags -->
-            <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
-              <span class="px-2.5 py-0.5 rounded-md glass-panel-amber font-mono text-[9px] font-bold text-amber-brand border border-amber-brand/30">
-                LANDMARK // 0{(idx % 5) + 1}
-              </span>
-              <span class="px-2.5 py-0.5 rounded-md glass-panel-navy font-mono text-[9px] text-slate-200 border border-white/10">
-                {proj.location}
-              </span>
-            </div>
-
-            <!-- Bottom Heading on Image -->
-            <div class="absolute bottom-3 left-3 right-3 text-white">
-              <span class="font-mono text-[9px] uppercase tracking-wider text-amber-brand block mb-0.5 font-semibold">
-                {proj.category}
-              </span>
-              <h3 class="font-display text-base sm:text-lg font-bold text-white tracking-tight leading-snug group-hover/card:text-amber-brand transition-colors line-clamp-1">
-                {proj.title}
-              </h3>
-            </div>
-          </div>
-
-          <!-- Descriptive Metadata HUD -->
-          <div class="p-4 sm:p-5 space-y-3 bg-navy-950/95 font-sans flex-1 flex flex-col justify-between">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between font-mono text-[11px] text-slate-400 border-b border-white/5 pb-2">
-                <div class="truncate pr-2">
-                  <span class="text-slate-500">CLIENT:</span>
-                  <strong class="text-white ml-1">{proj.client}</strong>
-                </div>
-                <div class="text-emerald-400 font-semibold flex items-center gap-1 shrink-0 text-[10px]">
-                  <Icon name="check-circle" class="w-3 h-3 text-emerald-400" />
-                  <span>Verified</span>
-                </div>
-              </div>
-
-              <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
-                {proj.scopeSummary}
-              </p>
-            </div>
-
-            <div class="pt-2.5 border-t border-white/5 flex items-center justify-between gap-2 font-mono text-xs">
-              <div class="flex flex-wrap gap-1">
-                {proj.sectors.slice(0, 2).map((sec) => (
-                  <span class="px-2 py-0.5 rounded bg-navy-900 border border-white/10 text-slate-300 text-[9px]">
-                    {sec}
-                  </span>
-                ))}
-              </div>
-
-              <a 
-                href="/contact" 
-                data-magnetic="true"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-brand text-navy-950 font-bold hover:bg-amber-glow shadow-glass-amber transition-all text-[11px]"
-              >
-                <span>Request Scope</span>
-                <Icon name="arrow-right" class="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-
-        </div>
-      ))}
+      <!-- Pagination Indicators (Amber Active Pill + Grey Inactive Dots) -->
+      <div 
+        id="landmark-pagination" 
+        class="flex items-center justify-center gap-2 pt-1" 
+        role="tablist" 
+        aria-label="Landmark carousel navigation"
+      >
+        {showcaseProjects.map((_, idx) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={idx === 0 ? "true" : "false"}
+            aria-label={`Go to landmark slide ${idx + 1}`}
+            class={`landmark-dot transition-all duration-300 h-2 rounded-full ${
+              idx === 0 
+                ? 'w-8 bg-amber-brand shadow-sm shadow-amber-brand/50' 
+                : 'w-2 bg-navy-800 hover:bg-slate-400 border border-white/10'
+            }`}
+            data-target-index={idx}
+          />
+        ))}
+      </div>
     </div>
 
   </div>
-
 </section>
+
+<script>
+  function setupLandmarkCarousel() {
+    const container = document.getElementById('landmark-carousel-container');
+    const cards = document.querySelectorAll('.landmark-card');
+    const dots = document.querySelectorAll('.landmark-dot');
+    const progressBar = document.getElementById('landmark-progress-bar');
+    const prevBtn = document.getElementById('landmark-prev-btn');
+    const nextBtn = document.getElementById('landmark-next-btn');
+    const statusText = document.getElementById('landmark-status-text');
+    const pulseDot = document.getElementById('landmark-pulse-dot');
+
+    if (!container || cards.length === 0) return;
+
+    const totalProjects = cards.length;
+    let currentIndex = 0;
+    let autoSlideInterval = null;
+    let isPaused = false;
+    const SLIDE_DURATION = 3500; // 3.5s per auto-slide
+
+    function getItemsPerView() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    }
+
+    function updateUI(index) {
+      currentIndex = index;
+
+      // Update active pagination indicator
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.setAttribute('aria-selected', 'true');
+          dot.classList.remove('w-2', 'bg-navy-800', 'hover:bg-slate-400');
+          dot.classList.add('w-8', 'bg-amber-brand', 'shadow-sm', 'shadow-amber-brand/50');
+        } else {
+          dot.setAttribute('aria-selected', 'false');
+          dot.classList.remove('w-8', 'bg-amber-brand', 'shadow-sm', 'shadow-amber-brand/50');
+          dot.classList.add('w-2', 'bg-navy-800', 'hover:bg-slate-400');
+        }
+      });
+
+      // Update progress bar width
+      if (progressBar) {
+        const progressPercentage = ((index + 1) / totalProjects) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+      }
+    }
+
+    function scrollToSlide(index, smooth = true) {
+      if (!container || !cards[index]) return;
+      const targetCard = cards[index] as HTMLElement;
+      
+      const targetScrollLeft = targetCard.offsetLeft - container.offsetLeft;
+      container.scrollTo({
+        left: targetScrollLeft,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+
+      updateUI(index);
+    }
+
+    function nextSlide() {
+      const itemsPerView = getItemsPerView();
+      const maxIndex = totalProjects - 1;
+      let nextIndex = currentIndex + 1;
+      if (nextIndex > maxIndex) {
+        nextIndex = 0;
+      }
+      scrollToSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      let prevIndex = currentIndex - 1;
+      if (prevIndex < 0) {
+        prevIndex = totalProjects - 1;
+      }
+      scrollToSlide(prevIndex);
+    }
+
+    function startAutoSlide() {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      autoSlideInterval = setInterval(() => {
+        if (!isPaused) {
+          nextSlide();
+        }
+      }, SLIDE_DURATION);
+
+      if (statusText) statusText.textContent = 'AUTO-SCROLLING REEL';
+      if (pulseDot) {
+        pulseDot.classList.remove('bg-amber-500');
+        pulseDot.classList.add('bg-emerald-400', 'animate-pulse');
+      }
+    }
+
+    function pauseAutoSlide() {
+      isPaused = true;
+      if (statusText) statusText.textContent = 'PAUSED (HOVER)';
+      if (pulseDot) {
+        pulseDot.classList.remove('bg-emerald-400', 'animate-pulse');
+        pulseDot.classList.add('bg-amber-500');
+      }
+    }
+
+    function resumeAutoSlide() {
+      isPaused = false;
+      if (statusText) statusText.textContent = 'AUTO-SCROLLING REEL';
+      if (pulseDot) {
+        pulseDot.classList.remove('bg-amber-500');
+        pulseDot.classList.add('bg-emerald-400', 'animate-pulse');
+      }
+    }
+
+    // Attach click handlers to pagination dots
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        scrollToSlide(idx);
+      });
+    });
+
+    // Attach click handlers to Prev/Next buttons
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Pause on hover or focus
+    container.addEventListener('mouseenter', pauseAutoSlide);
+    container.addEventListener('mouseleave', resumeAutoSlide);
+    container.addEventListener('focusin', pauseAutoSlide);
+    container.addEventListener('focusout', resumeAutoSlide);
+
+    // Update index when user scrolls container manually
+    let scrollTimeout = null;
+    container.addEventListener('scroll', () => {
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const scrollLeft = container.scrollLeft;
+        let closestIndex = 0;
+        let minDiff = Infinity;
+
+        cards.forEach((card, idx) => {
+          const el = card as HTMLElement;
+          const diff = Math.abs((el.offsetLeft - container.offsetLeft) - scrollLeft);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = idx;
+          }
+        });
+
+        if (closestIndex !== currentIndex) {
+          updateUI(closestIndex);
+        }
+      }, 80);
+    }, { passive: true });
+
+    // Keyboard navigation
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    // Start auto slide
+    startAutoSlide();
+
+    // Recompute on window resize
+    window.addEventListener('resize', () => {
+      scrollToSlide(currentIndex, false);
+    });
+  }
+
+  // Initialize on page load and View Transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLandmarkCarousel);
+  } else {
+    setupLandmarkCarousel();
+  }
+  document.addEventListener('astro:page-load', setupLandmarkCarousel);
+</script>

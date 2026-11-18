@@ -41,6 +41,40 @@
 /* =========================================================================
    1. SIGNATURE METALLIC GRADIENT TYPOGRAPHY
    ========================================================================= */
+.text-metallic-copper {
+  background: linear-gradient(
+    135deg,
+    #8B523B 0%,
+    #B56E4B 22%,
+    #C58461 45%,
+    #D99A74 68%,
+    #E7B99E 85%,
+    #B56E4B 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: metallicCopperFlow 12s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes metallicCopperFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-metallic-copper {
+    color: #B56E4B;
+    -webkit-text-fill-color: #B56E4B;
+  }
+}
+
 .text-metallic-amber {
   background: linear-gradient(
     135deg,
