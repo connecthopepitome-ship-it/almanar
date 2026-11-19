@@ -30,54 +30,17 @@ const navLinks = [
 ];
 ---
 
-<!-- 1. Top Technical Telemetry Strip -->
-<div class="bg-navy-950/90 border-b border-navy-800/80 text-slate-400 text-xs py-2 px-4 sm:px-6 lg:px-8 font-mono select-none">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
-    <!-- Left: Telemetry & Contact -->
-    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6 text-slate-300">
-      <a href={`tel:${COMPANY.contact.phone.replace(/[^0-9]/g, '')}`} class="inline-flex items-center gap-1.5 hover:text-amber-brand transition-colors">
-        <span class="w-1.5 h-1.5 rounded-full bg-amber-brand animate-ping"></span>
-        <span class="font-medium text-white">{COMPANY.contact.phone}</span>
-      </a>
-      <a href={`mailto:${COMPANY.contact.email}`} class="inline-flex items-center gap-1.5 hover:text-amber-brand transition-colors">
-        <Icon name="mail" class="w-3.5 h-3.5 text-amber-brand" />
-        <span>{COMPANY.contact.email}</span>
-      </a>
-      <span class="hidden lg:inline-flex items-center gap-1.5 text-slate-400">
-        <Icon name="map-pin" class="w-3.5 h-3.5 text-amber-brand" />
-        <span>Musaffah M35 // Abu Dhabi</span>
-      </span>
-      <span class="hidden xl:inline-flex items-center gap-1.5 text-slate-500">
-        <span>LAT 24.3496° N // LON 54.5103° E</span>
-      </span>
-    </div>
-
-    <!-- Right: Licensures -->
-    <div class="flex items-center gap-2 text-[11px]">
-      <span class="px-2 py-0.5 rounded bg-navy-900 border border-navy-800 text-amber-brand font-bold tracking-wider">
-        ADDC APPROVED
-      </span>
-      <span class="px-2 py-0.5 rounded bg-navy-900 border border-navy-800 text-slate-300 font-medium tracking-wide">
-        ADM RECOGNIZED
-      </span>
-      <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-navy-900 border border-navy-800 text-slate-400">
-        EST. 2001
-      </span>
-    </div>
-  </div>
-</div>
-
-<!-- 2. Signature Floating Architectural Glass Navigation -->
-<div class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-3 pb-2 transition-all duration-300 pointer-events-none" id="header-wrapper">
+<!-- Floating Architectural Glass Navigation (Strict Reference Match to Image 2) -->
+<div class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-2 transition-all duration-300 pointer-events-none" id="header-wrapper">
   <header 
     id="main-glass-header"
-    class="max-w-7xl mx-auto glass-nav rounded-2xl sm:rounded-3xl pointer-events-auto transition-all duration-300"
+    class="max-w-7xl mx-auto glass-nav-copper rounded-2xl sm:rounded-3xl pointer-events-auto transition-all duration-300"
   >
     <div class="px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 sm:h-20 transition-all duration-300" id="header-inner">
       
-      <!-- Brand Identity -->
-      <a href="/" class="flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-brand rounded-xl p-1" aria-label="Al Manar Tech Home">
-        <div class="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-xl p-1.5 shadow-sm flex items-center justify-center border border-navy-800 group-hover:border-amber-brand/60 transition-colors">
+      <!-- Brand Identity (Strict Reference Match) -->
+      <a href="/" class="flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F07842] rounded-xl p-1" aria-label="Al Manar Tech Home">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-xl p-1.5 shadow-sm flex items-center justify-center border border-white/10 group-hover:border-[#F07842]/60 transition-colors">
           <img 
             src="/images/original/Logo-Al-Manar-1-1024x1024.png" 
             alt="Al Manar Tech Official Logo" 
@@ -87,16 +50,16 @@ const navLinks = [
           />
         </div>
         <div class="flex flex-col">
-          <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white font-display leading-tight group-hover:text-amber-brand transition-colors">
-            AL MANAR <span class="text-metallic-amber">TECH</span>
+          <span class="text-base sm:text-lg font-extrabold tracking-tight text-white font-display leading-tight group-hover:text-[#F07842] transition-colors">
+            AL MANAR <span class="text-[#F07842]">TECH</span>
           </span>
-          <span class="text-[9px] font-mono tracking-widest uppercase text-slate-400 font-semibold">
+          <span class="text-[9px] font-mono tracking-widest uppercase text-[#A8B0BA] font-semibold">
             INFRASTRUCTURE CONTRACTING
           </span>
         </div>
       </a>
 
-      <!-- Desktop Links -->
+      <!-- Desktop Links (Clean White Typography + Copper Active Underline) -->
       <nav class="hidden lg:flex items-center gap-1 font-display" aria-label="Main Navigation">
         {navLinks.map((link) => {
           const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
@@ -106,22 +69,22 @@ const navLinks = [
               <div class="relative group py-2">
                 <button 
                   type="button" 
-                  class={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold tracking-tight transition-all duration-200 ${
+                  class={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold tracking-tight transition-all duration-200 ${
                     isActive 
-                      ? 'text-amber-brand bg-navy-900/90 border border-amber-brand/30 shadow-sm' 
-                      : 'text-slate-200 hover:text-white hover:bg-white/5'
+                      ? 'text-[#F07842]' 
+                      : 'text-white hover:text-[#FFAB78] hover:bg-white/5'
                   }`}
                   aria-expanded="false"
                 >
                   <span>{link.name}</span>
-                  <Icon name="chevron-down" class="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-brand transition-transform duration-200 group-hover:rotate-180" />
+                  <Icon name="chevron-down" class="w-3.5 h-3.5 text-[#A8B0BA] group-hover:text-[#F07842] transition-transform duration-200 group-hover:rotate-180" />
                 </button>
 
                 <!-- Glass Dropdown Panel -->
-                <div class="absolute left-0 top-full w-88 glass-panel-navy rounded-2xl shadow-glass-floating py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 z-50">
-                  <div class="px-5 py-2 border-b border-white/5 text-[10px] font-mono font-bold uppercase tracking-widest text-amber-brand flex items-center justify-between">
+                <div class="absolute left-0 top-full w-88 bg-[#17232D]/95 backdrop-blur-xl border border-white/12 rounded-2xl shadow-2xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 z-50">
+                  <div class="px-5 py-2 border-b border-white/10 text-[10px] font-mono font-bold uppercase tracking-widest text-[#F07842] flex items-center justify-between">
                     <span>Engineering Divisions</span>
-                    <span class="text-slate-500">06 DIVISIONS</span>
+                    <span class="text-[#A8B0BA]">06 DIVISIONS</span>
                   </div>
                   <div class="py-2">
                     {link.children?.map((child) => (
@@ -130,19 +93,19 @@ const navLinks = [
                         class="flex items-center justify-between px-5 py-2.5 hover:bg-white/5 transition-colors group/item"
                       >
                         <div class="flex items-center gap-3">
-                          <span class="font-mono text-xs text-slate-500 group-hover/item:text-amber-brand font-bold">
+                          <span class="font-mono text-xs text-[#A8B0BA] group-hover/item:text-[#F07842] font-bold">
                             {child.number}
                           </span>
                           <span class="text-sm font-bold text-slate-200 group-hover/item:text-white font-display">
                             {child.name}
                           </span>
                         </div>
-                        <Icon name="arrow-right" class="w-3 h-3 text-slate-600 group-hover/item:text-amber-brand transition-transform group-hover/item:translate-x-1" />
+                        <Icon name="arrow-right" class="w-3 h-3 text-[#A8B0BA] group-hover/item:text-[#F07842] transition-transform group-hover/item:translate-x-1" />
                       </a>
                     ))}
                   </div>
-                  <div class="mt-2 pt-2 border-t border-white/5 px-5">
-                    <a href="/services" class="font-mono text-xs text-amber-brand hover:text-amber-glow font-bold flex items-center gap-1.5 py-1">
+                  <div class="mt-2 pt-2 border-t border-white/10 px-5">
+                    <a href="/services" class="font-mono text-xs text-[#F07842] hover:text-[#FFAB78] font-bold flex items-center gap-1.5 py-1">
                       <span>View All Services Breakdown</span>
                       <Icon name="arrow-right" class="w-3.5 h-3.5" />
                     </a>
@@ -155,29 +118,29 @@ const navLinks = [
           return (
             <a 
               href={link.href}
-              class={`px-3.5 py-2 rounded-xl text-sm font-bold tracking-tight transition-all duration-200 relative group/link ${
+              class={`px-3.5 py-2 rounded-xl text-sm font-semibold tracking-tight transition-all duration-200 relative group/link ${
                 isActive 
-                  ? 'text-amber-brand bg-navy-900/90 border border-amber-brand/30 shadow-sm' 
-                  : 'text-slate-200 hover:text-white hover:bg-white/5'
+                  ? 'text-[#F07842]' 
+                  : 'text-white hover:text-[#FFAB78] hover:bg-white/5'
               }`}
             >
               <span>{link.name}</span>
               {isActive && (
-                <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-amber-brand rounded-full"></span>
+                <span class="absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-[#F07842] rounded-full"></span>
               )}
             </a>
           );
         })}
       </nav>
 
-      <!-- Desktop Header Magnetic Glass CTA -->
+      <!-- Desktop Header Magnetic Copper CTA (Strict Reference Match) -->
       <div class="hidden lg:flex items-center gap-4">
         <a 
           href="/contact" 
           data-magnetic="true"
-          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-display font-bold uppercase tracking-wider bg-amber-brand text-navy-950 hover:bg-amber-glow shadow-glass-amber transition-all duration-200"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-display font-bold uppercase tracking-wider bg-[#F07842] text-[#111920] hover:bg-[#D96532] shadow-lg shadow-[#F07842]/25 transition-all duration-200"
         >
-          <span>Discuss Project</span>
+          <span>DISCUSS PROJECT</span>
           <Icon name="arrow-right" class="w-3.5 h-3.5" />
         </a>
       </div>
@@ -186,7 +149,7 @@ const navLinks = [
       <div class="flex items-center gap-2 lg:hidden">
         <a 
           href="tel:025829700" 
-          class="p-2 rounded-xl bg-navy-900/80 text-amber-brand border border-white/10"
+          class="p-2 rounded-xl bg-[#17232D]/80 text-[#F07842] border border-white/10"
           aria-label="Call Al Manar Tech"
         >
           <Icon name="phone" class="w-5 h-5" />
@@ -194,7 +157,7 @@ const navLinks = [
         <button 
           id="mobile-menu-toggle"
           type="button" 
-          class="p-2.5 rounded-xl bg-navy-900/80 text-slate-200 border border-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-amber-brand"
+          class="p-2.5 rounded-xl bg-[#17232D]/80 text-slate-200 border border-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#F07842]"
           aria-label="Toggle Mobile Navigation Menu"
           aria-expanded="false"
         >
@@ -206,25 +169,25 @@ const navLinks = [
     </div>
 
     <!-- Mobile Drawer Navigation -->
-    <div id="mobile-menu" class="lg:hidden hidden glass-panel-navy rounded-b-2xl px-5 pt-3 pb-8 max-h-[85vh] overflow-y-auto border-t border-white/5">
+    <div id="mobile-menu" class="lg:hidden hidden bg-[#17232D]/98 backdrop-blur-xl rounded-b-2xl px-5 pt-3 pb-8 max-h-[85vh] overflow-y-auto border-t border-white/10">
       <div class="space-y-1 font-display">
         {navLinks.map((link) => {
           const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
           
           if (link.hasDropdown) {
             return (
-              <div class="py-2 border-b border-white/5">
+              <div class="py-2 border-b border-white/10">
                 <div class="flex items-center justify-between px-2 py-2 text-white font-bold text-base">
                   <span>{link.name}</span>
-                  <a href={link.href} class="font-mono text-xs text-amber-brand">Overview</a>
+                  <a href={link.href} class="font-mono text-xs text-[#F07842]">Overview</a>
                 </div>
                 <div class="pl-3 pr-1 py-1 space-y-1 font-sans">
                   {link.children?.map((child) => (
                     <a 
                       href={child.href}
-                      class="block px-3 py-2 rounded-lg text-sm text-slate-300 hover:text-amber-brand hover:bg-white/5"
+                      class="block px-3 py-2 rounded-lg text-sm text-[#D5D9DF] hover:text-[#F07842] hover:bg-white/5"
                     >
-                      <span class="font-mono text-xs text-amber-brand mr-2">{child.number}</span>
+                      <span class="font-mono text-xs text-[#F07842] mr-2">{child.number}</span>
                       {child.fullName}
                     </a>
                   ))}
@@ -237,7 +200,7 @@ const navLinks = [
             <a 
               href={link.href}
               class={`block px-3 py-2.5 rounded-xl text-base font-bold ${
-                isActive ? 'text-amber-brand bg-white/10' : 'text-slate-200 hover:bg-white/5'
+                isActive ? 'text-[#F07842] bg-white/10' : 'text-slate-200 hover:bg-white/5'
               }`}
             >
               {link.name}
@@ -247,23 +210,23 @@ const navLinks = [
       </div>
 
       <!-- Mobile Drawer Contact & Action -->
-      <div class="mt-6 pt-5 border-t border-white/5 space-y-4 font-mono text-xs">
-        <div class="space-y-2 text-slate-300">
+      <div class="mt-6 pt-5 border-t border-white/10 space-y-4 font-mono text-xs">
+        <div class="space-y-2 text-[#D5D9DF]">
           <div class="flex items-center gap-2">
-            <span class="text-amber-brand">TEL:</span>
-            <a href="tel:025829700" class="hover:text-amber-brand text-white font-bold">02-5829700</a>
+            <span class="text-[#F07842]">TEL:</span>
+            <a href="tel:025829700" class="hover:text-[#F07842] text-white font-bold">02-5829700</a>
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-amber-brand">MAIL:</span>
-            <a href="mailto:info@almanartech.com" class="hover:text-amber-brand text-white">info@almanartech.com</a>
+            <span class="text-[#F07842]">MAIL:</span>
+            <a href="mailto:info@almanartech.com" class="hover:text-[#F07842] text-white">info@almanartech.com</a>
           </div>
         </div>
 
         <a 
           href="/contact" 
-          class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-display text-sm font-bold bg-amber-brand text-navy-950 hover:bg-amber-glow shadow-glass-amber"
+          class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-display text-sm font-bold bg-[#F07842] text-[#111920] hover:bg-[#D96532] shadow-lg shadow-[#F07842]/20"
         >
-          <span>Request Project Quotation</span>
+          <span>DISCUSS YOUR PROJECT</span>
           <Icon name="arrow-right" class="w-4 h-4" />
         </a>
       </div>
@@ -279,11 +242,11 @@ const navLinks = [
   if (header && inner) {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 40) {
-        header.classList.add('scrolled');
+        header.classList.add('shadow-2xl');
         inner.classList.remove('h-20');
         inner.classList.add('h-16');
       } else {
-        header.classList.remove('scrolled');
+        header.classList.remove('shadow-2xl');
         inner.classList.add('h-20');
         inner.classList.remove('h-16');
       }
