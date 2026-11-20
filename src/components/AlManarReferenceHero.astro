@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import HeroVenetianCarousel from './HeroVenetianCarousel';
 
 // Six technical service divisions matching Image 2 exactly
 const servicePanels = [
@@ -74,39 +75,44 @@ const infoItems = [
   aria-label="Al Manar Tech Homepage Hero"
 >
   <!-- =========================================================================
-       1. BACKGROUND PHOTOGRAPH (IMAGE 1) & LAYERED DARK GRADIENTS
+       1. AUTOMATIC CINEMATIC 14-SLICE VENETIAN-BLIND BACKGROUND CAROUSEL
        ========================================================================= -->
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-    <!-- Building & Engineering Architecture Photograph (Image 1) -->
-    <img 
-      src="/images/hero-building-engineering.jpg" 
-      alt="Al Manar Tech Engineering Infrastructure & Building Architecture"
-      class="w-full h-full object-cover object-right sm:object-center transform scale-100"
-      loading="eager"
-      decoding="async"
-    />
+    <!-- 14-Slice Venetian-Blind Continuous Carousel Component (React) -->
+    <HeroVenetianCarousel client:load />
+
+    <!-- Uniform Dark Navy Overlay (Section 4: Starting at rgba(17, 25, 32, 0.38)) -->
+    <div 
+      class="absolute inset-0 bg-[#111920]/40 pointer-events-none"
+    ></div>
 
     <!-- Top Gradient Overlay (ensures floating header contrast) -->
     <div 
-      class="absolute inset-0" 
-      style="background: linear-gradient(180deg, rgba(17, 25, 32, 0.70) 0%, rgba(17, 25, 32, 0.40) 25%, rgba(17, 25, 32, 0.15) 50%, rgba(17, 25, 32, 0.85) 100%);"
+      class="absolute inset-0 pointer-events-none" 
+      style="background: linear-gradient(180deg, rgba(17, 25, 32, 0.75) 0%, rgba(17, 25, 32, 0.35) 25%, transparent 50%);"
     ></div>
 
     <!-- Left Gradient Overlay (provides obsidian density for 100% text contrast) -->
     <div 
-      class="absolute inset-0" 
-      style="background: linear-gradient(90deg, rgba(17, 25, 32, 0.96) 0%, rgba(17, 25, 32, 0.90) 35%, rgba(17, 25, 32, 0.55) 65%, rgba(17, 25, 32, 0.20) 100%);"
+      class="absolute inset-0 pointer-events-none" 
+      style="background: linear-gradient(90deg, rgba(17, 25, 32, 0.96) 0%, rgba(17, 25, 32, 0.88) 35%, rgba(17, 25, 32, 0.50) 65%, rgba(17, 25, 32, 0.15) 100%);"
     ></div>
 
-    <!-- Center Radial Warm Copper Glow -->
+    <!-- Bottom Gradient Overlay (ensures strong contrast for information strip) -->
     <div 
-      class="absolute inset-0"
+      class="absolute inset-0 pointer-events-none" 
+      style="background: linear-gradient(0deg, rgba(17, 25, 32, 0.90) 0%, rgba(17, 25, 32, 0.50) 15%, transparent 35%);"
+    ></div>
+
+    <!-- Center Radial Warm Copper Ambient Lighting -->
+    <div 
+      class="absolute inset-0 pointer-events-none"
       style="background: radial-gradient(circle at 75% 45%, rgba(240, 120, 66, 0.08) 0%, transparent 60%);"
     ></div>
 
     <!-- Technical Coordinate Grid Overlay (Matching Reference Image 2) -->
     <div 
-      class="absolute inset-0 opacity-[0.06]"
+      class="absolute inset-0 opacity-[0.06] pointer-events-none"
       style="background-image: linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px); background-size: 80px 80px;"
     ></div>
 
@@ -385,3 +391,4 @@ const infoItems = [
     }
   }
 </style>
+
