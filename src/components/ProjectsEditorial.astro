@@ -97,8 +97,8 @@ const categories = [
               <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">{sec}</span>
             ))}
           </div>
-          <a href="/contact" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-brand hover:text-white">
-            <span>Inquire Specs</span>
+          <a href={`/projects/${featuredProject.id}`} class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#F07842] hover:text-white">
+            <span>View Full Case Study</span>
             <Icon name="arrow-right" class="w-3.5 h-3.5" />
           </a>
         </div>
@@ -140,6 +140,13 @@ const categories = [
             <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed font-sans">
               {proj.scopeSummary}
             </p>
+            <div class="pt-2 flex items-center justify-between text-[11px] font-mono">
+              <span class="text-slate-400">{proj.location}</span>
+              <a href={`/projects/${proj.id}`} class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1">
+                <span>Case Study</span>
+                <Icon name="arrow-right" class="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       ))}
@@ -187,9 +194,9 @@ const categories = [
 
           <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
             <span class="text-slate-400">{proj.location}</span>
-            <a href="/contact" class="text-amber-brand hover:text-white font-semibold flex items-center gap-1">
-              <span>Scope</span>
-              <Icon name="chevron-right" class="w-3.5 h-3.5" />
+            <a href={`/projects/${proj.id}`} class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1">
+              <span>View Case Study</span>
+              <Icon name="arrow-right" class="w-3.5 h-3.5" />
             </a>
           </div>
         </div>

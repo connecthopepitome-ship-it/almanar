@@ -1,0 +1,254 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import MarqueeTicker from '../../components/MarqueeTicker.astro';
+import { VERIFIED_PROJECTS } from '../../data/company';
+
+export function getStaticPaths() {
+  return VERIFIED_PROJECTS.map((proj) => ({
+    params: { id: proj.id },
+    props: { project: proj }
+  }));
+}
+
+const { project } = Astro.props;
+
+const pageTitle = `${project.title} | Verified Project Case Study | Al Manar Tech Abu Dhabi`;
+const pageDescription = `Detailed engineering case study of ${project.title} executed for ${project.client} in ${project.location} by Al Manar Tech.`;
+
+// Related projects in similar category
+const relatedProjects = VERIFIED_PROJECTS
+  .filter(p => p.id !== project.id && (p.categorySlug === project.categorySlug || p.sectors.some(s => project.sectors.includes(s))))
+  .slice(0, 3);
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <!-- Project Breadcrumb & Top Bar -->
+  <section class="bg-navy-950 text-white pt-24 sm:pt-28 pb-12 border-b border-navy-800 hud-grid relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex items-center gap-2 font-mono text-xs text-slate-400" aria-label="Breadcrumbs">
+        <a href="/" class="hover:text-[#F07842] transition-colors">Home</a>
+        <span>/</span>
+        <a href="/projects" class="hover:text-[#F07842] transition-colors">Projects</a>
+        <span>/</span>
+        <span class="text-[#F07842]">{project.title}</span>
+      </nav>
+
+      <!-- Title & Header Composition -->
+      <div class="space-y-4 max-w-4xl">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-3 py-1 rounded-full bg-[#F07842]/10 border border-[#F07842]/30 text-[#F07842] font-mono text-xs font-bold uppercase tracking-wider">
+            {project.category}
+          </span>
+          <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            VERIFIED EXECUTION
+          </span>
+          <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 font-mono text-xs">
+            {project.location}
+          </span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          {project.title}
+        </h1>
+
+        <p class="font-sans text-base sm:text-lg text-slate-300 leading-relaxed">
+          {project.scopeSummary}
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Main Case Study Content Grid -->
+  <section class="py-16 lg:py-24 bg-navy-950 text-white border-b border-navy-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left: Large Photographic Showcase Frame (7 cols) -->
+        <div class="lg:col-span-7 space-y-8">
+          <div class="rounded-3xl overflow-hidden bg-navy-900 border border-white/10 shadow-2xl relative aspect-[16/10]">
+            <img 
+              src={project.image} 
+              alt={`${project.title} - ${project.client}`}
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-slate-300">
+              <span class="px-3 py-1 rounded-lg bg-navy-950/90 border border-white/10">
+                CLIENT: {project.client}
+              </span>
+              <span class="px-3 py-1 rounded-lg bg-navy-950/90 border border-white/10 text-[#F07842]">
+                STATUS: {project.completionYear || 'COMPLETED'}
+              </span>
+            </div>
+          </div>
+
+          <!-- Project Technical Overview -->
+          <div class="p-8 rounded-3xl glass-panel-navy border border-white/10 space-y-4 font-sans text-slate-300 text-sm leading-relaxed">
+            <h3 class="font-display text-xl font-bold text-white tracking-tight">
+              Scope of Engineering Deliverables
+            </h3>
+            <p>
+              This installation required close coordination with the client's operations and statutory authorities. Al Manar Tech's team managed shop drawing approvals, load distribution schedules, site rough-ins, containment, and statutory sign-offs.
+            </p>
+            <p>
+              All work conformed strictly to Abu Dhabi statutory standards, British Standards (BS 7671), and UAE Civil Defence regulations where life safety and fire detection systems were engaged.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Technical Specification Sidebar & Quick Contact (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Key Metrics Deck -->
+          <div class="p-6 rounded-3xl bg-[#17232D] border border-white/10 space-y-4 font-mono text-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <span class="text-slate-400">PROJECT CLIENT</span>
+              <span class="text-white font-bold">{project.client}</span>
+            </div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <span class="text-slate-400">LOCATION</span>
+              <span class="text-white font-bold">{project.location}</span>
+            </div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <span class="text-slate-400">OPERATING SECTOR</span>
+              <span class="text-white font-bold">{project.category}</span>
+            </div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <span class="text-slate-400">COMPLETION STATUS</span>
+              <span class="text-emerald-400 font-bold">{project.completionYear || 'Verified Complete'}</span>
+            </div>
+            <div class="space-y-2 pt-2">
+              <span class="text-slate-400 block text-[11px]">ENGAGED ENGINEERING DISCIPLINES</span>
+              <div class="flex flex-wrap gap-1.5">
+                {project.sectors.map((sec) => (
+                  <span class="px-2.5 py-1 rounded-lg bg-[#F07842]/10 border border-[#F07842]/30 text-[#F07842] text-[11px] font-bold">
+                    {sec}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Tender Estimating Box -->
+          <div class="p-6 rounded-3xl bg-[#17232D]/80 border border-[#F07842]/30 space-y-4">
+            <span class="font-mono text-xs font-bold text-[#F07842] block">
+              ESTIMATING &amp; TENDER CONSULTATION
+            </span>
+            <h4 class="font-display text-lg font-bold text-white">
+              Planning a similar facility in Abu Dhabi or Al Ain?
+            </h4>
+            <p class="font-sans text-xs text-slate-300 leading-relaxed">
+              Submit your project blueprints, single-line diagrams, or BOQ to our engineering desk for transparent estimation.
+            </p>
+            <div class="pt-2 flex flex-col gap-2.5">
+              <a 
+                href="#enquiry-section" 
+                class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-[#F07842] text-[#111920] font-display text-xs font-bold uppercase tracking-wider hover:bg-[#D96532] transition-colors shadow-lg shadow-[#F07842]/20"
+              >
+                <span>Request Project Proposal</span>
+                <Icon name="arrow-right" class="w-4 h-4" />
+              </a>
+
+              <a 
+                href="tel:025829700" 
+                class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-xs font-bold hover:bg-white/10 transition-colors"
+              >
+                <Icon name="phone" class="w-3.5 h-3.5 text-[#F07842]" />
+                <span>Call Estimating Desk: 02-5829700</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Landmark Case Studies -->
+  {relatedProjects.length > 0 && (
+    <section class="py-16 bg-navy-900 text-white border-b border-navy-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="flex items-center justify-between pb-4 border-b border-white/5">
+          <div class="space-y-1">
+            <span class="font-mono text-xs text-[#F07842] font-bold uppercase tracking-wider">
+              PORTFOLIO CONTINUITY
+            </span>
+            <h3 class="font-display text-2xl font-bold text-white">
+              Related Project Installations
+            </h3>
+          </div>
+          <a href="/projects" class="font-mono text-xs text-[#F07842] hover:text-white flex items-center gap-1.5">
+            <span>View All Projects</span>
+            <Icon name="arrow-right" class="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedProjects.map((p) => (
+            <a 
+              href={`/projects/${p.id}`}
+              class="group glass-panel-navy rounded-2xl overflow-hidden border border-white/10 hover:border-[#F07842]/50 transition-all flex flex-col justify-between"
+            >
+              <div class="aspect-[16/10] overflow-hidden bg-navy-950 relative">
+                <img src={p.image} alt={p.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                <span class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#F07842] text-[#111920]">
+                  {p.category}
+                </span>
+              </div>
+              <div class="p-5 space-y-2">
+                <h4 class="font-display text-base font-bold text-white group-hover:text-[#F07842] transition-colors line-clamp-1">
+                  {p.title}
+                </h4>
+                <p class="font-mono text-xs text-slate-400">
+                  {p.client} // {p.location}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Project Consultation Form Section -->
+  <section id="enquiry-section" class="py-24 bg-navy-950 text-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5 space-y-6">
+          <div class="space-y-2">
+            <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#F07842] block">
+              GET IN TOUCH
+            </span>
+            <h2 class="font-display text-3xl font-extrabold text-white tracking-tight">
+              Initiate Your Engineering Consultation
+            </h2>
+          </div>
+          <p class="font-sans text-sm text-slate-300 leading-relaxed">
+            Our estimating team responds to tenders, design drawings, and bill of quantities with professional velocity and complete commercial confidentiality.
+          </p>
+          <div class="space-y-3 font-mono text-xs text-slate-300 pt-2">
+            <p>TEL: <a href="tel:025829700" class="text-[#F07842] font-bold">02-5829700</a></p>
+            <p>MAIL: <a href="mailto:info@almanartech.com" class="text-white hover:text-[#F07842]">info@almanartech.com</a></p>
+            <p>HQ: Musaffah M35, Abu Dhabi, UAE</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <ContactForm preselectedService={project.category} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
