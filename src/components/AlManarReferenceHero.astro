@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import HeroVenetianCarousel from './HeroVenetianCarousel';
+import HeroVenetianCarousel from './HeroVenetianCarousel.astro';
 
 // Six technical service divisions matching Image 2 exactly
 const servicePanels = [
@@ -78,8 +78,8 @@ const infoItems = [
        1. AUTOMATIC CINEMATIC 14-SLICE VENETIAN-BLIND BACKGROUND CAROUSEL
        ========================================================================= -->
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-    <!-- 14-Slice Venetian-Blind Continuous Carousel Component (React) -->
-    <HeroVenetianCarousel client:load />
+    <!-- 14-Slice Venetian-Blind Continuous Carousel Component -->
+    <HeroVenetianCarousel />
 
     <!-- Uniform Dark Navy Overlay (Section 4: Starting at rgba(17, 25, 32, 0.38)) -->
     <div 

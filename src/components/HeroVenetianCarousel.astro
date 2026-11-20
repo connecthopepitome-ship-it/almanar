@@ -1,0 +1,224 @@
+---
+// Three engineering background images matching user specifications
+const slides = [
+  {
+    id: 1,
+    src: '/images/hero-slide-1.jpg',
+    alt: 'Modern commercial building with integrated HVAC infrastructure'
+  },
+  {
+    id: 2,
+    src: '/images/hero-slide-2.jpg',
+    alt: 'Contemporary glass commercial and engineering building'
+  },
+  {
+    id: 3,
+    src: '/images/hero-slide-3.jpg',
+    alt: 'Industrial mechanical plant room with HVAC ducting, pumps and engineering infrastructure'
+  }
+];
+
+const NUM_SLICES = 14;
+const DISPLAY_DURATION = 5000; // 5 seconds display between transitions
+const TRANSITION_DURATION = 2300; // Exactly 2.3 seconds transition duration
+const SLICE_DELAY_STEP = 55; // 13 * 55ms = 715ms total delay across 14 slices
+const SLICE_ANIM_DURATION = TRANSITION_DURATION - (NUM_SLICES - 1) * SLICE_DELAY_STEP; // 1585ms
+---
+
+<div 
+  id="hero-venetian-carousel"
+  class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
+  aria-hidden="true"
+  data-display-duration={DISPLAY_DURATION}
+  data-transition-duration={TRANSITION_DURATION}
+  data-slice-duration={SLICE_ANIM_DURATION}
+  data-slice-delay={SLICE_DELAY_STEP}
+>
+  <!-- BASE SLIDE LAYER (Displays current active slide image) -->
+  <div id="venetian-base-layer" class="absolute inset-0 w-full h-full">
+    <img
+      id="venetian-base-img"
+      src={slides[0].src}
+      alt={slides[0].alt}
+      class="w-full h-full object-cover object-right sm:object-center transform-gpu"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <!-- INCOMING SLIDE LAYER: 14 Equal Vertical Slices (Left-to-Right Staggered Reveal) -->
+  <div id="venetian-incoming-layer" class="absolute inset-0 w-full h-full z-10 pointer-events-none hidden">
+    {Array.from({ length: NUM_SLICES }).map((_, i) => {
+      const sliceLeftPct = (i * 100) / NUM_SLICES;
+      const sliceWidthPct = 100 / NUM_SLICES;
+
+      return (
+        <div
+          class="venetian-slice absolute top-0 bottom-0 overflow-hidden"
+          data-slice-index={i}
+          style={`left: ${sliceLeftPct}%; width: calc(${sliceWidthPct}% + 1.5px);`}
+        >
+          <!-- Full image correctly positioned and scaled across all slices -->
+          <img
+            class="venetian-slice-img absolute top-0 h-full max-w-none object-cover object-right sm:object-center transform-gpu"
+            src={slides[1].src}
+            alt={slides[1].alt}
+            style={`width: ${NUM_SLICES * 100}%; left: -${i * 100}%;`}
+            loading="eager"
+            decoding="async"
+          />
+          <!-- Fine glowing copper shutter leading edge -->
+          <div class="absolute right-0 top-0 bottom-0 w-[1.5px] bg-[#F07842] shadow-[0_0_12px_#F07842] opacity-80 pointer-events-none" />
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+<style is:global>
+  @keyframes venetianBlindWipe {
+    0% {
+      clip-path: inset(0 100% 0 0);
+      opacity: 0.8;
+    }
+    100% {
+      clip-path: inset(0 0% 0 0);
+      opacity: 1;
+    }
+  }
+
+  .venetian-slice-animating {
+    animation-name: venetianBlindWipe;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: both;
+    will-change: clip-path;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .venetian-slice-animating {
+      animation: none !important;
+      clip-path: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  function initVenetianCarousel() {
+    const container = document.getElementById('hero-venetian-carousel');
+    const baseImg = document.getElementById('venetian-base-img') as HTMLImageElement;
+    const incomingLayer = document.getElementById('venetian-incoming-layer');
+    const sliceImgs = document.querySelectorAll('.venetian-slice-img') as NodeListOf<HTMLImageElement>;
+    const slices = document.querySelectorAll('.venetian-slice') as NodeListOf<HTMLElement>;
+
+    if (!container || !baseImg || !incomingLayer || slices.length === 0) return;
+
+    const slides = [
+      { id: 1, src: '/images/hero-slide-1.jpg', alt: 'Modern commercial building with integrated HVAC infrastructure' },
+      { id: 2, src: '/images/hero-slide-2.jpg', alt: 'Contemporary glass commercial and engineering building' },
+      { id: 3, src: '/images/hero-slide-3.jpg', alt: 'Industrial mechanical plant room with HVAC ducting, pumps and engineering infrastructure' }
+    ];
+
+    // Preload all 3 slide images into memory
+    slides.forEach((slide) => {
+      const img = new Image();
+      img.src = slide.src;
+    });
+
+    const DISPLAY_DURATION = 5000; // 5 seconds display
+    const TRANSITION_DURATION = 2300; // Exactly 2.3 seconds
+    const SLICE_DELAY_STEP = 55; // 55ms per slice
+    const SLICE_ANIM_DURATION = 1585; // 1585ms + 13*55ms = 2300ms
+
+    let currentIndex = 0;
+    let isTransitioning = false;
+    let displayTimer = null;
+    let transitionTimer = null;
+    let isTabVisible = true;
+
+    function triggerTransition() {
+      if (isTransitioning || !isTabVisible) return;
+      isTransitioning = true;
+
+      const nextIndex = (currentIndex + 1) % slides.length;
+      const nextSlide = slides[nextIndex];
+
+      // Update incoming slice images
+      sliceImgs.forEach((img) => {
+        img.src = nextSlide.src;
+        img.alt = nextSlide.alt;
+      });
+
+      // Prepare slices and start the staggered Venetian blind wipe
+      slices.forEach((slice, i) => {
+        // Remove animation class first to reset
+        slice.classList.remove('venetian-slice-animating');
+        slice.style.clipPath = 'inset(0 100% 0 0)';
+        slice.style.animationDuration = `${SLICE_ANIM_DURATION}ms`;
+        slice.style.animationDelay = `${i * SLICE_DELAY_STEP}ms`;
+      });
+
+      // Show incoming layer
+      incomingLayer.classList.remove('hidden');
+
+      // Trigger animation on next frame
+      requestAnimationFrame(() => {
+        slices.forEach((slice) => {
+          slice.classList.add('venetian-slice-animating');
+        });
+      });
+
+      // After exactly 2300ms, commit transition
+      if (transitionTimer) clearTimeout(transitionTimer);
+      transitionTimer = setTimeout(() => {
+        // Update base image to the newly revealed slide
+        baseImg.src = nextSlide.src;
+        baseImg.alt = nextSlide.alt;
+
+        // Hide incoming layer and reset slices
+        incomingLayer.classList.add('hidden');
+        slices.forEach((slice) => {
+          slice.classList.remove('venetian-slice-animating');
+          slice.style.clipPath = 'inset(0 100% 0 0)';
+        });
+
+        currentIndex = nextIndex;
+        isTransitioning = false;
+
+        // Schedule next transition in 5 seconds
+        scheduleNextSlide();
+      }, TRANSITION_DURATION);
+    }
+
+    function scheduleNextSlide() {
+      if (displayTimer) clearTimeout(displayTimer);
+      displayTimer = setTimeout(() => {
+        triggerTransition();
+      }, DISPLAY_DURATION);
+    }
+
+    // Tab visibility handling
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        isTabVisible = false;
+        if (displayTimer) clearTimeout(displayTimer);
+      } else {
+        isTabVisible = true;
+        if (!isTransitioning) {
+          scheduleNextSlide();
+        }
+      }
+    });
+
+    // Start rotation
+    scheduleNextSlide();
+  }
+
+  // Initialize on load and Astro page transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVenetianCarousel);
+  } else {
+    initVenetianCarousel();
+  }
+  document.addEventListener('astro:page-load', initVenetianCarousel);
+</script>
