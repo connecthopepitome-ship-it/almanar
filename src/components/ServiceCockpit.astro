@@ -134,9 +134,10 @@ import { SERVICES } from '../data/company';
 
             <a 
               href="#contact" 
-              class="text-xs font-mono text-[#F07842] hover:text-white transition-colors flex items-center gap-1.5 font-bold"
+              data-service-select={s.title}
+              class="quote-select-trigger text-xs font-mono text-[#F07842] hover:text-white transition-colors flex items-center gap-1.5 font-bold"
             >
-              <span>Request BOQ Estimating</span>
+              <span>Request a Quote</span>
               <Icon name="chevron-right" class="w-3.5 h-3.5" />
             </a>
           </div>
@@ -178,9 +179,10 @@ import { SERVICES } from '../data/company';
             </a>
             <a 
               href="#contact" 
-              class="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-[#F07842] text-[#111920] font-display text-xs font-bold uppercase tracking-wider hover:bg-[#D96532] transition-colors"
+              data-service-select={s.title}
+              class="quote-select-trigger flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-[#F07842] text-[#111920] font-display text-xs font-bold uppercase tracking-wider hover:bg-[#D96532] transition-colors"
             >
-              <span>Get Quote</span>
+              <span>Request Quote</span>
             </a>
           </div>
         </div>
@@ -229,6 +231,23 @@ import { SERVICES } from '../data/company';
       btn.addEventListener('click', activate);
     });
   }
+
+  // Pre-select service in Contact Form on Request a Quote click
+  const quoteTriggers = document.querySelectorAll('.quote-select-trigger');
+  quoteTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const targetService = trigger.getAttribute('data-service-select');
+      const selectElem = document.getElementById('service') as HTMLSelectElement | null;
+      if (selectElem && targetService) {
+        for (let i = 0; i < selectElem.options.length; i++) {
+          if (selectElem.options[i].value === targetService || selectElem.options[i].text.includes(targetService)) {
+            selectElem.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    });
+  });
 
   // Mobile accordion toggle
   const mobileToggles = document.querySelectorAll('.mobile-service-toggle');
