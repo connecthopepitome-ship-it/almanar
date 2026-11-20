@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { COMPANY } from '../data/company';
 
 const credentials = [
   {
@@ -54,7 +55,7 @@ const credentials = [
 ---
 
 <section 
-  id="why-choose-al-manar" 
+  id="why-choose-us" 
   class="py-24 lg:py-32 bg-navy-950 text-white border-b border-navy-800 relative overflow-hidden"
   aria-label="Why Choose Al Manar Tech"
 >
@@ -68,7 +69,7 @@ const credentials = [
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/5 scroll-reveal-up">
       <div class="space-y-3 max-w-2xl">
         <div class="inline-flex items-center gap-2 font-mono text-xs text-[#F07842] font-bold tracking-widest uppercase px-3 py-1 rounded-full glass-panel-copper">
-          <span>06 // TRUST &amp; CAPABILITY</span>
+          <span>06 // WHY AL MANAR TECH</span>
         </div>
         <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
           Why Leading Developers &amp;<br/>
@@ -79,6 +80,25 @@ const credentials = [
       <p class="text-slate-400 font-mono text-xs max-w-md">
         VERIFIED ABU DHABI CONTRACTOR CREDENTIALS. ZERO COMPROMISE ON STATUTORY CODES, MATERIALS, OR TIMELINES.
       </p>
+    </div>
+
+    <!-- Verified Company Statistics Grid (Consolidated from separate stats block) -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 rounded-3xl bg-[#17232D]/80 border border-white/10 backdrop-blur-xl scroll-reveal-up">
+      {COMPANY.stats.map((stat) => (
+        <div class="flex flex-col items-start space-y-2 border-l-2 border-[#F07842] pl-4">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-slate-400">
+            {stat.label}
+          </span>
+          <div class="flex items-baseline gap-1">
+            <span class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+              {stat.value}
+            </span>
+          </div>
+          <p class="text-xs text-slate-300 font-sans leading-relaxed">
+            {stat.detail}
+          </p>
+        </div>
+      ))}
     </div>
 
     <!-- 6 Credential Pillars Grid -->
@@ -125,33 +145,31 @@ const credentials = [
       ))}
     </div>
 
-    <!-- Bottom Stat Summary Banner -->
-    <div class="p-6 sm:p-8 rounded-3xl bg-[#17232D]/80 border border-white/10 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left scroll-reveal-up">
-      <div class="space-y-1">
-        <h4 class="font-display text-lg font-bold text-white">
-          Ready to review your drawings or tender schedule with our engineers?
-        </h4>
-        <p class="font-sans text-xs sm:text-sm text-slate-300">
-          We provide transparent load assessments, BOQ pricing, and statutory feasibility within 24 working hours.
-        </p>
+    <!-- Official UAE Regulatory Authorities Banner -->
+    <div class="p-6 sm:p-8 rounded-3xl bg-[#17232D]/90 border border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 scroll-reveal-up">
+      <div class="flex items-center gap-3 text-slate-300 font-mono text-xs">
+        <div class="w-8 h-8 rounded-xl bg-[#F07842]/10 border border-[#F07842]/30 flex items-center justify-center text-[#F07842] shrink-0">
+          <Icon name="shield-check" class="w-4 h-4" />
+        </div>
+        <div>
+          <span class="text-white font-bold block">OFFICIAL STATUTORY LICENSURES:</span>
+          <span class="text-slate-400 text-[11px]">Direct filings, inspections, and energization approvals</span>
+        </div>
       </div>
 
-      <div class="flex items-center gap-3 shrink-0">
-        <a 
-          href="#contact" 
-          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#F07842] text-[#111920] font-display text-xs font-bold uppercase tracking-wider hover:bg-[#D96532] transition-colors shadow-md shadow-[#F07842]/20"
-        >
-          <span>Request Quote</span>
-          <Icon name="arrow-right" class="w-4 h-4" />
-        </a>
-
-        <a 
-          href="tel:025829700" 
-          class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-xs font-semibold hover:bg-white/10 transition-colors"
-        >
-          <Icon name="phone" class="w-3.5 h-3.5 text-[#F07842]" />
-          <span>02-5829700</span>
-        </a>
+      <div class="flex flex-wrap items-center gap-4 sm:gap-6 font-mono text-xs text-slate-300">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>ADDC Approved Contractor</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>ADM Recognized</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>ADQCC &amp; Civil Defence</span>
+        </div>
       </div>
     </div>
 
