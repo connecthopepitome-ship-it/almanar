@@ -3,222 +3,350 @@
 const slides = [
   {
     id: 1,
+    number: '01',
     src: '/images/hero-slide-1.jpg',
+    title: 'Modern Commercial Building & HVAC Infrastructure',
     alt: 'Modern commercial building with integrated HVAC infrastructure'
   },
   {
     id: 2,
+    number: '02',
     src: '/images/hero-slide-2.jpg',
+    title: 'Contemporary Glass Commercial & Engineering Building',
     alt: 'Contemporary glass commercial and engineering building'
   },
   {
     id: 3,
+    number: '03',
     src: '/images/hero-slide-3.jpg',
+    title: 'Industrial Mechanical Plant Room & HVAC Pumps',
     alt: 'Industrial mechanical plant room with HVAC ducting, pumps and engineering infrastructure'
   }
 ];
 
 const NUM_SLICES = 14;
-const DISPLAY_DURATION = 5000; // 5 seconds display between transitions
+const DISPLAY_DURATION = 5000; // 5 seconds display hold between transitions
 const TRANSITION_DURATION = 2300; // Exactly 2.3 seconds transition duration
-const SLICE_DELAY_STEP = 55; // 13 * 55ms = 715ms total delay across 14 slices
-const SLICE_ANIM_DURATION = TRANSITION_DURATION - (NUM_SLICES - 1) * SLICE_DELAY_STEP; // 1585ms
+const SLICE_DELAY_STEP = 50; // 13 * 50ms = 650ms max delay
+const SLICE_ANIM_DURATION = TRANSITION_DURATION - (NUM_SLICES - 1) * SLICE_DELAY_STEP; // 1650ms
 ---
 
 <div 
   id="hero-venetian-carousel"
   class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
   aria-hidden="true"
-  data-display-duration={DISPLAY_DURATION}
-  data-transition-duration={TRANSITION_DURATION}
-  data-slice-duration={SLICE_ANIM_DURATION}
-  data-slice-delay={SLICE_DELAY_STEP}
 >
-  <!-- BASE SLIDE LAYER (Displays current active slide image) -->
-  <div id="venetian-base-layer" class="absolute inset-0 w-full h-full">
-    <img
-      id="venetian-base-img"
-      src={slides[0].src}
-      alt={slides[0].alt}
-      class="w-full h-full object-cover object-right sm:object-center transform-gpu"
-      loading="eager"
-      decoding="async"
-    />
-  </div>
+  <!-- THREE INDEPENDENT 14-SLICE VENETIAN SLIDES -->
+  {slides.map((slide, slideIdx) => (
+    <div 
+      class={`venetian-slide absolute inset-0 w-full h-full pointer-events-none ${slideIdx === 0 ? 'is-current' : 'is-idle'}`}
+      data-slide-index={slideIdx}
+    >
+      {Array.from({ length: NUM_SLICES }).map((_, i) => {
+        const sliceLeftPct = (i * 100) / NUM_SLICES;
+        const sliceWidthPct = 100 / NUM_SLICES;
 
-  <!-- INCOMING SLIDE LAYER: 14 Equal Vertical Slices (Left-to-Right Staggered Reveal) -->
-  <div id="venetian-incoming-layer" class="absolute inset-0 w-full h-full z-10 pointer-events-none hidden">
-    {Array.from({ length: NUM_SLICES }).map((_, i) => {
-      const sliceLeftPct = (i * 100) / NUM_SLICES;
-      const sliceWidthPct = 100 / NUM_SLICES;
+        return (
+          <div
+            class="venetian-slice absolute top-0 bottom-0 overflow-hidden pointer-events-none"
+            style={`
+              left: ${sliceLeftPct}%;
+              width: ${sliceWidthPct}%;
+              --slice-index: ${i};
+              --slice-delay: ${i * SLICE_DELAY_STEP}ms;
+              --slice-dur: ${SLICE_ANIM_DURATION}ms;
+            `}
+          >
+            <!-- Masked Image Wrapper -->
+            <div class="venetian-img-mask absolute inset-0 overflow-hidden">
+              <img
+                class="venetian-slice-img absolute top-0 h-full max-w-none object-cover object-right sm:object-center transform-gpu"
+                src={slide.src}
+                alt={slide.alt}
+                style={`width: ${NUM_SLICES * 100}%; left: -${i * 100}%;`}
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <!-- Glowing Copper Shutter Blade -->
+            <div class="shutter-blade absolute top-0 bottom-0 pointer-events-none" />
+          </div>
+        );
+      })}
+    </div>
+  ))}
 
-      return (
-        <div
-          class="venetian-slice absolute top-0 bottom-0 overflow-hidden"
-          data-slice-index={i}
-          style={`left: ${sliceLeftPct}%; width: calc(${sliceWidthPct}% + 1.5px);`}
-        >
-          <!-- Full image correctly positioned and scaled across all slices -->
-          <img
-            class="venetian-slice-img absolute top-0 h-full max-w-none object-cover object-right sm:object-center transform-gpu"
-            src={slides[1].src}
-            alt={slides[1].alt}
-            style={`width: ${NUM_SLICES * 100}%; left: -${i * 100}%;`}
-            loading="eager"
-            decoding="async"
-          />
-          <!-- Fine glowing copper shutter leading edge -->
-          <div class="absolute right-0 top-0 bottom-0 w-[1.5px] bg-[#F07842] shadow-[0_0_12px_#F07842] opacity-80 pointer-events-none" />
-        </div>
-      );
-    })}
+  <!-- Slide Progression Indicator (Interactive & Visual Status) -->
+  <div class="absolute bottom-16 sm:bottom-14 right-6 sm:right-12 z-20 pointer-events-auto flex items-center gap-3 font-mono text-xs text-white/70 bg-[#111920]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#252F38] shadow-lg">
+    <span class="text-[#F07842] font-bold" id="carousel-current-num">01</span>
+    <span class="text-white/30">/</span>
+    <span class="text-white/50">03</span>
+    <div class="flex items-center gap-1.5 ml-1">
+      <button 
+        type="button" 
+        class="carousel-dot cursor-pointer p-0.5 group focus:outline-none" 
+        data-slide-target="0" 
+        aria-label="View slide 1"
+      >
+        <span class="carousel-dot-bar block w-6 h-1 rounded-full bg-[#F07842] shadow-[0_0_8px_#F07842] transition-all duration-300"></span>
+      </button>
+      <button 
+        type="button" 
+        class="carousel-dot cursor-pointer p-0.5 group focus:outline-none" 
+        data-slide-target="1" 
+        aria-label="View slide 2"
+      >
+        <span class="carousel-dot-bar block w-2 h-1 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300"></span>
+      </button>
+      <button 
+        type="button" 
+        class="carousel-dot cursor-pointer p-0.5 group focus:outline-none" 
+        data-slide-target="2" 
+        aria-label="View slide 3"
+      >
+        <span class="carousel-dot-bar block w-2 h-1 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300"></span>
+      </button>
+    </div>
   </div>
 </div>
 
 <style is:global>
-  @keyframes venetianBlindWipe {
+  /* Base state of slides */
+  .venetian-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  /* Current resting slide */
+  .venetian-slide.is-current {
+    z-index: 2;
+  }
+  .venetian-slide.is-current .venetian-img-mask {
+    clip-path: inset(0 0% 0 0);
+  }
+  .venetian-slide.is-current .shutter-blade {
+    opacity: 0;
+    display: none;
+  }
+
+  /* Idle inactive slide */
+  .venetian-slide.is-idle {
+    z-index: 1;
+  }
+  .venetian-slide.is-idle .venetian-img-mask {
+    clip-path: inset(0 100% 0 0);
+  }
+  .venetian-slide.is-idle .shutter-blade {
+    opacity: 0;
+    display: none;
+  }
+
+  /* Entering slide: active Venetian wipe transition (2.3s total) */
+  .venetian-slide.is-entering {
+    z-index: 10;
+  }
+
+  /* 14-Slice Progressive Wipe Keyframes */
+  @keyframes venetianMaskReveal {
     0% {
       clip-path: inset(0 100% 0 0);
-      opacity: 0.8;
     }
     100% {
       clip-path: inset(0 0% 0 0);
-      opacity: 1;
     }
   }
 
-  .venetian-slice-animating {
-    animation-name: venetianBlindWipe;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-    animation-fill-mode: both;
+  /* Copper Shutter Blade Sweep Keyframes */
+  @keyframes shutterBladeSweep {
+    0% {
+      left: 0%;
+      opacity: 0;
+    }
+    6% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+
+  .venetian-slide.is-entering .venetian-img-mask {
+    animation: venetianMaskReveal var(--slice-dur, 1650ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--slice-delay, 0ms);
     will-change: clip-path;
   }
 
+  .venetian-slide.is-entering .shutter-blade {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, rgba(240, 120, 66, 0.2) 0%, #F07842 30%, #FFAB78 50%, #F07842 70%, rgba(240, 120, 66, 0.2) 100%);
+    box-shadow: 0 0 16px #F07842, 0 0 6px #FFAB78;
+    animation: shutterBladeSweep var(--slice-dur, 1650ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--slice-delay, 0ms);
+    will-change: left, opacity;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .venetian-slice-animating {
+    .venetian-slide.is-entering .venetian-img-mask {
       animation: none !important;
-      clip-path: none !important;
+      clip-path: inset(0 0% 0 0) !important;
+    }
+    .venetian-slide.is-entering .shutter-blade {
+      display: none !important;
+    }
+    .venetian-slide {
+      transition: opacity 0.8s ease;
+    }
+    .venetian-slide.is-idle {
+      opacity: 0 !important;
+    }
+    .venetian-slide.is-current {
       opacity: 1 !important;
     }
   }
 </style>
 
-<script>
-  function initVenetianCarousel() {
-    const container = document.getElementById('hero-venetian-carousel');
-    const baseImg = document.getElementById('venetian-base-img') as HTMLImageElement;
-    const incomingLayer = document.getElementById('venetian-incoming-layer');
-    const sliceImgs = document.querySelectorAll('.venetian-slice-img') as NodeListOf<HTMLImageElement>;
-    const slices = document.querySelectorAll('.venetian-slice') as NodeListOf<HTMLElement>;
+<script is:inline>
+  (function initVenetianCarousel() {
+    function setupEngine() {
+      const container = document.getElementById('hero-venetian-carousel');
+      if (!container) return;
 
-    if (!container || !baseImg || !incomingLayer || slices.length === 0) return;
+      // Ensure single instance running
+      if (container.__engineRunning) return;
+      container.__engineRunning = true;
 
-    const slides = [
-      { id: 1, src: '/images/hero-slide-1.jpg', alt: 'Modern commercial building with integrated HVAC infrastructure' },
-      { id: 2, src: '/images/hero-slide-2.jpg', alt: 'Contemporary glass commercial and engineering building' },
-      { id: 3, src: '/images/hero-slide-3.jpg', alt: 'Industrial mechanical plant room with HVAC ducting, pumps and engineering infrastructure' }
-    ];
+      const slides = Array.from(container.querySelectorAll('.venetian-slide'));
+      if (slides.length <= 1) return;
 
-    // Preload all 3 slide images into memory
-    slides.forEach((slide) => {
-      const img = new Image();
-      img.src = slide.src;
-    });
+      const DISPLAY_DURATION = 5000; // 5s display duration
+      const TRANSITION_DURATION = 2300; // 2.3s transition duration
 
-    const DISPLAY_DURATION = 5000; // 5 seconds display
-    const TRANSITION_DURATION = 2300; // Exactly 2.3 seconds
-    const SLICE_DELAY_STEP = 55; // 55ms per slice
-    const SLICE_ANIM_DURATION = 1585; // 1585ms + 13*55ms = 2300ms
+      let currentIndex = 0;
+      let isTransitioning = false;
+      let timer = null;
+      let isTabActive = true;
 
-    let currentIndex = 0;
-    let isTransitioning = false;
-    let displayTimer = null;
-    let transitionTimer = null;
-    let isTabVisible = true;
+      const counterEl = document.getElementById('carousel-current-num');
+      const dotButtons = Array.from(container.querySelectorAll('.carousel-dot'));
 
-    function triggerTransition() {
-      if (isTransitioning || !isTabVisible) return;
-      isTransitioning = true;
-
-      const nextIndex = (currentIndex + 1) % slides.length;
-      const nextSlide = slides[nextIndex];
-
-      // Update incoming slice images
-      sliceImgs.forEach((img) => {
-        img.src = nextSlide.src;
-        img.alt = nextSlide.alt;
+      // Preload images
+      ['/images/hero-slide-1.jpg', '/images/hero-slide-2.jpg', '/images/hero-slide-3.jpg'].forEach(function(src) {
+        const img = new Image();
+        img.src = src;
       });
 
-      // Prepare slices and start the staggered Venetian blind wipe
-      slices.forEach((slice, i) => {
-        // Remove animation class first to reset
-        slice.classList.remove('venetian-slice-animating');
-        slice.style.clipPath = 'inset(0 100% 0 0)';
-        slice.style.animationDuration = `${SLICE_ANIM_DURATION}ms`;
-        slice.style.animationDelay = `${i * SLICE_DELAY_STEP}ms`;
-      });
-
-      // Show incoming layer
-      incomingLayer.classList.remove('hidden');
-
-      // Trigger animation on next frame
-      requestAnimationFrame(() => {
-        slices.forEach((slice) => {
-          slice.classList.add('venetian-slice-animating');
-        });
-      });
-
-      // After exactly 2300ms, commit transition
-      if (transitionTimer) clearTimeout(transitionTimer);
-      transitionTimer = setTimeout(() => {
-        // Update base image to the newly revealed slide
-        baseImg.src = nextSlide.src;
-        baseImg.alt = nextSlide.alt;
-
-        // Hide incoming layer and reset slices
-        incomingLayer.classList.add('hidden');
-        slices.forEach((slice) => {
-          slice.classList.remove('venetian-slice-animating');
-          slice.style.clipPath = 'inset(0 100% 0 0)';
-        });
-
-        currentIndex = nextIndex;
-        isTransitioning = false;
-
-        // Schedule next transition in 5 seconds
-        scheduleNextSlide();
-      }, TRANSITION_DURATION);
-    }
-
-    function scheduleNextSlide() {
-      if (displayTimer) clearTimeout(displayTimer);
-      displayTimer = setTimeout(() => {
-        triggerTransition();
-      }, DISPLAY_DURATION);
-    }
-
-    // Tab visibility handling
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        isTabVisible = false;
-        if (displayTimer) clearTimeout(displayTimer);
-      } else {
-        isTabVisible = true;
-        if (!isTransitioning) {
-          scheduleNextSlide();
+      function updateIndicators(index) {
+        if (counterEl) {
+          counterEl.textContent = '0' + (index + 1);
         }
+        dotButtons.forEach(function(btn, i) {
+          const bar = btn.querySelector('.carousel-dot-bar');
+          if (!bar) return;
+          if (i === index) {
+            bar.className = 'carousel-dot-bar block w-6 h-1 rounded-full bg-[#F07842] shadow-[0_0_8px_#F07842] transition-all duration-300';
+          } else {
+            bar.className = 'carousel-dot-bar block w-2 h-1 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300';
+          }
+        });
       }
-    });
 
-    // Start rotation
-    scheduleNextSlide();
-  }
+      function transitionTo(nextIndex) {
+        if (isTransitioning || nextIndex === currentIndex) return;
+        isTransitioning = true;
 
-  // Initialize on load and Astro page transitions
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initVenetianCarousel);
-  } else {
-    initVenetianCarousel();
-  }
-  document.addEventListener('astro:page-load', initVenetianCarousel);
+        const currentSlide = slides[currentIndex];
+        const nextSlide = slides[nextIndex];
+
+        // 1. Reset nextSlide and force reflow so keyframes cleanly restart
+        nextSlide.classList.remove('is-idle', 'is-current', 'is-entering');
+        void nextSlide.offsetWidth;
+
+        // 2. Trigger entering Venetian wipe animation
+        nextSlide.classList.add('is-entering');
+
+        // Update counter & indicators immediately as transition starts
+        updateIndicators(nextIndex);
+
+        console.log('[Al Manar Carousel] 14-Slice Venetian wipe -> Slide ' + (nextIndex + 1) + ' (2300ms)');
+
+        // 3. Complete transition after exactly 2300ms
+        setTimeout(function() {
+          // nextSlide is now the stable base
+          nextSlide.classList.remove('is-entering');
+          nextSlide.classList.add('is-current');
+
+          // currentSlide is now idle
+          currentSlide.classList.remove('is-current', 'is-entering');
+          currentSlide.classList.add('is-idle');
+
+          currentIndex = nextIndex;
+          isTransitioning = false;
+
+          // Schedule next automatic advance
+          scheduleNext();
+        }, TRANSITION_DURATION);
+      }
+
+      function advance() {
+        if (!isTabActive || isTransitioning) return;
+        const nextIndex = (currentIndex + 1) % slides.length;
+        transitionTo(nextIndex);
+      }
+
+      function scheduleNext() {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(advance, DISPLAY_DURATION);
+      }
+
+      // Allow clicking dots to manually change slides
+      dotButtons.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = parseInt(btn.getAttribute('data-slide-target'), 10);
+          if (!isNaN(target) && target !== currentIndex && !isTransitioning) {
+            if (timer) clearTimeout(timer);
+            transitionTo(target);
+          }
+        });
+      });
+
+      // Handle visibility change
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          isTabActive = false;
+          if (timer) clearTimeout(timer);
+        } else {
+          isTabActive = true;
+          if (!isTransitioning) {
+            scheduleNext();
+          }
+        }
+      });
+
+      // Start initial timer
+      scheduleNext();
+      console.log('[Al Manar Carousel] Engine active. 5s hold, 2.3s 14-slice Venetian transition.');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupEngine);
+    } else {
+      setupEngine();
+    }
+
+    // Astro page load support
+    document.addEventListener('astro:page-load', setupEngine);
+  })();
 </script>
