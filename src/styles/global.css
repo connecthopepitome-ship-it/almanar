@@ -41,38 +41,6 @@
 /* =========================================================================
    1. SIGNATURE METALLIC GRADIENT TYPOGRAPHY
    ========================================================================= */
-.text-copper-headline {
-  background: linear-gradient(
-    135deg,
-    #F07842 0%,
-    #FFAB78 40%,
-    #F07842 70%,
-    #D96532 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
-  animation: copperFlow 8s ease-in-out infinite;
-}
-
-@keyframes copperFlow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .text-copper-headline {
-    color: #F07842;
-    -webkit-text-fill-color: #F07842;
-  }
-}
-
 .text-metallic-copper {
   background: linear-gradient(
     135deg,
@@ -180,32 +148,6 @@
   border: 1px solid rgba(241, 184, 62, 0.3);
   box-shadow: 0 10px 25px -5px rgba(241, 184, 62, 0.15), 0 1px 0 0 rgba(255, 255, 255, 0.2) inset;
   color: #F1B83E;
-}
-
-/* Obsidian & Copper Glass Navigation */
-.glass-nav-copper {
-  background: rgba(17, 25, 32, 0.82);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.65), 0 1px 0 0 rgba(255, 255, 255, 0.1) inset;
-}
-
-/* Obsidian & Copper Right Service Panel */
-.glass-panel-copper {
-  background: rgba(23, 35, 45, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.55), 0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-panel-copper:hover {
-  background: rgba(23, 35, 45, 0.88);
-  border-color: rgba(240, 120, 66, 0.55);
-  box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(240, 120, 66, 0.2), 0 1px 0 0 rgba(240, 120, 66, 0.3) inset;
-  transform: translateX(-4px);
 }
 
 /* Warm Ivory Glass Panel (For light sections) */

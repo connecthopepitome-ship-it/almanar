@@ -4,15 +4,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        copper: {
-          DEFAULT: '#F07842',
-          primary: '#F07842',
-          secondary: '#D96532',
-          light: '#FFAB78',
-          dark: '#111920',
-          charcoal: '#17232D',
-          graphite: '#252F38',
-        },
         navy: {
           950: '#0B131C',
           900: '#111D2B', // Midnight navy
