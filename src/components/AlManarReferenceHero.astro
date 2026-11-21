@@ -211,15 +211,15 @@ const infoItems = [
            RIGHT COLUMN: SIX VERTICALLY STACKED TRANSLUCENT SERVICE PANELS
            --------------------------------------------------------------------- -->
       <div class="lg:col-span-5 xl:col-span-4 flex justify-start lg:justify-end">
-        <div class="w-full sm:max-w-xs space-y-2.5 sm:space-y-3">
+        <div class="w-full max-w-[270px] sm:max-w-[280px] space-y-2 sm:space-y-2.5">
           {servicePanels.map((panel, idx) => (
             <a 
               href={panel.href}
-              class="glass-panel-copper rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 flex items-center gap-3.5 group cursor-pointer border border-white/12 hover:border-[#F07842]/60 transition-all duration-300 animate-hero-slide-left"
+              class="glass-panel-copper rounded-2xl px-4 py-2.5 sm:px-4.5 sm:py-3 flex items-center gap-3.5 group cursor-pointer border border-white/10 hover:border-[#F07842]/60 transition-all duration-300 animate-hero-slide-left"
               style={`animation-delay: ${150 + idx * 75}ms;`}
             >
-              <!-- Copper Line Icon -->
-              <div class="p-2 rounded-xl bg-[#111920]/70 border border-white/10 group-hover:border-[#F07842]/40 transition-colors shrink-0">
+              <!-- Copper Line Icon (Matching Image 2 directly without boxed outline) -->
+              <div class="w-6 h-6 flex items-center justify-center shrink-0 text-[#F07842] group-hover:text-[#FFAB78] group-hover:scale-110 transition-all duration-200">
                 {panel.iconName === 'fan' && (
                   <svg class="w-5 h-5 text-[#F07842] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4z" />
@@ -262,12 +262,12 @@ const infoItems = [
                 )}
               </div>
 
-              <!-- Service Title -->
-              <div class="flex flex-col">
-                <span class="font-display font-bold text-[11px] sm:text-xs tracking-wider text-white uppercase leading-tight group-hover:text-[#FFAB78] transition-colors">
+              <!-- Service Title (Clean dual-level typographic hierarchy) -->
+              <div class="flex flex-col justify-center text-left min-w-0">
+                <span class="font-display font-bold text-xs sm:text-[12.5px] tracking-wider text-white uppercase leading-none group-hover:text-[#FFAB78] transition-colors">
                   {panel.titleLine1}
                 </span>
-                <span class="font-display font-bold text-[11px] sm:text-xs tracking-wider text-white uppercase leading-tight group-hover:text-[#FFAB78] transition-colors">
+                <span class="font-mono text-[9.5px] sm:text-[10px] text-slate-300/90 font-medium tracking-widest uppercase leading-none mt-1 group-hover:text-white transition-colors">
                   {panel.titleLine2}
                 </span>
               </div>
