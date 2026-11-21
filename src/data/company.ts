@@ -524,7 +524,7 @@ export const INDUSTRIES: Industry[] = [
       "Optical beam smoke detection and integrated hazard shutdown controls"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "Fire Detection", "Facility Maintenance"],
-    image: "/images/original/electrical-team-abu-dhabi.png"
+    image: "/images/industries/industry-industrial.jpg"
   },
   {
     number: "02",
@@ -543,7 +543,7 @@ export const INDUSTRIES: Industry[] = [
       "Smart DALI architectural lighting controls and sub-distribution panels"
     ],
     servicesOffered: ["MEP Contracting", "IT & Telecom", "Security & Surveillance", "HVAC Systems"],
-    image: "/images/original/Al-Dar-Academies-HQ.jpeg"
+    image: "/images/industries/industry-commercial.jpg"
   },
   {
     number: "03",
@@ -562,7 +562,7 @@ export const INDUSTRIES: Industry[] = [
       "High-resolution dome CCTV cameras and EAS security interfaces"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "Security & Surveillance", "Fire Detection"],
-    image: "/images/original/Puma-Outlet-Showroom.jpeg"
+    image: "/images/industries/industry-retail.jpg"
   },
   {
     number: "04",
@@ -581,7 +581,7 @@ export const INDUSTRIES: Industry[] = [
       "Access-controlled pharmacy and laboratory entry security"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "IT & Telecom", "Security & Surveillance"],
-    image: "/images/original/fire-safety-install-abu-dhabi.png"
+    image: "/images/industries/industry-healthcare.jpg"
   },
   {
     number: "05",
@@ -600,7 +600,7 @@ export const INDUSTRIES: Industry[] = [
       "Dedicated commercial kitchen distribution panels with interlocked gas solenoid shut-off"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "Fire Detection", "Facility Maintenance"],
-    image: "/images/original/Katrina-Sweets.jpeg"
+    image: "/images/industries/industry-food-beverage.jpg"
   },
   {
     number: "06",
@@ -619,7 +619,7 @@ export const INDUSTRIES: Industry[] = [
       "Dedicated on-call maintenance teams stationed for immediate resolution"
     ],
     servicesOffered: ["MEP Contracting", "Facility Maintenance", "Fire Detection", "Security"],
-    image: "/images/original/Yas-Water-World-Miral.jpeg"
+    image: "/images/industries/industry-hospitality.jpg"
   },
   {
     number: "07",
@@ -638,7 +638,7 @@ export const INDUSTRIES: Industry[] = [
       "Protective cage containment for all fire and security devices"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "Fire Detection", "IT & Telecom"],
-    image: "/images/original/Emirates-Judo-and-Wrestling-Federation.jpeg"
+    image: "/images/industries/industry-institutional.jpg"
   },
   {
     number: "08",
@@ -657,7 +657,7 @@ export const INDUSTRIES: Industry[] = [
       "Perimeter IP cameras, video entry stations, and automated gate automation"
     ],
     servicesOffered: ["MEP Contracting", "HVAC Systems", "Security & Surveillance", "Facility Maintenance"],
-    image: "/images/original/City-Challenge.jpeg"
+    image: "/images/industries/industry-residential.jpg"
   }
 ];
 
