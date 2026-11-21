@@ -4,8 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CustomCursor from '../components/CustomCursor.astro';
 import Icon from '../components/Icon.astro';
-import MobileAppDock from '../components/MobileAppDock.astro';
-import ClientPortalModal from '../components/ClientPortalModal.astro';
 import { COMPANY } from '../data/company';
 
 interface Props {
@@ -99,18 +97,18 @@ const pageSchema = schema || defaultLocalBusinessSchema;
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Al Manar Tech" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
     
     <link rel="icon" type="image/png" sizes="192x192" href="/images/original/cropped-Logo-Al-Manar-1-192x192.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/original/cropped-Logo-Al-Manar-1-192x192.png" />
     <link rel="apple-touch-icon" href="/images/original/cropped-Logo-Al-Manar-1-192x192.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Preload Hero Background Images to Prevent Flash/Flicker -->
+    <link rel="preload" as="image" href="/images/hero-slide-1.jpg" />
+    <link rel="preload" as="image" href="/images/hero-slide-2.jpg" />
+    <link rel="preload" as="image" href="/images/hero-slide-3.jpg" />
 
     <!-- SEO Meta Tags -->
     <title>{title} | Al Manar Tech Abu Dhabi</title>
@@ -144,7 +142,7 @@ const pageSchema = schema || defaultLocalBusinessSchema;
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </head>
-  <body class="min-h-screen flex flex-col bg-navy-950 text-white antialiased selection:bg-amber-brand selection:text-navy-950 pb-20 lg:pb-0">
+  <body class="min-h-screen flex flex-col bg-navy-950 text-white antialiased selection:bg-amber-brand selection:text-navy-950">
     <!-- Top Global Animated Glowing Scroll Progress Bar -->
     <div id="scroll-progress-bar" aria-hidden="true"></div>
 
@@ -157,21 +155,15 @@ const pageSchema = schema || defaultLocalBusinessSchema;
 
     <Footer />
 
-    <!-- Floating Actions (Scroll to Top & Mobile App Dock) -->
+    <!-- Floating Actions (Scroll to Top) -->
     <button 
       id="scroll-to-top" 
       type="button" 
-      class="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-30 p-2.5 sm:p-3 rounded-full bg-navy-900/90 text-amber-brand border border-navy-700 shadow-xl opacity-0 invisible translate-y-3 transition-all duration-300 hover:bg-amber-brand hover:text-navy-950 focus:outline-none focus:ring-2 focus:ring-amber-brand"
+      class="fixed bottom-6 right-4 sm:right-6 z-30 p-2.5 sm:p-3 rounded-full bg-navy-900/90 text-amber-brand border border-navy-700 shadow-xl opacity-0 invisible translate-y-3 transition-all duration-300 hover:bg-amber-brand hover:text-navy-950 focus:outline-none focus:ring-2 focus:ring-amber-brand"
       aria-label="Scroll to top of page"
     >
       <Icon name="arrow-up" class="w-4 h-4 sm:w-5 sm:h-5" />
     </button>
-
-    <!-- Native Mobile Web App Floating Dock -->
-    <MobileAppDock currentPath={Astro.url.pathname} />
-
-    <!-- Client & Tender Portal Modal Sheet -->
-    <ClientPortalModal />
 
     <!-- Interactive script: scroll to top & reveal observer -->
     <script src="../scripts/scrollEngine.ts"></script>

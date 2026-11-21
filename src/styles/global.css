@@ -17,6 +17,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: #111D2B;
     background-color: #111D2B;

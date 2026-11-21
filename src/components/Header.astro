@@ -30,17 +30,17 @@ const navLinks = [
 ];
 ---
 
-<!-- Floating Architectural Glass Navigation (Strict Reference Match to Image 2) -->
-<div class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-2 transition-all duration-300 pointer-events-none" id="header-wrapper">
+<!-- Floating Architectural Glass Navigation -->
+<div class="sticky top-0 z-50 w-full px-2.5 sm:px-6 lg:px-8 pt-2.5 sm:pt-4 pb-2 transition-all duration-300 pointer-events-none" id="header-wrapper">
   <header 
     id="main-glass-header"
-    class="max-w-7xl mx-auto glass-nav-copper rounded-2xl sm:rounded-3xl pointer-events-auto transition-all duration-300"
+    class="max-w-7xl mx-auto glass-nav-copper rounded-2xl sm:rounded-3xl pointer-events-auto transition-all duration-300 border border-white/10 shadow-lg"
   >
-    <div class="px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 sm:h-20 transition-all duration-300" id="header-inner">
+    <div class="px-3 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-20 transition-all duration-300" id="header-inner">
       
-      <!-- Brand Identity (Strict Single-Line Header) -->
-      <a href="/" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F07842] rounded-xl p-1 shrink-0 whitespace-nowrap" aria-label="Al Manar Tech Home">
-        <div class="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-xl p-1.5 shadow-sm flex items-center justify-center border border-white/10 group-hover:border-[#F07842]/60 transition-colors shrink-0">
+      <!-- Brand Identity (Left: Logo, Company Name, Descriptor) -->
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F07842] rounded-xl p-0.5 shrink-0 whitespace-nowrap" aria-label="Al Manar Tech Home">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 bg-white rounded-xl p-1 sm:p-1.5 shadow-sm flex items-center justify-center border border-white/10 group-hover:border-[#F07842]/60 transition-colors shrink-0">
           <img 
             src="/images/original/Logo-Al-Manar-1-1024x1024.png" 
             alt="Al Manar Tech Official Logo" 
@@ -50,10 +50,10 @@ const navLinks = [
           />
         </div>
         <div class="flex flex-col whitespace-nowrap">
-          <span class="text-base sm:text-lg font-extrabold tracking-tight text-white font-display leading-tight group-hover:text-[#F07842] transition-colors whitespace-nowrap">
+          <span class="text-sm sm:text-lg font-extrabold tracking-tight text-white font-display leading-tight group-hover:text-[#F07842] transition-colors whitespace-nowrap">
             AL MANAR <span class="text-[#F07842]">TECH</span>
           </span>
-          <span class="text-[9px] font-sans tracking-widest uppercase text-[#A8B0BA] font-semibold whitespace-nowrap">
+          <span class="text-[8px] sm:text-[9px] font-sans tracking-widest uppercase text-[#A8B0BA] font-semibold whitespace-nowrap">
             INFRASTRUCTURE CONTRACTING
           </span>
         </div>
@@ -133,18 +133,8 @@ const navLinks = [
         })}
       </nav>
 
-      <!-- Desktop Header Actions (Strict Single-Row • Unified Font) -->
+      <!-- Desktop Header Actions (Strict Single-Row • DISCUSS PROJECT CTA) -->
       <div class="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0 whitespace-nowrap">
-        <button 
-          type="button"
-          data-open-portal="true"
-          data-portal-mode="auth"
-          class="inline-flex items-center gap-1.5 px-3 xl:px-3.5 py-2.5 rounded-xl text-xs xl:text-[13px] font-display font-semibold text-slate-200 hover:text-white border border-white/12 hover:border-[#F07842]/50 hover:bg-white/5 transition-all cursor-pointer whitespace-nowrap shrink-0"
-        >
-          <Icon name="shield-check" class="w-4 h-4 text-[#F07842] shrink-0" />
-          <span class="whitespace-nowrap">Client Portal</span>
-        </button>
-
         <a 
           href="/contact" 
           data-magnetic="true"
@@ -155,23 +145,12 @@ const navLinks = [
         </a>
       </div>
 
-      <!-- Mobile Action Bar & Menu Toggle -->
-      <div class="flex items-center gap-1.5 sm:gap-2 lg:hidden">
-        <button 
-          type="button" 
-          data-open-portal="true"
-          data-portal-mode="track"
-          class="px-2.5 py-1.5 rounded-xl bg-[#F07842]/10 border border-[#F07842]/30 text-[#F07842] text-[11px] font-mono font-bold flex items-center gap-1 cursor-pointer active:scale-95 transition-transform"
-          aria-label="Open Client Portal"
-        >
-          <Icon name="award" class="w-3.5 h-3.5" />
-          <span>Portal</span>
-        </button>
-
+      <!-- Mobile Action Controls (Right: Direct Call + 44px Touch Target Hamburger Menu) -->
+      <div class="flex items-center gap-2 lg:hidden">
         <a 
           href="tel:025829700" 
-          class="p-2 rounded-xl bg-[#17232D]/80 text-emerald-400 border border-white/10 active:scale-95 transition-transform"
-          aria-label="Call Al Manar Tech"
+          class="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-[#17232D]/90 text-emerald-400 border border-white/10 hover:border-emerald-500/40 active:scale-95 transition-all"
+          aria-label="Call Al Manar Tech: 02-5829700"
         >
           <Icon name="phone" class="w-4 h-4" />
         </a>
@@ -179,8 +158,8 @@ const navLinks = [
         <button 
           id="mobile-menu-toggle"
           type="button" 
-          class="p-2 rounded-xl bg-[#17232D]/80 text-slate-200 border border-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#F07842] active:scale-95 transition-transform"
-          aria-label="Toggle Mobile Navigation Menu"
+          class="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-[#17232D]/90 text-slate-200 border border-white/10 hover:text-white hover:border-[#F07842]/40 focus:outline-none focus:ring-2 focus:ring-[#F07842] active:scale-95 transition-all"
+          aria-label="Toggle Navigation Menu"
           aria-expanded="false"
         >
           <Icon name="menu" class="w-5 h-5 block menu-open-icon" />
@@ -191,29 +170,7 @@ const navLinks = [
     </div>
 
     <!-- Mobile Drawer Navigation -->
-    <div id="mobile-menu" class="lg:hidden hidden bg-[#141D26]/98 backdrop-blur-2xl rounded-b-3xl px-5 pt-3 pb-8 max-h-[85vh] overflow-y-auto border-t border-white/10 shadow-2xl">
-      
-      <!-- Quick Portal Access Card (App Style) -->
-      <div class="mb-4 p-3.5 rounded-2xl bg-[#1B2733] border border-[#F07842]/30 flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-[#F07842]/15 text-[#F07842] flex items-center justify-center">
-            <Icon name="shield-check" class="w-4 h-4" />
-          </div>
-          <div>
-            <span class="font-display text-xs font-bold text-white block">Client &amp; Tender Portal</span>
-            <span class="font-mono text-[10px] text-slate-400 block">Track Live Submittals &amp; Login</span>
-          </div>
-        </div>
-        <button 
-          type="button" 
-          data-open-portal="true" 
-          data-portal-mode="track"
-          class="px-3 py-1.5 rounded-lg bg-[#F07842] text-[#111920] font-display text-[11px] font-bold uppercase tracking-wider active:scale-95 transition-transform"
-        >
-          Open
-        </button>
-      </div>
-
+    <div id="mobile-menu" class="lg:hidden hidden bg-[#141D26]/98 backdrop-blur-2xl rounded-b-3xl px-4 sm:px-5 pt-3 pb-6 max-h-[85vh] overflow-y-auto border-t border-white/10 shadow-2xl">
       <div class="space-y-1 font-display">
         {navLinks.map((link) => {
           const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
@@ -223,7 +180,7 @@ const navLinks = [
               <div class="py-2 border-b border-white/5">
                 <div class="flex items-center justify-between px-2 py-2 text-white font-bold text-base">
                   <span>{link.name}</span>
-                  <a href={link.href} class="font-mono text-xs text-[#F07842]">Overview →</a>
+                  <a href={link.href} class="font-mono text-xs text-[#F07842] font-semibold">Overview →</a>
                 </div>
                 <div class="grid grid-cols-2 gap-1.5 p-1 font-sans">
                   {link.children?.map((child) => (
@@ -253,7 +210,7 @@ const navLinks = [
         })}
       </div>
 
-      <!-- Mobile Drawer Contact & Quick Actions -->
+      <!-- Mobile Drawer Contact & Actions -->
       <div class="mt-5 pt-4 border-t border-white/10 space-y-3 font-mono text-xs">
         <div class="grid grid-cols-2 gap-2">
           <a 
@@ -275,11 +232,13 @@ const navLinks = [
           href="/contact" 
           class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-display text-xs font-bold uppercase tracking-wider bg-[#F07842] text-[#111920] hover:bg-[#D96532] shadow-lg shadow-[#F07842]/20 active:scale-95 transition-transform"
         >
-          <span>SUBMIT PROJECT SPECIFICATIONS</span>
+          <span>DISCUSS YOUR PROJECT</span>
           <Icon name="arrow-right" class="w-4 h-4" />
         </a>
       </div>
     </div>
+  </header>
+</div>
   </header>
 </div>
 
