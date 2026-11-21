@@ -8,249 +8,174 @@ interface Props {
 
 const { showFilters = true } = Astro.props;
 
+// Authentic UAE Project Categories
 const categories = [
-  { id: 'all', label: 'All Projects' },
-  { id: 'commercial', label: 'Commercial & Corporate' },
-  { id: 'retail', label: 'Retail & Showrooms' },
-  { id: 'food-beverage', label: 'Food & Beverage' },
-  { id: 'hospitality', label: 'Hospitality & Leisure' },
-  { id: 'institutional', label: 'Institutional & Sports' },
+  { id: 'all', label: 'All Projects', count: VERIFIED_PROJECTS.length },
+  { id: 'commercial', label: 'Commercial & Corporate', count: VERIFIED_PROJECTS.filter(p => p.categorySlug === 'commercial').length },
+  { id: 'retail', label: 'Retail & Showrooms', count: VERIFIED_PROJECTS.filter(p => p.categorySlug === 'retail').length },
+  { id: 'food-beverage', label: 'Food & Beverage', count: VERIFIED_PROJECTS.filter(p => p.categorySlug === 'food-beverage').length },
+  { id: 'hospitality', label: 'Hospitality & Leisure', count: VERIFIED_PROJECTS.filter(p => p.categorySlug === 'hospitality').length },
+  { id: 'institutional', label: 'Institutional & Sports', count: VERIFIED_PROJECTS.filter(p => p.categorySlug === 'institutional').length },
 ];
-
-const featuredProject = VERIFIED_PROJECTS.find(p => p.featured) || VERIFIED_PROJECTS[0];
-const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id);
 ---
 
-<div class="projects-editorial-root space-y-10">
+<div class="projects-editorial-root space-y-12">
   
   {showFilters && (
-    <div class="space-y-6">
-      <!-- Search Input & Category Filters Bar -->
-      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-        
-        <!-- Instant Search Box -->
-        <div class="relative w-full md:max-w-xs">
-          <Icon name="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <input 
-            type="text" 
-            id="project-search-input" 
-            placeholder="Search projects or clients..." 
-            aria-label="Search verified projects by title, client, or discipline"
-            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#252A30] border border-white/10 text-white placeholder-slate-400 text-xs font-mono focus:outline-none focus:border-[#C58461] transition-colors"
-          />
-        </div>
-
-        <!-- Technical Category Filter Buttons -->
-        <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Project Categories">
-          {categories.map((cat, idx) => (
-            <button
-              type="button"
-              data-category={cat.id}
-              class={`proj-filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border ${
-                idx === 0 
-                  ? 'bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber' 
-                  : 'bg-[#252A30] text-slate-300 border-white/10 hover:border-[#C58461]/60 hover:text-white'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
+    <!-- Interactive Search and Filter Command Toolbar -->
+    <div class="space-y-6 max-w-5xl mx-auto">
+      
+      <!-- Top: Quick Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-2.5" role="tablist" aria-label="Project Categories">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            data-category={cat.id}
+            class={`proj-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all duration-300 border flex items-center gap-2 cursor-pointer ${
+              idx === 0 
+                ? 'is-active bg-[#F07842] text-[#111920] border-[#F07842] shadow-lg shadow-[#F07842]/20 font-bold' 
+                : 'bg-[#17232D] text-slate-300 border-white/10 hover:border-[#F07842]/60 hover:text-white hover:bg-[#1E2D3A]'
+            }`}
+          >
+            <span>{cat.label}</span>
+            <span class={`filter-count px-1.5 py-0.5 rounded text-[10px] font-mono transition-colors ${
+              idx === 0 ? 'bg-[#111920]/20 text-[#111920]' : 'bg-white/10 text-slate-400'
+            }`}>
+              {cat.count}
+            </span>
+          </button>
+        ))}
       </div>
+
+      <!-- Bottom: Search Input with Ambient Glow -->
+      <div class="max-w-md mx-auto relative">
+        <Icon name="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <input 
+          type="text" 
+          id="project-search-input" 
+          placeholder="Filter by project name, client, or technical sector..." 
+          aria-label="Search verified projects by title, client, or discipline"
+          class="w-full pl-11 pr-4 py-3 rounded-xl bg-[#17232D]/90 border border-white/10 text-white placeholder-slate-400 text-xs font-mono focus:outline-none focus:border-[#F07842] focus:ring-1 focus:ring-[#F07842] shadow-lg shadow-black/20 transition-all font-sans"
+        />
+        <div id="search-clear-btn" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white cursor-pointer text-xs font-mono">
+          ✕
+        </div>
+      </div>
+
     </div>
   )}
 
-  <!-- Asymmetrical Editorial Showcase (Lead Featured Project + 2 Offset Cards) -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" id="featured-editorial-strip">
-    
-    <!-- 1 Large Featured Project (7 Cols) -->
-    <article 
-      class="lg:col-span-7 editorial-project-card group bg-[#252A30]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#C58461]/60 shadow-glass-floating relative flex flex-col justify-between transition-all duration-300"
-      data-cat={featuredProject.categorySlug}
-      data-title={featuredProject.title.toLowerCase()}
-      data-client={featuredProject.client.toLowerCase()}
-      data-sectors={featuredProject.sectors.join(' ').toLowerCase()}
-      data-cursor="view"
-    >
-      <div class="relative aspect-[16/10] overflow-hidden bg-[#17191D] crosshair-corner">
-        <img 
-          src={featuredProject.image} 
-          alt={`${featuredProject.title} - ${featuredProject.client}`}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          loading="lazy"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#17191D] via-[#17191D]/30 to-transparent"></div>
-
-        <!-- Glass Telemetry Tags -->
-        <div class="absolute top-4 left-4 flex items-center gap-2">
-          <span class="px-3 py-1 rounded-xl bg-[#17191D]/80 border border-[#B56E4B]/40 text-[#FFAB78] font-mono text-[10px] font-bold">
-            FEATURED INSTALLATION
-          </span>
-          <span class="px-3 py-1 rounded-xl bg-[#17191D]/80 border border-white/10 text-slate-200 font-mono text-[10px]">
-            {featuredProject.location}
-          </span>
-        </div>
-
-        <div class="absolute bottom-4 left-4 right-4 text-white">
-          <span class="font-mono text-xs uppercase tracking-wider text-[#FFAB78] block mb-1">
-            {featuredProject.category}
-          </span>
-          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-[#FFAB78] transition-colors">
-            {featuredProject.title}
-          </h3>
-        </div>
-      </div>
-
-      <div class="p-6 sm:p-8 space-y-4 bg-[#17191D]/90 flex-1 flex flex-col justify-between">
-        <div class="space-y-3">
-          <div class="flex items-center justify-between font-mono text-xs text-slate-400 pb-3 border-b border-white/5">
-            <span>CLIENT: <strong class="text-white">{featuredProject.client}</strong></span>
-            <span class="text-emerald-400 font-semibold flex items-center gap-1">
-              <Icon name="check-circle" class="w-3.5 h-3.5" />
-              Verified Execution
-            </span>
-          </div>
-          <p class="text-sm text-slate-300 leading-relaxed font-sans">
-            {featuredProject.scopeSummary}
-          </p>
-        </div>
-
-        <div class="pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
-            {featuredProject.sectors.map((sec) => (
-              <span class="px-2.5 py-1 rounded-lg bg-[#252A30] text-slate-300 border border-white/10">{sec}</span>
-            ))}
-          </div>
-          <a 
-            href={`/projects/${featuredProject.id}`} 
-            class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#F07842] hover:text-white transition-colors group/link"
-          >
-            <span>View Full Case Study</span>
-            <Icon name="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2 Smaller Alternating Project Cards (5 Cols) -->
-    <div class="lg:col-span-5 flex flex-col gap-8 justify-between">
-      {otherProjects.slice(0, 2).map((proj) => (
-        <article 
-          class="editorial-project-card group bg-[#252A30]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#C58461]/60 shadow-glass-navy flex flex-col justify-between transition-all duration-300"
-          data-cat={proj.categorySlug}
-          data-title={proj.title.toLowerCase()}
-          data-client={proj.client.toLowerCase()}
-          data-sectors={proj.sectors.join(' ').toLowerCase()}
-          data-cursor="view"
-        >
-          <div class="relative aspect-[16/9] overflow-hidden bg-[#17191D]">
-            <img 
-              src={proj.image} 
-              alt={`${proj.title} - ${proj.client}`}
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#17191D] via-[#17191D]/30 to-transparent"></div>
-            
-            <div class="absolute bottom-3 left-4 right-4">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#FFAB78] block">
-                {proj.category}
-              </span>
-              <h4 class="font-display text-lg font-bold text-white group-hover:text-[#FFAB78] transition-colors leading-snug">
-                {proj.title}
-              </h4>
-            </div>
-          </div>
-
-          <div class="p-5 space-y-3 bg-[#17191D]/90 flex-1 flex flex-col justify-between">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-                <span class="truncate">Client: <strong class="text-white">{proj.client}</strong></span>
-                <span class="shrink-0">{proj.location}</span>
-              </div>
-              <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed font-sans">
-                {proj.scopeSummary}
-              </p>
-            </div>
-
-            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
-              <span class="text-slate-400">{proj.location}</span>
-              <a 
-                href={`/projects/${proj.id}`} 
-                class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1 transition-colors group/sublink"
-              >
-                <span>Case Study</span>
-                <Icon name="arrow-right" class="w-3.5 h-3.5 group-sublink:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-
-  </div>
-
-  <!-- Additional Projects Grid for Full Directory (Filtered) -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4" id="all-editorial-grid">
-    {otherProjects.slice(2).map((proj) => (
+  <!-- Uniform Responsive Project Directory Grid (Real Authentic Images Preserved) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch" id="all-editorial-grid">
+    {VERIFIED_PROJECTS.map((proj, idx) => (
       <article 
-        class="editorial-project-card group bg-[#252A30]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#C58461]/60 shadow-glass-navy flex flex-col justify-between transition-all duration-300"
+        class="editorial-project-card group bg-[#162029]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#F07842]/60 shadow-xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#F07842]/10"
         data-cat={proj.categorySlug}
         data-title={proj.title.toLowerCase()}
         data-client={proj.client.toLowerCase()}
         data-sectors={proj.sectors.join(' ').toLowerCase()}
+        data-location={proj.location.toLowerCase()}
         data-cursor="view"
       >
-        <div class="relative aspect-[16/10] overflow-hidden bg-[#17191D]">
+        <!-- Authentic Image Photographic Frame with Consistent 16:10 Ratio -->
+        <a href={`/projects/${proj.id}`} class="block relative aspect-[16/10] overflow-hidden bg-navy-950 crosshair-corner cursor-pointer">
           <img 
             src={proj.image} 
-            alt={`${proj.title} - ${proj.client}`}
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            alt={`${proj.title} - ${proj.client} Project by Al Manar Tech in Abu Dhabi`}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#17191D] via-[#17191D]/20 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#111920] via-transparent to-[#111920]/40 pointer-events-none"></div>
+
+          <!-- Top Telemetry Badges -->
+          <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between text-[10px] font-mono pointer-events-none">
+            <span class="px-2.5 py-1 rounded-lg bg-[#111920]/80 backdrop-blur-md border border-[#F07842]/40 text-[#FFAB78] font-bold uppercase tracking-wider">
+              {proj.category}
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-[#111920]/80 backdrop-blur-md border border-white/10 text-slate-300 font-semibold flex items-center gap-1.5">
+              <Icon name="map-pin" class="w-3 h-3 text-[#F07842]" />
+              <span>{proj.location}</span>
+            </span>
+          </div>
+
+          <!-- Bottom Status Pill -->
+          <div class="absolute bottom-3 left-3.5 pointer-events-none">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#111920]/90 backdrop-blur-md border border-emerald-500/30 text-[10px] font-mono text-emerald-400 font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>VERIFIED CONTRACT EXECUTION</span>
+            </span>
+          </div>
+        </a>
+
+        <!-- Descriptive Metadata Body with Proper Text Alignment & Spacing -->
+        <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4 bg-[#162029]">
           
-          <div class="absolute top-3 left-3 bg-[#17191D]/80 text-[#FFAB78] text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-lg border border-[#B56E4B]/40">
-            {proj.category}
-          </div>
-
-          <div class="absolute bottom-3 left-3 right-3">
-            <h4 class="font-display text-base font-bold text-white group-hover:text-[#FFAB78] transition-colors leading-snug">
-              {proj.title}
-            </h4>
-          </div>
-        </div>
-
-        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-[#17191D]/90">
-          <div>
-            <div class="text-xs font-mono text-slate-400 mb-1">
-              Client: <strong class="text-white">{proj.client}</strong>
+          <div class="space-y-2.5">
+            <!-- Client & Reference Strip -->
+            <div class="flex items-center justify-between font-mono text-xs text-slate-400 pb-2.5 border-b border-white/5">
+              <span>CLIENT: <strong class="text-white font-bold ml-1">{proj.client}</strong></span>
+              <span class="text-[#FFAB78] text-[11px] font-semibold">{proj.completionYear || 'COMPLETED'}</span>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2 font-sans">
+
+            <!-- Project Title -->
+            <h3 class="font-display text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug group-hover:text-[#FFAB78] transition-colors pt-1">
+              <a href={`/projects/${proj.id}`} class="hover:underline">
+                {proj.title}
+              </a>
+            </h3>
+
+            <!-- Scope Summary Description -->
+            <p class="font-sans text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
               {proj.scopeSummary}
             </p>
           </div>
 
-          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
-            <span class="text-slate-400">{proj.location}</span>
+          <!-- Sectors Deployed Badges -->
+          <div class="pt-2">
+            <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+              {proj.sectors.map((sec) => (
+                <span class="px-2.5 py-1 rounded-md bg-[#111920] text-slate-300 border border-white/10">
+                  {sec}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Card Bottom Action Link -->
+          <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 font-medium">UAE Civil Defence &amp; ADDC</span>
             <a 
               href={`/projects/${proj.id}`} 
-              class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1 transition-colors group/link"
+              class="inline-flex items-center gap-1.5 font-bold text-[#F07842] group-hover:text-white transition-colors group/link cursor-pointer"
             >
-              <span>View Case Study</span>
+              <span>Case Study</span>
               <Icon name="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
             </a>
           </div>
+
         </div>
       </article>
     ))}
   </div>
 
   <!-- Empty Search Results Message (Hidden by default) -->
-  <div id="no-projects-found" class="hidden text-center py-16 px-4 bg-[#252A30]/50 rounded-3xl border border-white/10">
-    <p class="font-display text-lg font-bold text-white mb-2">No Matching Projects Found</p>
-    <p class="text-xs font-mono text-slate-400">Try adjusting your category filter or search keywords.</p>
+  <div id="no-projects-found" class="hidden text-center py-20 px-6 bg-[#162029]/80 rounded-3xl border border-white/10 max-w-lg mx-auto space-y-4">
+    <div class="w-12 h-12 rounded-full bg-[#111920] border border-[#F07842]/30 flex items-center justify-center mx-auto text-[#F07842]">
+      <Icon name="search" class="w-6 h-6" />
+    </div>
+    <div class="space-y-1">
+      <p class="font-display text-xl font-bold text-white">No Matching Projects Found</p>
+      <p class="text-xs font-mono text-slate-400 leading-relaxed">
+        Try adjusting your search terms or select "All Projects" to view the full verified portfolio.
+      </p>
+    </div>
+    <button 
+      id="reset-filter-btn"
+      type="button" 
+      class="px-5 py-2.5 rounded-xl bg-[#F07842] text-[#111920] text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#D96532] transition-colors cursor-pointer"
+    >
+      Reset Filters
+    </button>
   </div>
 
 </div>
@@ -262,6 +187,8 @@ const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id)
   const filterBtns = document.querySelectorAll('.proj-filter-btn');
   const allCards = document.querySelectorAll('.editorial-project-card');
   const searchInput = document.getElementById('project-search-input') as HTMLInputElement | null;
+  const clearBtn = document.getElementById('search-clear-btn');
+  const resetBtn = document.getElementById('reset-filter-btn');
   const noProjectsMsg = document.getElementById('no-projects-found');
 
   function updateFilteredCards() {
@@ -272,12 +199,14 @@ const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id)
       const cardTitle = card.getAttribute('data-title') || '';
       const cardClient = card.getAttribute('data-client') || '';
       const cardSectors = card.getAttribute('data-sectors') || '';
+      const cardLocation = card.getAttribute('data-location') || '';
 
       const matchesCat = (activeCategory === 'all' || cardCat === activeCategory);
       const matchesSearch = !activeSearch || (
         cardTitle.includes(activeSearch) || 
         cardClient.includes(activeSearch) || 
-        cardSectors.includes(activeSearch)
+        cardSectors.includes(activeSearch) ||
+        cardLocation.includes(activeSearch)
       );
 
       if (matchesCat && matchesSearch) {
@@ -295,27 +224,68 @@ const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id)
         noProjectsMsg.classList.add('hidden');
       }
     }
+
+    if (clearBtn) {
+      if (activeSearch.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+    }
   }
 
-  if (filterBtns.length > 0 && allCards.length > 0) {
-    filterBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach((b) => {
-          b.className = 'proj-filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border bg-[#252A30] text-slate-300 border-white/10 hover:border-[#C58461]/60 hover:text-white';
-        });
+  function setCategory(catId: string) {
+    activeCategory = catId;
 
-        btn.className = 'proj-filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber';
+    filterBtns.forEach((b) => {
+      const bCat = b.getAttribute('data-category');
+      const countBadge = b.querySelector('.filter-count');
+      const isSelected = bCat === catId;
 
-        activeCategory = btn.getAttribute('data-category') || 'all';
-        updateFilteredCards();
-      });
+      if (isSelected) {
+        b.className = 'proj-filter-btn is-active px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all duration-300 border flex items-center gap-2 cursor-pointer bg-[#F07842] text-[#111920] border-[#F07842] shadow-lg shadow-[#F07842]/20 font-bold';
+        if (countBadge) {
+          countBadge.className = 'filter-count px-1.5 py-0.5 rounded text-[10px] font-mono transition-colors bg-[#111920]/20 text-[#111920] font-bold';
+        }
+      } else {
+        b.className = 'proj-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all duration-300 border flex items-center gap-2 cursor-pointer bg-[#17232D] text-slate-300 border-white/10 hover:border-[#F07842]/60 hover:text-white hover:bg-[#1E2D3A]';
+        if (countBadge) {
+          countBadge.className = 'filter-count px-1.5 py-0.5 rounded text-[10px] font-mono transition-colors bg-white/10 text-slate-400';
+        }
+      }
     });
+
+    updateFilteredCards();
   }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-category') || 'all';
+      setCategory(cat);
+    });
+  });
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       activeSearch = (e.target as HTMLInputElement).value.toLowerCase().trim();
       updateFilteredCards();
+    });
+  }
+
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      activeSearch = '';
+      updateFilteredCards();
+      searchInput.focus();
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      activeSearch = '';
+      setCategory('all');
     });
   }
 </script>
