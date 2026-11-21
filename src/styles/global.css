@@ -280,6 +280,7 @@
 }
 
 .hud-grid-ivory {
+  background-color: #F4F1EA;
   background-size: 56px 56px;
   background-image: 
     linear-gradient(to right, rgba(17, 29, 43, 0.04) 1px, transparent 1px),
