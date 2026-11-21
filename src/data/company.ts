@@ -106,7 +106,7 @@ export const SERVICES: ServiceDivision[] = [
     tagline: "Precision Electrical, Mechanical, and Plumbing Engineering for Abu Dhabi's Built Environment",
     description: "As an ADDC-approved electromechanical contractor, Al Manar Tech engineers and delivers turnkey MEP installations. From high-capacity power distribution systems and LV panels to sanitary engineering and industrial containment, we ensure code-compliant, energy-efficient operational infrastructure.",
     icon: "zap",
-    heroImage: "/images/original/electrical-team-abu-dhabi.png",
+    heroImage: "/images/services/service-mep-contracting.jpg",
     specs: [
       { label: "Voltage Level", value: "LV / 415V 3-Phase" },
       { label: "Authority", value: "ADDC Approved" },
@@ -179,7 +179,7 @@ export const SERVICES: ServiceDivision[] = [
     tagline: "High-Performance Structured Cabling, Fiber Networks, and Data Center Infrastructure",
     description: "Reliable digital connectivity forms the nervous system of modern business operations. Al Manar Tech designs, implements, and certifies high-performance copper and optical fiber structured cabling, enterprise server rooms, PABX systems, and unified communications for enterprise resilience.",
     icon: "network",
-    heroImage: "/images/original/Al-Dar-Academies-HQ.jpeg",
+    heroImage: "/images/services/service-it-telecom.jpg",
     specs: [
       { label: "Cabling Tier", value: "Cat6A / Cat7 / OS2 / OM4" },
       { label: "Certification", value: "Fluke DSX Tested" },
@@ -246,7 +246,7 @@ export const SERVICES: ServiceDivision[] = [
     tagline: "Certified Fire Hazard Detection and Life Safety Systems Aligned with UAE Civil Defence Requirements",
     description: "Protecting lives, structural assets, and operational continuity requires early, reliable fire hazard detection. Al Manar Tech installs advanced analogue addressable fire alarm systems, smoke evacuation interface modules, emergency voice evacuation, and central monitoring compliant with UAE Fire and Life Safety Codes.",
     icon: "shield-alert",
-    heroImage: "/images/original/fire-safety-install-abu-dhabi.png",
+    heroImage: "/images/services/service-fire-detection.jpg",
     specs: [
       { label: "System Protocol", value: "Analogue Addressable" },
       { label: "Regulation", value: "UAE Civil Defence Code" },
@@ -313,7 +313,7 @@ export const SERVICES: ServiceDivision[] = [
     tagline: "Industrial and Commercial Thermal Comfort, Air Quality, and Energy-Efficient Cooling",
     description: "Given the demanding climatic conditions of Abu Dhabi and Al Ain, robust HVAC systems are vital for occupant comfort, product integrity, and energy sustainability. Al Manar Tech provides complete HVAC engineering, from chilled water networks and VRF systems to specialized ventilation and precision climate control.",
     icon: "fan",
-    heroImage: "/images/original/Puma-Outlet-Showroom.jpeg",
+    heroImage: "/images/services/service-hvac.jpg",
     specs: [
       { label: "Cooling Medium", value: "Chilled Water / VRF / DX" },
       { label: "Air Balancing", value: "Certified TAB Protocols" },
@@ -380,7 +380,7 @@ export const SERVICES: ServiceDivision[] = [
     tagline: "Protocolled IP-CCTV, Access Control, and Physical Perimeter Security Solutions",
     description: "Operational continuity and asset protection require dependable physical security. Al Manar Tech installs compliant IP video surveillance, biometric access control, automated vehicle barrier systems, and centralized security monitoring infrastructure tailored to Abu Dhabi facility standards.",
     icon: "camera",
-    heroImage: "/images/original/Emirates-NBD-Bank.jpeg",
+    heroImage: "/images/services/service-security.jpg",
     specs: [
       { label: "Video Standards", value: "Ultra-HD IP / ONVIF Compliant" },
       { label: "Storage Archival", value: "RAID NVR / SAN Storage" },
@@ -447,7 +447,7 @@ export const SERVICES: ServiceDivision[] = [
     tagline: "Planned Preventive Maintenance (PPM) and Rapid Breakdown Response for Infrastructure Longevity",
     description: "Installed infrastructure represents a major capital investment that demands disciplined ongoing care. Al Manar Tech provides structured Annual Maintenance Contracts (AMC), predictive thermal thermography, 24/7 on-call emergency response, and scheduled servicing across electromechanical and HVAC assets.",
     icon: "wrench",
-    heroImage: "/images/original/Yas-Water-World-Miral.jpeg",
+    heroImage: "/images/services/service-facility-maintenance.jpg",
     specs: [
       { label: "Response Time", value: "Guaranteed SLA / 24/7" },
       { label: "Inspections", value: "FLIR Thermal Thermography" },
