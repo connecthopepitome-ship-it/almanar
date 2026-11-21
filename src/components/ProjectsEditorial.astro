@@ -25,13 +25,13 @@ const categories = [
     <!-- Interactive Search and Filter Command Toolbar -->
     <div class="space-y-6 max-w-5xl mx-auto">
       
-      <!-- Top: Quick Filter Buttons -->
-      <div class="flex flex-wrap items-center justify-center gap-2.5" role="tablist" aria-label="Project Categories">
+      <!-- Top: Quick Filter Buttons (Swipeable on mobile, Centered on desktop) -->
+      <div class="flex flex-nowrap sm:flex-wrap items-center sm:justify-center gap-2 overflow-x-auto no-scrollbar pb-2 sm:pb-0 px-2 sm:px-0 -mx-4 sm:mx-0 px-4 scroll-smooth" role="tablist" aria-label="Project Categories">
         {categories.map((cat, idx) => (
           <button
             type="button"
             data-category={cat.id}
-            class={`proj-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all duration-300 border flex items-center gap-2 cursor-pointer ${
+            class={`proj-filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all duration-300 border flex items-center gap-2 cursor-pointer active:scale-95 ${
               idx === 0 
                 ? 'is-active bg-[#F07842] text-[#111920] border-[#F07842] shadow-lg shadow-[#F07842]/20 font-bold' 
                 : 'bg-[#17232D] text-slate-300 border-white/10 hover:border-[#F07842]/60 hover:text-white hover:bg-[#1E2D3A]'
