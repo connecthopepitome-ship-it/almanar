@@ -8,9 +8,6 @@ interface Props {
 
 const { showFilters = true } = Astro.props;
 
-const featuredProject = VERIFIED_PROJECTS.find(p => p.featured) || VERIFIED_PROJECTS[0];
-const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id);
-
 const categories = [
   { id: 'all', label: 'All Projects' },
   { id: 'commercial', label: 'Commercial & Corporate' },
@@ -19,170 +16,213 @@ const categories = [
   { id: 'hospitality', label: 'Hospitality & Leisure' },
   { id: 'institutional', label: 'Institutional & Sports' },
 ];
+
+const featuredProject = VERIFIED_PROJECTS.find(p => p.featured) || VERIFIED_PROJECTS[0];
+const otherProjects = VERIFIED_PROJECTS.filter(p => p.id !== featuredProject.id);
 ---
 
-<div class="projects-editorial-root space-y-12">
+<div class="projects-editorial-root space-y-10">
   
   {showFilters && (
-    <!-- Technical Glass Filter Navigation Tabs -->
-    <div class="flex flex-wrap items-center justify-start sm:justify-center gap-2 pb-2">
-      {categories.map((cat, idx) => (
-        <button
-          type="button"
-          data-category={cat.id}
-          class={`proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border ${
-            idx === 0 
-              ? 'bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber' 
-              : 'glass-panel-navy text-slate-300 border-white/5 hover:border-amber-brand/40 hover:text-white'
-          }`}
-        >
-          {cat.label}
-        </button>
-      ))}
+    <div class="space-y-6">
+      <!-- Search Input & Category Filters Bar -->
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        
+        <!-- Instant Search Box -->
+        <div class="relative w-full md:max-w-xs">
+          <Icon name="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <input 
+            type="text" 
+            id="project-search-input" 
+            placeholder="Search projects or clients..." 
+            aria-label="Search verified projects by title, client, or discipline"
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#252A30] border border-white/10 text-white placeholder-slate-400 text-xs font-mono focus:outline-none focus:border-[#C58461] transition-colors"
+          />
+        </div>
+
+        <!-- Technical Category Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Project Categories">
+          {categories.map((cat, idx) => (
+            <button
+              type="button"
+              data-category={cat.id}
+              class={`proj-filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border ${
+                idx === 0 
+                  ? 'bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber' 
+                  : 'bg-[#252A30] text-slate-300 border-white/10 hover:border-[#C58461]/60 hover:text-white'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+      </div>
     </div>
   )}
 
-  <!-- Asymmetrical Editorial Showcase (Featured + 2 Offset Grid) -->
+  <!-- Asymmetrical Editorial Showcase (Lead Featured Project + 2 Offset Cards) -->
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" id="featured-editorial-strip">
     
     <!-- 1 Large Featured Project (7 Cols) -->
-    <div 
-      class="lg:col-span-7 editorial-project-card group glass-panel-navy rounded-3xl overflow-hidden shadow-glass-floating relative flex flex-col justify-between"
+    <article 
+      class="lg:col-span-7 editorial-project-card group bg-[#252A30]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#C58461]/60 shadow-glass-floating relative flex flex-col justify-between transition-all duration-300"
       data-cat={featuredProject.categorySlug}
+      data-title={featuredProject.title.toLowerCase()}
+      data-client={featuredProject.client.toLowerCase()}
+      data-sectors={featuredProject.sectors.join(' ').toLowerCase()}
       data-cursor="view"
     >
-      <div class="relative aspect-[16/10] overflow-hidden bg-navy-950 crosshair-corner">
+      <div class="relative aspect-[16/10] overflow-hidden bg-[#17191D] crosshair-corner">
         <img 
           src={featuredProject.image} 
           alt={`${featuredProject.title} - ${featuredProject.client}`}
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#17191D] via-[#17191D]/30 to-transparent"></div>
 
         <!-- Glass Telemetry Tags -->
         <div class="absolute top-4 left-4 flex items-center gap-2">
-          <span class="px-3 py-1 rounded-xl glass-panel-amber font-mono text-[10px] font-bold">
+          <span class="px-3 py-1 rounded-xl bg-[#17191D]/80 border border-[#B56E4B]/40 text-[#FFAB78] font-mono text-[10px] font-bold">
             FEATURED INSTALLATION
           </span>
-          <span class="px-3 py-1 rounded-xl glass-panel-navy text-slate-200 font-mono text-[10px]">
+          <span class="px-3 py-1 rounded-xl bg-[#17191D]/80 border border-white/10 text-slate-200 font-mono text-[10px]">
             {featuredProject.location}
           </span>
         </div>
 
         <div class="absolute bottom-4 left-4 right-4 text-white">
-          <span class="font-mono text-xs uppercase tracking-wider text-amber-brand block mb-1">
+          <span class="font-mono text-xs uppercase tracking-wider text-[#FFAB78] block mb-1">
             {featuredProject.category}
           </span>
-          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-amber-brand transition-colors">
+          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-[#FFAB78] transition-colors">
             {featuredProject.title}
           </h3>
         </div>
       </div>
 
-      <div class="p-6 sm:p-8 space-y-4 bg-navy-950/80">
-        <div class="flex items-center justify-between font-mono text-xs text-slate-400">
-          <span>CLIENT: <strong class="text-white">{featuredProject.client}</strong></span>
-          <span class="text-emerald-400 font-semibold flex items-center gap-1">
-            <Icon name="check-circle" class="w-3.5 h-3.5" />
-            Verified Execution
-          </span>
+      <div class="p-6 sm:p-8 space-y-4 bg-[#17191D]/90 flex-1 flex flex-col justify-between">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between font-mono text-xs text-slate-400 pb-3 border-b border-white/5">
+            <span>CLIENT: <strong class="text-white">{featuredProject.client}</strong></span>
+            <span class="text-emerald-400 font-semibold flex items-center gap-1">
+              <Icon name="check-circle" class="w-3.5 h-3.5" />
+              Verified Execution
+            </span>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed font-sans">
+            {featuredProject.scopeSummary}
+          </p>
         </div>
-        <p class="text-sm text-slate-300 leading-relaxed font-sans">
-          {featuredProject.scopeSummary}
-        </p>
-        <div class="pt-2 flex items-center justify-between">
+
+        <div class="pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
           <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
             {featuredProject.sectors.map((sec) => (
-              <span class="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">{sec}</span>
+              <span class="px-2.5 py-1 rounded-lg bg-[#252A30] text-slate-300 border border-white/10">{sec}</span>
             ))}
           </div>
-          <a href={`/projects/${featuredProject.id}`} class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#F07842] hover:text-white">
+          <a 
+            href={`/projects/${featuredProject.id}`} 
+            class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#F07842] hover:text-white transition-colors group/link"
+          >
             <span>View Full Case Study</span>
-            <Icon name="arrow-right" class="w-3.5 h-3.5" />
+            <Icon name="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
           </a>
         </div>
       </div>
-    </div>
+    </article>
 
     <!-- 2 Smaller Alternating Project Cards (5 Cols) -->
     <div class="lg:col-span-5 flex flex-col gap-8 justify-between">
       {otherProjects.slice(0, 2).map((proj) => (
-        <div 
-          class="editorial-project-card group glass-panel-navy rounded-3xl overflow-hidden shadow-glass-navy flex flex-col justify-between"
+        <article 
+          class="editorial-project-card group bg-[#252A30]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#C58461]/60 shadow-glass-navy flex flex-col justify-between transition-all duration-300"
           data-cat={proj.categorySlug}
+          data-title={proj.title.toLowerCase()}
+          data-client={proj.client.toLowerCase()}
+          data-sectors={proj.sectors.join(' ').toLowerCase()}
           data-cursor="view"
         >
-          <div class="relative aspect-[16/9] overflow-hidden bg-navy-950">
+          <div class="relative aspect-[16/9] overflow-hidden bg-[#17191D]">
             <img 
               src={proj.image} 
               alt={`${proj.title} - ${proj.client}`}
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#17191D] via-[#17191D]/30 to-transparent"></div>
             
             <div class="absolute bottom-3 left-4 right-4">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-amber-brand block">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[#FFAB78] block">
                 {proj.category}
               </span>
-              <h4 class="font-display text-lg font-bold text-white group-hover:text-amber-brand transition-colors leading-snug">
+              <h4 class="font-display text-lg font-bold text-white group-hover:text-[#FFAB78] transition-colors leading-snug">
                 {proj.title}
               </h4>
             </div>
           </div>
 
-          <div class="p-5 space-y-3 bg-navy-950/80">
-            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-              <span class="truncate">Client: <strong class="text-white">{proj.client}</strong></span>
-              <span class="shrink-0">{proj.location}</span>
+          <div class="p-5 space-y-3 bg-[#17191D]/90 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="truncate">Client: <strong class="text-white">{proj.client}</strong></span>
+                <span class="shrink-0">{proj.location}</span>
+              </div>
+              <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed font-sans">
+                {proj.scopeSummary}
+              </p>
             </div>
-            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed font-sans">
-              {proj.scopeSummary}
-            </p>
-            <div class="pt-2 flex items-center justify-between text-[11px] font-mono">
+
+            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
               <span class="text-slate-400">{proj.location}</span>
-              <a href={`/projects/${proj.id}`} class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1">
+              <a 
+                href={`/projects/${proj.id}`} 
+                class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1 transition-colors group/sublink"
+              >
                 <span>Case Study</span>
-                <Icon name="arrow-right" class="w-3.5 h-3.5" />
+                <Icon name="arrow-right" class="w-3.5 h-3.5 group-sublink:translate-x-1 transition-transform" />
               </a>
             </div>
           </div>
-        </div>
+        </article>
       ))}
     </div>
 
   </div>
 
-  <!-- Additional Projects Grid (Filtered) -->
+  <!-- Additional Projects Grid for Full Directory (Filtered) -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4" id="all-editorial-grid">
     {otherProjects.slice(2).map((proj) => (
-      <div 
-        class="editorial-project-card group glass-panel-navy rounded-3xl overflow-hidden shadow-glass-navy flex flex-col justify-between hover:border-amber-brand/50 transition-all duration-300"
+      <article 
+        class="editorial-project-card group bg-[#252A30]/90 rounded-3xl overflow-hidden border border-white/10 hover:border-[#C58461]/60 shadow-glass-navy flex flex-col justify-between transition-all duration-300"
         data-cat={proj.categorySlug}
+        data-title={proj.title.toLowerCase()}
+        data-client={proj.client.toLowerCase()}
+        data-sectors={proj.sectors.join(' ').toLowerCase()}
         data-cursor="view"
       >
-        <div class="relative aspect-[16/10] overflow-hidden bg-navy-950">
+        <div class="relative aspect-[16/10] overflow-hidden bg-[#17191D]">
           <img 
             src={proj.image} 
             alt={`${proj.title} - ${proj.client}`}
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#17191D] via-[#17191D]/20 to-transparent"></div>
           
-          <div class="absolute top-3 left-3 glass-panel-amber text-amber-brand text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-lg border border-amber-brand/30">
+          <div class="absolute top-3 left-3 bg-[#17191D]/80 text-[#FFAB78] text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-lg border border-[#B56E4B]/40">
             {proj.category}
           </div>
 
           <div class="absolute bottom-3 left-3 right-3">
-            <h4 class="font-display text-base font-bold text-white group-hover:text-amber-brand transition-colors">
+            <h4 class="font-display text-base font-bold text-white group-hover:text-[#FFAB78] transition-colors leading-snug">
               {proj.title}
             </h4>
           </div>
         </div>
 
-        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-navy-950/80">
+        <div class="p-5 space-y-3 flex-1 flex flex-col justify-between bg-[#17191D]/90">
           <div>
             <div class="text-xs font-mono text-slate-400 mb-1">
               Client: <strong class="text-white">{proj.client}</strong>
@@ -194,42 +234,88 @@ const categories = [
 
           <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
             <span class="text-slate-400">{proj.location}</span>
-            <a href={`/projects/${proj.id}`} class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1">
+            <a 
+              href={`/projects/${proj.id}`} 
+              class="text-[#F07842] hover:text-white font-semibold flex items-center gap-1 transition-colors group/link"
+            >
               <span>View Case Study</span>
-              <Icon name="arrow-right" class="w-3.5 h-3.5" />
+              <Icon name="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>
-      </div>
+      </article>
     ))}
+  </div>
+
+  <!-- Empty Search Results Message (Hidden by default) -->
+  <div id="no-projects-found" class="hidden text-center py-16 px-4 bg-[#252A30]/50 rounded-3xl border border-white/10">
+    <p class="font-display text-lg font-bold text-white mb-2">No Matching Projects Found</p>
+    <p class="text-xs font-mono text-slate-400">Try adjusting your category filter or search keywords.</p>
   </div>
 
 </div>
 
 <script>
+  let activeCategory = 'all';
+  let activeSearch = '';
+
   const filterBtns = document.querySelectorAll('.proj-filter-btn');
   const allCards = document.querySelectorAll('.editorial-project-card');
+  const searchInput = document.getElementById('project-search-input') as HTMLInputElement | null;
+  const noProjectsMsg = document.getElementById('no-projects-found');
+
+  function updateFilteredCards() {
+    let visibleCount = 0;
+
+    allCards.forEach((card) => {
+      const cardCat = card.getAttribute('data-cat') || '';
+      const cardTitle = card.getAttribute('data-title') || '';
+      const cardClient = card.getAttribute('data-client') || '';
+      const cardSectors = card.getAttribute('data-sectors') || '';
+
+      const matchesCat = (activeCategory === 'all' || cardCat === activeCategory);
+      const matchesSearch = !activeSearch || (
+        cardTitle.includes(activeSearch) || 
+        cardClient.includes(activeSearch) || 
+        cardSectors.includes(activeSearch)
+      );
+
+      if (matchesCat && matchesSearch) {
+        (card as HTMLElement).style.display = 'flex';
+        visibleCount++;
+      } else {
+        (card as HTMLElement).style.display = 'none';
+      }
+    });
+
+    if (noProjectsMsg) {
+      if (visibleCount === 0) {
+        noProjectsMsg.classList.remove('hidden');
+      } else {
+        noProjectsMsg.classList.add('hidden');
+      }
+    }
+  }
 
   if (filterBtns.length > 0 && allCards.length > 0) {
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         filterBtns.forEach((b) => {
-          b.className = 'proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border glass-panel-navy text-slate-300 border-white/5 hover:border-amber-brand/40 hover:text-white';
+          b.className = 'proj-filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border bg-[#252A30] text-slate-300 border-white/10 hover:border-[#C58461]/60 hover:text-white';
         });
 
-        btn.className = 'proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber';
+        btn.className = 'proj-filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 border bg-amber-brand text-navy-950 border-amber-brand shadow-glass-amber';
 
-        const category = btn.getAttribute('data-category');
-
-        allCards.forEach((card) => {
-          const cardCat = card.getAttribute('data-cat');
-          if (category === 'all' || cardCat === category) {
-            (card as HTMLElement).style.display = 'flex';
-          } else {
-            (card as HTMLElement).style.display = 'none';
-          }
-        });
+        activeCategory = btn.getAttribute('data-category') || 'all';
+        updateFilteredCards();
       });
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      activeSearch = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      updateFilteredCards();
     });
   }
 </script>

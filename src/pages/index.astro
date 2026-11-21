@@ -5,7 +5,7 @@ import AlManarReferenceHero from '../components/AlManarReferenceHero.astro';
 import MarqueeTicker from '../components/MarqueeTicker.astro';
 import ServiceCockpit from '../components/ServiceCockpit.astro';
 import IndustriesEditorial from '../components/IndustriesEditorial.astro';
-import ProjectsEditorial from '../components/ProjectsEditorial.astro';
+import SelectedProjectsPreview from '../components/SelectedProjectsPreview.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { COMPANY, WORK_PROCESS } from '../data/company';
@@ -145,12 +145,12 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
   </section>
 
   <!-- =========================================================================
-       SECTION 05 — SELECTED PROJECTS (CONSOLIDATED CASE-STUDY SHOWCASE)
+       SECTION 05 — SELECTED PROJECTS (ONE PREMIUM HOMEPAGE PREVIEW)
        ========================================================================= -->
-  <section id="projects" class="py-24 lg:py-32 bg-navy-950 text-white border-b border-navy-800 relative">
+  <section id="projects" class="py-24 lg:py-32 bg-[#17191D] text-white border-b border-white/10 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
-      <!-- Heading Composition matching Phase 2 Part B -->
+      <!-- Heading Composition matching exact specification -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10 scroll-reveal-up">
         <div class="space-y-3">
           <div class="inline-flex items-center gap-2 font-mono text-xs text-[#F07842] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-full bg-[#252A30] border border-[#B56E4B]/40">
@@ -159,8 +159,11 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
           <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             SELECTED PROJECTS
           </h2>
+          <p class="font-display text-base sm:text-lg font-bold text-[#FFAB78] tracking-wider uppercase">
+            ENGINEERING EXPERIENCE. REAL-WORLD EXECUTION.
+          </p>
           <p class="text-slate-300 font-sans text-base max-w-2xl leading-relaxed">
-            Engineering expertise delivered across commercial, retail, hospitality and institutional environments.
+            Explore selected projects that demonstrate Al Manar Tech's experience across commercial, retail, hospitality and institutional environments.
           </p>
         </div>
         <a 
@@ -172,9 +175,9 @@ const pageDescription = "Al Manar Tech is an established ADDC-approved electrome
         </a>
       </div>
 
-      <!-- Consolidated Editorial Projects Component with Case Study Detail Links -->
+      <!-- Single Selected Projects Preview Component (Max 4 Representative Landmarks) -->
       <div class="scroll-reveal-up">
-        <ProjectsEditorial showFilters={true} />
+        <SelectedProjectsPreview />
       </div>
 
     </div>
