@@ -785,28 +785,28 @@ export const VERIFIED_PROJECTS: ProjectItem[] = [
 export const WORK_PROCESS = [
   {
     step: "01",
-    phase: "PHASE_01 // DISCOVERY",
+    phase: "Phase 01 • Consultation & Assessment",
     title: "Consultation & Engineering Assessment",
     summary: "Thorough site evaluation, load requirement calculation, and client specification review.",
     details: "Our senior engineering team conducts on-site surveys, assesses power/cooling demands, inspects existing infrastructure, and reviews authority jurisdiction parameters (ADDC, ADM, Civil Defence). We provide a detailed technical feasibility review and competitive commercial quotation."
   },
   {
     step: "02",
-    phase: "PHASE_02 // REGULATORY",
+    phase: "Phase 02 • Authority Engineering & Approvals",
     title: "Design, Approvals & Authority Engineering",
     summary: "Precision engineering drawings, authority documentation, procurement, and project timelines.",
     details: "We draft detailed shop drawings, load schedules, single-line diagrams (SLD), and equipment submittals. Our team coordinates formal authority approvals with Abu Dhabi Distribution Company and Municipality while establishing rigorous milestone schedules."
   },
   {
     step: "03",
-    phase: "PHASE_03 // EXECUTION",
+    phase: "Phase 03 • Certified Technical Execution",
     title: "Certified Technical Execution",
     summary: "Methodical on-site installation by licensed engineers and technicians adhering to UAE codes.",
     details: "All field installations are carried out under dedicated project manager supervision using certified materials. We enforce stringent quality control checklists, safety protocols (EHS), and continuous coordination with main contractors and architects."
   },
   {
     step: "04",
-    phase: "PHASE_04 // COMMISSIONING",
+    phase: "Phase 04 • Testing, Balancing & Handover",
     title: "Commissioning, Handover & Lifecycle Maintenance",
     summary: "Stringent testing and balancing, authority inspection sign-off, operation manuals, and AMC plans.",
     details: "We execute pre-commissioning Megger tests, TAB balancing, and system interlocks prior to scheduling authority inspection. Upon energization and handover, we furnish As-Built drawings, O&M manuals, and tailored Planned Preventive Maintenance contracts."

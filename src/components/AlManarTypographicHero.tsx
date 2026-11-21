@@ -230,11 +230,11 @@ export default function AlManarTypographicHero() {
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-[#B56E4B] animate-ping" />
             <span className="text-white font-bold tracking-widest uppercase">
-              AL MANAR TECH // ABU DHABI
+              AL MANAR TECH • ABU DHABI
             </span>
             <span className="text-stone-500">•</span>
             <span className="text-stone-400 font-semibold tracking-wider">
-              [SYS_AUTH: ADDC-CON-2001]
+              ADDC &amp; ADM APPROVED CONTRACTOR
             </span>
           </div>
 
