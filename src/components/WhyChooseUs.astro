@@ -83,17 +83,39 @@ const credentials = [
     </div>
 
     <!-- Verified Company Statistics Grid (Consolidated from separate stats block) -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 rounded-3xl bg-[#17232D]/80 border border-white/10 backdrop-blur-xl scroll-reveal-up">
-      {COMPANY.stats.map((stat) => (
-        <div class="flex flex-col items-start space-y-2 border-l-2 border-[#F07842] pl-4">
-          <span class="font-mono text-[10px] uppercase tracking-widest text-slate-400">
-            {stat.label}
-          </span>
-          <div class="flex items-baseline gap-1">
-            <span class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+    <div 
+      id="stats-counter-grid"
+      class="grid grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 rounded-3xl bg-[#17232D]/80 border border-white/10 backdrop-blur-xl scroll-reveal-up"
+    >
+      {COMPANY.stats.map((stat, idx) => (
+        <div class="flex flex-col items-start space-y-2.5 border-l-2 border-[#F07842] pl-4 sm:pl-5 group">
+          <!-- Top Row: Icon + Label (Icon specifically highlighted on Column 1) -->
+          <div class="flex items-center gap-2">
+            <div class={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${
+              idx === 0 
+                ? 'bg-[#F07842]/20 border border-[#F07842]/50 text-[#F07842] shadow-sm shadow-[#F07842]/30' 
+                : 'bg-white/5 border border-white/10 text-slate-300 group-hover:text-[#F07842]'
+            }`}>
+              <Icon name={stat.icon || 'award'} class="w-3.5 h-3.5" />
+            </div>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
+              {stat.label}
+            </span>
+          </div>
+
+          <!-- Counter Number with Transition Animation -->
+          <div class="flex items-baseline gap-0.5">
+            <span 
+              class="stat-counter-number font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white transition-all duration-300"
+              data-target={stat.target}
+              data-start={stat.start}
+              data-suffix={stat.suffix}
+              data-pad={stat.padZero ? 'true' : 'false'}
+            >
               {stat.value}
             </span>
           </div>
+
           <p class="text-xs text-slate-300 font-sans leading-relaxed">
             {stat.detail}
           </p>
@@ -107,10 +129,15 @@ const credentials = [
         <div 
           class={`glass-panel-navy p-7 sm:p-8 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6 hover:border-[#F07842]/50 hover:shadow-lg hover:shadow-[#F07842]/10 transition-all duration-300 group scroll-reveal-up stagger-${idx + 1}`}
         >
-          <!-- Top Row: Number & Badge -->
+          <!-- Top Row: Number & Badge (Icon highlighted on Pillar 01) -->
           <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold text-[#F07842] px-2.5 py-1 rounded-lg bg-[#F07842]/10 border border-[#F07842]/30">
-              Pillar {cred.number}
+            <span class={`font-mono text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5 transition-all ${
+              idx === 0 
+                ? 'text-[#F07842] bg-[#F07842]/15 border border-[#F07842]/40 shadow-sm shadow-[#F07842]/20' 
+                : 'text-[#F07842] bg-[#F07842]/10 border border-[#F07842]/30'
+            }`}>
+              <Icon name={cred.icon} class="w-3.5 h-3.5 text-[#F07842]" />
+              <span>Pillar {cred.number}</span>
             </span>
             <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest px-2.5 py-0.5 rounded bg-white/5 border border-white/5">
               {cred.badge}
@@ -175,3 +202,83 @@ const credentials = [
 
   </div>
 </section>
+
+<script>
+  // Dynamic Counting Animation Transition for Statistics
+  function initStatsCounter() {
+    const counterElements = document.querySelectorAll<HTMLElement>('.stat-counter-number');
+    if (!counterElements.length) return;
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const animateNumber = (el: HTMLElement) => {
+      const target = parseInt(el.getAttribute('data-target') || '0', 10);
+      const start = parseInt(el.getAttribute('data-start') || '0', 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const padZero = el.getAttribute('data-pad') === 'true';
+      const duration = 1800; // 1.8 seconds duration
+
+      if (prefersReducedMotion) {
+        let finalVal = target.toString();
+        if (padZero && target < 10) finalVal = '0' + target;
+        el.textContent = finalVal + suffix;
+        return;
+      }
+
+      let startTime: number | null = null;
+
+      function step(timestamp: number) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        
+        // Quartic Ease-Out transition: 1 - (1 - progress)^4
+        const easeProgress = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(start + (target - start) * easeProgress);
+
+        let formatted = current.toString();
+        if (padZero && current < 10) {
+          formatted = '0' + current;
+        }
+
+        el.textContent = formatted + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          let finalVal = target.toString();
+          if (padZero && target < 10) finalVal = '0' + target;
+          el.textContent = finalVal + suffix;
+          // Apply subtle glow highlight transition upon landing
+          el.classList.add('text-metallic-amber');
+        }
+      }
+
+      requestAnimationFrame(step);
+    };
+
+    const statsGrid = document.getElementById('stats-counter-grid');
+    if (statsGrid && 'IntersectionObserver' in window) {
+      let hasRun = false;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !hasRun) {
+              hasRun = true;
+              counterElements.forEach(animateNumber);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      observer.observe(statsGrid);
+    } else {
+      counterElements.forEach(animateNumber);
+    }
+  }
+
+  // Initialize on page load and navigation
+  initStatsCounter();
+  document.addEventListener('astro:page-load', initStatsCounter);
+</script>

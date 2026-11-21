@@ -88,10 +88,10 @@ export const COMPANY = {
     }
   ],
   stats: [
-    { value: "2001", label: "Established In", detail: "Over two decades of continuous operational experience in UAE" },
-    { value: "160+", label: "Verified Projects", detail: "Successfully executed across Abu Dhabi & Al Ain" },
-    { value: "06", label: "Core Divisions", detail: "Integrated MEP, HVAC, Fire, IT, Security & AMC" },
-    { value: "100%", label: "Authority Compliance", detail: "ADDC, ADM & Civil Defence aligned procedures" }
+    { value: "2001", target: 2001, start: 1970, suffix: "", padZero: false, icon: "calendar", label: "Established In", detail: "Over two decades of continuous operational experience in UAE" },
+    { value: "160+", target: 160, start: 0, suffix: "+", padZero: false, icon: "shield-check", label: "Verified Projects", detail: "Successfully executed across Abu Dhabi & Al Ain" },
+    { value: "06", target: 6, start: 0, suffix: "", padZero: true, icon: "layers", label: "Core Divisions", detail: "Integrated MEP, HVAC, Fire, IT, Security & AMC" },
+    { value: "100%", target: 100, start: 0, suffix: "%", padZero: false, icon: "award", label: "Authority Compliance", detail: "ADDC, ADM & Civil Defence aligned procedures" }
   ]
 };
 
